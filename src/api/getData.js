@@ -5,7 +5,7 @@ import qs from 'qs'
 axios.defaults.timeout = 5000
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8'
 axios.defaults.headers.post['Accept'] = 'application/json'
-axios.defaults.baseURL = 'http://localhost:8888/public'
+axios.defaults.baseURL = 'http://localhost:10086/'
 
 // POST传参序列化
 axios.interceptors.request.use((config) => {
@@ -43,5 +43,4 @@ export function fetch (url, params) {
 }
 
 export default {
-
 }

@@ -13,6 +13,8 @@ const hisBlogs = r => require.ensure([], () => r(require('@/page/OtherPeopleBlog
 const myBlogs = r => require.ensure([], () => r(require('@/page/MyBlogs')), 'myBlogs')
 const blogDetail = r => require.ensure([], () => r(require('@/page/BlogDetail')), 'blogDetail')
 
+const test = r => require.ensure([], () => r(require('@/page/Test')), 'test')
+
 Vue.use(Router)
 
 export default new Router({
@@ -71,6 +73,11 @@ export default new Router({
       path: '/blogDetail',
       name: 'blogDetail',
       component: blogDetail
+    },
+    {
+      path: '/test',
+      name: 'test',
+      component: test
     }
   ]
 })
