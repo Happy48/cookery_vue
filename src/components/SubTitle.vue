@@ -45,6 +45,9 @@
 </template>
 <script>
 export default {
+  stores: {
+    token: 'state.token'
+  },
   data () {
     return {
       backgroundColor: 'transparent',
@@ -54,10 +57,10 @@ export default {
   },
   methods: {
     login: function () {
-      this.$store.commit('LOGIN')
+      this.token = '539aab779e71efb02749a7ed50cfdf15'
     },
     logout: function () {
-      this.$store.commit('LOGOUT')
+      this.token = ''
     },
     handleScroll () {
       var scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop
@@ -74,7 +77,7 @@ export default {
   },
   computed: {
     isLogin: function () {
-      return this.$store.state.isLogin
+      return (this.token !== '')
     }
   },
   mounted () {
