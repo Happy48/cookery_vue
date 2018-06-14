@@ -24,7 +24,6 @@
 import CollectItem from '@/components/CollectItem'
 import $ from 'jquery'
 import api from '@/api/getData'
-import '../js/jquery.page.js'
 export default {
   props: [
     'name'
@@ -62,7 +61,6 @@ export default {
     }
   },
   created () {
-    this.getTotalPages()
     this.searchFromPeople()
   },
   components: {
@@ -78,18 +76,18 @@ export default {
       api.searchFromPeople(searchInfo).then(res => {}).catch(res => {
         this.collectList = res.data
       })
-    },
-    getTotalPages () {
-      $('.tcdPageCode').createPage({
-        pageCount: 100,
-        current: 1,
-        backFn: function (p) {
-          console.log(p)
-          this.page = p
-          this.searchFromPeople()
-        }
-      })
     }
+  },
+  mounted: function () {
+    $('.tcdPageCode').createPage({
+      pageCount: 100,
+      current: 1,
+      backFn: function (p) {
+        console.log(p)
+        this.page = p
+        this.searchFromPeople()
+      }
+    })
   }
 }
 </script>
