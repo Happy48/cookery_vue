@@ -63,7 +63,7 @@ export default {
         {
           'foodPic': '/static/images/bo2.jpg',
           'foodTitle': 'Consectetuer adipiscing',
-          'foodDesc': 'Lorem ipsum dolor sit amet'
+          'foodDesc': 'Loremipsum dolor sit amet'
         }
       ],
       likeLabelTitle: '你关注的人也喜欢',

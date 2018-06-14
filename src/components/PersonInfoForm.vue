@@ -136,6 +136,7 @@
 </template>
 <script>
 import api from '@/api/getData'
+
 export default {
   stores: {
     token: 'state.token'
