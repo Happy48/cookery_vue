@@ -122,5 +122,30 @@ export default {
    */
   leaveReply (params) {
     return fetch('/leaveReply', params)
+  },
+  /**
+   * 收藏笔记
+   */
+  collect (params) {
+    return axios.get('/collect?token=' + params['token'] + '&noteid=' + params['noteid'])
+  },
+  /**
+   * 标记笔记为喜欢
+   */
+  like (params) {
+    return axios.get('/like?token=' + params['token'] + '&noteid=' + params['noteid'])
+  },
+  /**
+   * 添加新笔记
+   */
+  createNote (params) {
+    return fetch('/createNote', params)
+  },
+  /**
+   * 修改个人信息
+   */
+  changeInfo (params) {
+    return fetch('/changeInfo', params)
   }
+
 }
