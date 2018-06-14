@@ -110,6 +110,7 @@ import api from '@/api/getData'
 export default {
   data () {
     return {
+      noteId: 5,
       title: '营养齐全的【Cobb Salad】',
       url: '/static/images/ss.jpg',
       count: 2373,
@@ -151,6 +152,9 @@ export default {
   },
   methods: {
     initBlogDetail () {
+      this.noteId = this.$route.params.noteID;
+      // TODO remove
+      this.noteId = 5
       let information = {
         noteId: 5
       }
