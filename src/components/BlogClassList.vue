@@ -11,15 +11,15 @@
         <div :key="item.index" v-for="item in list" class=" blog-head">
           <div :key="subItem.index" v-for="subItem in item" class="col-md-4 blog-top">
             <div class="blog-in">
-              <a href="single.html"><img class="img-responsive" :src="subItem.url" alt=" "></a>
+              <a href="single.html"><img class="img-responsive" :src="subItem.foodPic" alt=" "></a>
               <div class="blog-grid">
-                <h3><a href="single.html">{{subItem.title}}</a></h3>
+                <h3><a href="single.html">{{subItem.foodTitle}}</a></h3>
                 <div class="date">
-                  <span class="date-in"><i class="glyphicon glyphicon-calendar"> </i>{{subItem.date}}</span>
-                  <a href="single.html" class="comments"><i class="glyphicon glyphicon-comment"></i>{{subItem.comments}}</a>
+                  <span class="date-in"><i class="glyphicon glyphicon-calendar"> </i>{{subItem.foodCreateTime}}</span>
+                  <a href="single.html" class="comments"><i class="glyphicon glyphicon-comment"></i>{{subItem.foodLikes}}</a>
                   <div class="clearfix"> </div>
                 </div>
-                <p>{{subItem.description}}</p>
+                <p>{{subItem.foodDesc}}</p>
                 <div class="more">
                   <a class="link link-yaku" href="single.html">
                     <span>R</span><span>e</span><span>a</span><span>d</span> <span>M</span><span>o</span><span>r</span><span>e</span>
@@ -38,81 +38,11 @@
 <script>
 export default {
   props: [
-    'name'
+    'name',
+    'list'
   ],
   data () {
     return {
-      list: [
-        [
-          {
-            title: 'On the other hand',
-            date: '22.08.2014',
-            url: '/static/images/bl2.jpg',
-            desc: 'At vero eos et accusamus et iusto',
-            comments: '24'
-          },
-          {
-            title: 'On the other hand',
-            date: '22.08.2014',
-            url: '/static/images/bl2.jpg',
-            desc: 'At vero eos et accusamus et iusto',
-            comments: '24'
-          },
-          {
-            title: 'On the other hand',
-            date: '22.08.2014',
-            url: '/static/images/bl2.jpg',
-            desc: 'At vero eos et accusamus et iusto',
-            comments: '24'
-          }
-        ],
-        [
-          {
-            title: 'On the other hand',
-            date: '22.08.2014',
-            url: '/static/images/bl2.jpg',
-            desc: 'At vero eos et accusamus et iusto',
-            comments: '24'
-          },
-          {
-            title: 'On the other hand',
-            date: '22.08.2014',
-            url: '/static/images/bl2.jpg',
-            desc: 'At vero eos et accusamus et iusto',
-            comments: '24'
-          },
-          {
-            title: 'On the other hand',
-            date: '22.08.2014',
-            url: '/static/images/bl2.jpg',
-            desc: 'At vero eos et accusamus et iusto',
-            comments: '24'
-          }
-        ],
-        [
-          {
-            title: 'On the other hand',
-            date: '22.08.2014',
-            url: '/static/images/bl2.jpg',
-            desc: 'At vero eos et accusamus et iusto',
-            comments: '24'
-          },
-          {
-            title: 'On the other hand',
-            date: '22.08.2014',
-            url: '/static/images/bl2.jpg',
-            desc: 'At vero eos et accusamus et iusto',
-            comments: '24'
-          },
-          {
-            title: 'On the other hand',
-            date: '22.08.2014',
-            url: '/static/images/bl2.jpg',
-            desc: 'At vero eos et accusamus et iusto',
-            comments: '24'
-          }
-        ]
-      ]
     }
   }
 }

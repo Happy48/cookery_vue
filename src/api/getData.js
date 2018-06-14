@@ -63,6 +63,12 @@ export default {
     return axios.get('/indexRecommend')
   },
   /**
+   * 搜索全部博客
+   */
+  search (key, page) {
+    return axios.get('/search?key=' + key + '&page=' + page)
+  },
+  /**
    * 获得分类列表
    */
   getList () {

@@ -6,8 +6,8 @@
 
     <div class="col-md-3 search" id='search' v-bind:style="{background: searchBackground, border: borderStyle}">
       <form>
-        <input type="text" placeholder="搜索笔记/食材" required="" >
-        <input type="submit" value="" >
+        <input type="text" @keyup.enter="search" v-model="searchText" placeholder="搜索笔记/食材" required="" >
+        <input type="submit" @click="search" value="" >
       </form>
     </div>
 
@@ -50,7 +50,8 @@ export default {
     return {
       backgroundColor: 'transparent',
       searchBackground: 'none',
-      borderStyle: '0.1em white solid'
+      borderStyle: '0.1em white solid',
+      searchText: ''
     }
   },
   methods: {
@@ -71,6 +72,15 @@ export default {
         this.searchBackground = '#005238'
         this.borderStyle = 'none'
       }
+    },
+    search () {
+      this.$router.push({
+        name: 'AllBlog',
+        params: {
+          title: '搜索结果',
+          query: this.searchText
+        }
+      })
     }
   },
   computed: {
