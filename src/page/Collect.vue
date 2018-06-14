@@ -11,7 +11,7 @@
           <OtherLikeLabel :list="otherLikeData" :title="likeLabelTitle"></OtherLikeLabel>
 
         </div>
-        <collect-list></collect-list>
+        <collect-list :name="name"></collect-list>
 
       </div>
     </div>
@@ -64,7 +64,8 @@ export default {
           'foodDesc': 'Lorem ipsum dolor sit amet'
         }
       ],
-      likeLabelTitle: '你关注的人也喜欢'
+      likeLabelTitle: '你关注的人也喜欢',
+      name: '我'
     }
   },
   components: {
