@@ -7,43 +7,26 @@
   </div>
 </template>
 <script>
+import api from '@/api/getData'
 export default {
   data () {
     return {
       list: [
         {
           name: '家常菜',
-          url: ''
-        },
-        {
-          name: '快手菜',
-          url: ''
-        },
-        {
-          name: '下饭菜',
-          url: ''
-        },
-        {
-          name: '早餐',
-          url: ''
-        },
-        {
-          name: '家常菜',
-          url: ''
-        },
-        {
-          name: '快手菜',
-          url: ''
-        },
-        {
-          name: '下饭菜',
-          url: ''
-        },
-        {
-          name: '早餐',
-          url: ''
+          id: ''
         }
       ]
+    }
+  },
+  created () {
+    this.getList()
+  },
+  methods: {
+    getList () {
+      api.getList().then().catch(res => {
+        this.list = res.data
+      })
     }
   }
 }

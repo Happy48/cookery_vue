@@ -61,5 +61,11 @@ export default {
    */
   getIndexRecommend () {
     return axios.get('/indexRecommend')
+  },
+  /**
+   * 获得分类列表
+   */
+  getList () {
+    return axios.get('/getList')
   }
 }
