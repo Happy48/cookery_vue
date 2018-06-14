@@ -37,7 +37,6 @@ export default {
   data () {
     return {
       forcusList: [
-        //[
           {
             icon: '/static/images/me.jpg',
             name: 'Lorem'
@@ -50,50 +49,6 @@ export default {
             icon: '/static/images/me2.jpg',
             name: 'Lorem'
           }
-        //]
-        // ,
-        // [
-        //   {
-        //     icon: '/static/images/me3.jpg',
-        //     name: 'Lorem'
-        //   },
-        //   {
-        //     icon: '/static/images/me4.jpg',
-        //     name: 'Lorem'
-        //   },
-        //   {
-        //     icon: '/static/images/me5.jpg',
-        //     name: 'Lorem'
-        //   }
-        // ],
-        // [
-        //   {
-        //     icon: '/static/images/me6.jpg',
-        //     name: 'Lorem'
-        //   },
-        //   {
-        //     icon: '/static/images/me7.jpg',
-        //     name: 'Lorem'
-        //   },
-        //   {
-        //     icon: '/static/images/me8.jpg',
-        //     name: 'Lorem'
-        //   }
-        // ],
-        // [
-        //   {
-        //     icon: '/static/images/me.jpg',
-        //     name: 'Lorem'
-        //   },
-        //   {
-        //     icon: '/static/images/me1.jpg',
-        //     name: 'Lorem'
-        //   },
-        //   {
-        //     icon: '/static/images/me2.jpg',
-        //     name: 'Lorem'
-        //   }
-        // ]
       ]
     }
   },

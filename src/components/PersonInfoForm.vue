@@ -101,7 +101,7 @@
       <div class="col-lg-6 col-md-6">
         <div class="input-group search-in animated wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="500ms">
           <label style="float: left;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;头像:&nbsp;&nbsp;&nbsp;&nbsp;</label>
-          <img class="fl avator-img" id="js-portrait" src="http://img.mukewang.com/58492fe600012e8e01800180-200-200.jpg" data-portrait="58492fe600012e8e01800180" width="180" height="180">
+          <img class="fl avator-img" id="js-portrait" :src="picUrl" data-portrait="58492fe600012e8e01800180" width="180" height="180">
         </div>
       </div>
     </div>
@@ -140,6 +140,9 @@ export default {
   stores: {
     token: 'state.token'
   },
+  props: [
+    'name'
+  ],
   data () {
     return {
       userName: '',
@@ -149,9 +152,15 @@ export default {
       introduction: '',
       phoneNumber: '',
       userPwd: '',
-      email: ''
+      email: '',
+      picUrl: ''
     }
   },
+  created () {
+      if (this.name === '我') {
+        this.getMyInfo()
+      }
+    },
   methods: {
     save_info () {
       let information = {
@@ -177,6 +186,15 @@ export default {
         } else if (data.code === '3') {
           alert('不存在该用户')
         }
+      })
+    },
+    getMyInfo () {
+      let list = {name: '梅子厨艺'}
+      api.getUserInfo(list).then(res => {}).catch(res => {
+        let user = res.data
+        this.userName = user.userName
+        this.introduction = user.introduction
+        this.picUrl = user.icon
       })
     }
   }
