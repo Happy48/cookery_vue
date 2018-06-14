@@ -5,7 +5,7 @@
     <div class="content">
       <div class="events">
         <div class="col-md-3 categories-grid" style="padding-left: 50px">
-          <blog-square-label></blog-square-label>
+          <blog-square-label v-on:getBlogListByClass="getBlogListByClass"></blog-square-label>
 
           <OtherLikeLabel :list="otherLikeData" :title="likeLabelTitle"></OtherLikeLabel>
         </div>
@@ -100,6 +100,9 @@ export default {
         let notes = res.data
         this.otherLikeData = notes
       })
+    },
+    getBlogListByClass (...param) {
+      this.list = param
     }
   }
 }
