@@ -55,6 +55,7 @@ export default {
   },
   created () {
     this.search()
+    this.recommend()
   },
   methods: {
     reduceArray (arr, count) {
@@ -90,6 +91,15 @@ export default {
         this.list = this.reduceArray(res.data, 3)
       })
       console.log(this.list)
+    },
+    recommend () {
+      let information = {
+        number: 3
+      }
+      api.getGuessLike(information).then().catch(res => {
+        let notes = res.data
+        this.otherLikeData = notes
+      })
     }
   }
 }
