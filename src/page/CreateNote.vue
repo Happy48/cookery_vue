@@ -27,6 +27,7 @@ import CollectLabel from '@/components/CollectLabel'
 import AttentionLabel from '@/components/AttentionLabel'
 import OtherLikeLabel from '@/components/OtherLikeLabel'
 import CreateBlog from '@/components/CreateBlog'
+import api from '@/api/getData'
 
 export default {
   data () {
@@ -50,19 +51,19 @@ export default {
       ],
       otherLikeData: [
         {
-          'url': '/static/images/bo.jpg',
-          'title': 'Consectetuer adipiscing',
-          'desc': 'Lorem ipsum dolor sit amet'
+          'foodPic': '/static/images/bo.jpg',
+          'foodTitle': 'Consectetuer adipiscing',
+          'foodDesc': 'Lorem ipsum dolor sit amet'
         },
         {
-          'url': '/static/images/bo1.jpg',
-          'title': 'Consectetuer adipiscing',
-          'desc': 'Lorem ipsum dolor sit amet'
+          'foodPic': '/static/images/bo1.jpg',
+          'foodTitle': 'Consectetuer adipiscing',
+          'foodDesc': 'Lorem ipsum dolor sit amet'
         },
         {
-          'url': '/static/images/bo2.jpg',
-          'title': 'Consectetuer adipiscing',
-          'desc': 'Lorem ipsum dolor sit amet'
+          'foodPic': '/static/images/bo2.jpg',
+          'foodTitle': 'Consectetuer adipiscing',
+          'foodDesc': 'Lorem ipsum dolor sit amet'
         }
       ],
       likeLabelTitle: '你关注的人也喜欢'
@@ -76,6 +77,20 @@ export default {
     AttentionLabel,
     OtherLikeLabel,
     CreateBlog
+  },
+  created () {
+    this.recommend()
+  },
+  methods: {
+    recommend () {
+      let information = {
+        number: 3
+      }
+      api.getGuessLike(information).then().catch(res => {
+        let notes = res.data
+        this.otherLikeData = notes
+      })
+    }
   }
 }
 </script>
