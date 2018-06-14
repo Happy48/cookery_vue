@@ -22,7 +22,7 @@
               <i class="fa fa-lock fa-lg"></i>
               <input v-model="password" class="form-control required" type="password" placeholder="密码" id="password" name="password" maxlength="20" required/>
             </div>
-            <a class='col-md-offset-7' href="register.html">马上注册！</a>
+            <a class='col-md-offset-7' ><router-link to="register">马上注册</router-link></a>
             <div class="leave">
               <form>
                 <div class="single-grid wow fadeInLeft animated" data-wow-delay=".5s">
@@ -66,9 +66,9 @@ export default {
           this.$router.push('/')
         } else if (data.code === '1') {
           // TODO
-        }else if (data.code === '2') {
+        } else if (data.code === '2') {
           // TODO
-        }else if (data.code === '3') {
+        } else if (data.code === '3') {
           // TODO
         }
       })

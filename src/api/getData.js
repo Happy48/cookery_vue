@@ -49,5 +49,11 @@ export default {
    */
   login (params) {
     return fetch('/login', params)
+  },
+  /**
+   * 注册
+   */
+  register (params) {
+    return fetch('/register', params)
   }
 }

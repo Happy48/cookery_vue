@@ -15,23 +15,23 @@
 
           <div class="col-md-9">
             <div class="form-group">
+              <i class="fa fa-envelope-open"></i>
+              <input v-model="email" class="form-control required" type="text" placeholder="邮箱" id="email" name="email" maxlength="20"/>
+            </div>
+            <div class="form-group">
               <i class="fa fa-user fa-lg"></i>
-              <input class="form-control required" type="text" placeholder="用户名" id="username" name="username" autofocus="autofocus" maxlength="20"/>
+              <input v-model="name" class="form-control required" type="text" placeholder="用户名" id="username" name="username" autofocus="autofocus" maxlength="20"/>
             </div>
             <div class="form-group">
               <i class="fa fa-lock fa-lg"></i>
-              <input class="form-control required" type="password" placeholder="密码" id="password" name="password" maxlength="20"/>
+              <input v-model="password" class="form-control required" type="password" placeholder="密码" id="password" name="password" maxlength="20"/>
             </div>
-            <div class="form-group">
-              <i class="fa fa-envelope-open"></i>
-              <input class="form-control required" type="text" placeholder="邮箱" id="email" name="email" maxlength="20"/>
-            </div>
-            <a class='col-md-offset-7' href="login.html">去登录！</a>
+            <a class='col-md-offset-7'><router-link to="login">去登陆</router-link></a>
             <div class="leave">
               <form>
                 <div class="single-grid wow fadeInLeft animated" data-wow-delay=".5s">
                   <label class="hvr-rectangle-out">
-                    <input type="submit" value="注册">
+                    <input type="submit" @click="register" value="注册">
                   </label>
                 </div>
               </form>
@@ -44,6 +44,37 @@
 
 </template>
 <script>
+import api from '@/api/getData'
+export default {
+  data () {
+    return {
+      email: '',
+      password: '',
+      name: ''
+    }
+  },
+  methods: {
+    register () {
+      let information = {
+        email: this.email,
+        pass: this.password,
+        name: this.name
+      }
+      api.register(information).then(res => {
+      }).catch(res => {
+        let data = res.data
+        if (data.code === '0') {
+          console.log('注册成功')
+          this.$router.push('/login')
+        } else if (data.code === '1') {
+          // TODO
+        } else if (data.code === '2') {
+          // TODO
+        }
+      })
+    }
+  }
+}
 
 </script>
 <style scoped>
