@@ -4,13 +4,13 @@
       <h3>评论</h3>
       <div :key="item.index" v-for="item in commentList" class="media wow fadeInLeft animated" data-wow-delay=".5s">
         <div class="code-in">
-          <p class="smith"><a href="#">{{item.name}}</a> <span>{{item.date}}</span></p>
+          <p class="smith"><a href="#">{{item.userName}}</a> <span>{{item.time}}</span></p>
           <p class="reply"><a href="#"><i class="glyphicon glyphicon-repeat"> </i>REPLY</a></p>
           <div class="clearfix"> </div>
         </div>
         <div class="media-left">
           <a href="#">
-            <img :src="item.url" alt="">
+            <img :src="item.icon" alt="">
           </a>
         </div>
         <div class="media-body">
@@ -33,25 +33,28 @@
 </template>
 <script>
 export default {
+  props: [
+    'commentList'
+  ],
   data () {
     return {
       commentList: [
         {
-          name: 'Andey ',
-          date: '02 June 2014, 15:20',
-          url: '/static/images/si2.jpg',
+          userName: 'Andey ',
+          time: '02 June 2014, 15:20',
+          icon: '/static/images/si2.jpg',
           content: '早餐开启美好的一天'
         },
         {
-          name: 'Rackham  ',
-          date: '02 June 2014, 15:20',
-          url: '/static/images/si.jpg',
+          userName: 'Rackham  ',
+          time: '02 June 2014, 15:20',
+          icon: '/static/images/si.jpg',
           content: '啊啊啊～～还有这样的存在？'
         },
         {
-          name: 'Andey ',
-          date: '02 June 2014, 15:20',
-          url: '/static/images/si1.jpg',
+          userName: 'Andey ',
+          time: '02 June 2014, 15:20',
+          icon: '/static/images/si1.jpg',
           content: '整个食草菜谱 我也要吃'
         }
       ]
