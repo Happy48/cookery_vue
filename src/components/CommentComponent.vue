@@ -39,26 +39,26 @@ export default {
   ],
   data () {
     return {
-      commentList: [
-        {
-          userName: 'Andey ',
-          time: '02 June 2014, 15:20',
-          icon: '/static/images/si2.jpg',
-          content: '早餐开启美好的一天'
-        },
-        {
-          userName: 'Rackham  ',
-          time: '02 June 2014, 15:20',
-          icon: '/static/images/si.jpg',
-          content: '啊啊啊～～还有这样的存在？'
-        },
-        {
-          userName: 'Andey ',
-          time: '02 June 2014, 15:20',
-          icon: '/static/images/si1.jpg',
-          content: '整个食草菜谱 我也要吃'
-        }
-      ]
+      // commentList: [
+      //   {
+      //     userName: 'Andey ',
+      //     time: '02 June 2014, 15:20',
+      //     icon: '/static/images/si2.jpg',
+      //     content: '早餐开启美好的一天'
+      //   },
+      //   {
+      //     userName: 'Rackham  ',
+      //     time: '02 June 2014, 15:20',
+      //     icon: '/static/images/si.jpg',
+      //     content: '啊啊啊～～还有这样的存在？'
+      //   },
+      //   {
+      //     userName: 'Andey ',
+      //     time: '02 June 2014, 15:20',
+      //     icon: '/static/images/si1.jpg',
+      //     content: '整个食草菜谱 我也要吃'
+      //   }
+      // ]
     }
   }
 }

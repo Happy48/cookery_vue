@@ -34,6 +34,9 @@
               <form>
                 <div class="single-grid wow fadeInLeft animated" data-wow-delay=".5s">
                   <label class="hvr-rectangle-out">
+                    <input type="submit" value="喜欢">
+                  </label>
+                  <label class="hvr-rectangle-out">
                     <input type="submit" value="收藏">
                   </label>
                 </div>
@@ -111,14 +114,13 @@ export default {
       url: '/static/images/ss.jpg',
       count: 2373,
       date: '08.09.2014',
-      commentNumber: 5 ,
+      commentNumber: 5,
       desc: '你知道考伯沙拉吗？满满一盘色彩缤纷的沙拉哟！看着心情就好好',
 
       peopleUrl: '/static/images/si1.jpg',
       name: 'Andy',
       works: [],
       comments: [],
-
 
       materialList: [
         {
@@ -150,7 +152,7 @@ export default {
   methods: {
     initBlogDetail () {
       let information = {
-        noteId: 3
+        noteId: 5
       }
       api.getNoteDetail(information).then().catch(res => {
         let note = res.data
@@ -162,7 +164,7 @@ export default {
         this.desc = note.foodDesc
         this.peopleUrl = note.userVO.icon
         this.name = note.userVO.userName
-        this.materialList= note.materialVOList
+        this.materialList = note.materialVOList
         this.steps = note.stepVOList
         this.works = note.workVOList
         this.comments = note.commentVOList
