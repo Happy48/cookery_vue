@@ -77,7 +77,6 @@ export default {
       searchPage: 0,
       isSearched: false,
       total: 150,
-      display: 5,
       current: 1
     }
   },
@@ -94,6 +93,8 @@ export default {
   },
   methods: {
     getMyNoteList () {
+      let list = {token: this.token}
+      api.getMyNoteListTotal(list).then(res => {}).catch(res => { this.total = res.data })
       let listInfo = {
         token: this.token,
         page: this.page
@@ -104,6 +105,8 @@ export default {
       })
     },
     getUserNoteList () {
+      let list = {name: this.name}
+      api.getNoteListTotalByUserID(list).then(res => {}).catch(res => { this.total = res.data })
       let listInfo = {
         name: this.name,
         page: this.page
@@ -126,6 +129,15 @@ export default {
       this.preSearch = this.searchContent
     },
     searchFromPeople () {
+      if (this.preSearch !== this.searchContent) {
+        let searchKey = {
+          name: this.name,
+          key: this.searchContent
+        }
+        api.searchFromCertainPersonTotal(searchKey).then(res => {}).catch(res => {
+          this.total = res.data
+        })
+      }
       let searchInfo = {
         name: this.name,
         key: this.searchContent,
@@ -137,6 +149,15 @@ export default {
       })
     },
     searchMyBlog () {
+      if (this.preSearch !== this.searchContent) {
+        let searchKey = {
+          token: this.token,
+          key: this.searchContent
+        }
+        api.searchFromMyTotal(searchKey).then(res => {}).catch(res => {
+          this.total = res.data
+        })
+      }
       let searchInfo = {
         token: this.token,
         key: this.searchContent,

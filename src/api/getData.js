@@ -165,5 +165,29 @@ export default {
    */
   searchMyBlog (params) {
     return axios.get('searchMyBlog?token=' + params['token'] + '&key=' + params['key'] + '&page=' + params['page'])
+  },
+  /**
+   * 搜索别人的博客，获取总页数
+   */
+  searchFromCertainPersonTotal (params) {
+    return axios.get('searchFromCertainPersonTotal?name=' + params['name'] + '&key=' + params['key'])
+  },
+  /**
+   * 搜索自己的博客，获取总页数
+   */
+  searchFromMyTotal (params) {
+    return axios.get('searchFromMyTotal?token=' + params['token'] + '&key=' + params['key'])
+  },
+  /**
+   * 获取我的笔记页数
+   */
+  getMyNoteListTotal (params) {
+    return axios.get('myNoteListTotal?token=' + params['token'])
+  },
+  /**
+   *获取别人的笔记页数
+   */
+  getNoteListTotalByUserID (params) {
+    return axios.get('userNoteListTotalByUserID?name=' + params['name'])
   }
 }

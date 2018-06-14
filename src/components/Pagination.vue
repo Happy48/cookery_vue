@@ -26,7 +26,7 @@ export default{
     },
     display: {// 每页显示条数
       type: Number,
-      default: 10
+      default: 5
     },
     currentPage: {// 当前页码
       type: Number,
@@ -43,7 +43,7 @@ export default{
   },
   computed: {
     page: function () { // 总页数
-      return Math.ceil(this.total / this.display)
+      return Math.ceil(this.total * 1.0 / this.display)
     },
     grouplist: function () { // 获取分页页码
       var len = this.page
