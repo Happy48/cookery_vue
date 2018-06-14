@@ -99,6 +99,13 @@ export default {
   getUserNoteList (params) {
     return axios.get('userNoteList?name=' + params['name'] + '&page=' + params['page'])
   },
+
+  /**
+   * 获取我的笔记列表
+   */
+  getMyNoteList (params) {
+    return axios.get('myNoteList?token=' + params['token'] + '&page=' + params['page'])
+  },
   /**
    * 获取我的收藏列表
    */
@@ -152,6 +159,11 @@ export default {
    */
   changeInfo (params) {
     return fetch('/changeInfo', params)
+  },
+  /**
+   * 从个人的博客里面搜索
+   */
+  searchMyBlog (params) {
+    return axios.get('searchMyBlog?token=' + params['token'] + '&key=' + params['key'] + '&page=' + params['page'])
   }
-
 }

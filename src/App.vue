@@ -6,7 +6,6 @@
 
 <script>
 import './js/jquery.min'
-import './js/jquery.page'
 import './js/easing'
 import './js/move-top'
 import './js/wow.min'
