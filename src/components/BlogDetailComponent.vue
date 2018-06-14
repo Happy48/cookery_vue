@@ -111,7 +111,7 @@ export default {
       url: '/static/images/ss.jpg',
       count: 2373,
       date: '08.09.2014',
-      commentNumber: 5,
+      commentNumber: 5 ,
       desc: '你知道考伯沙拉吗？满满一盘色彩缤纷的沙拉哟！看着心情就好好',
 
       peopleUrl: '/static/images/si1.jpg',
