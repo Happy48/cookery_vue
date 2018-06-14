@@ -1012,6 +1012,8 @@ p.reply a i{
 .popular li{
 	list-style:none;
 	padding:0.5em 0;
+  padding-left: 1em;
+
 }
 .popular li a{
 	color:#777;
@@ -1025,9 +1027,15 @@ p.reply a i{
   vertical-align: middle;
   margin-right: 16px;
 }
+.popular li.active{
+  border-radius: 10px ;
+  border:2px solid #005238 ;
+  background: #005238;
+}
 
 .popular li.active  a{
-  color:#005238;
+  color:#fff;
+  /*color: #005238;*/
   font-size:1.2em;
 }
 
