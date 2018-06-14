@@ -1,7 +1,6 @@
 <template>
   <div>
     <sub-title></sub-title>
-    <!--content-->
     <div class="content">
       <div class="events">
         <div class="col-md-3 categories-grid" style="padding-left: 50px">
