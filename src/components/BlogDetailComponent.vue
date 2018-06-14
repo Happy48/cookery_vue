@@ -27,7 +27,7 @@
             <h4 style="font-size: 30px">{{count}}</h4>
           </div>
           <div class="col-md-9 wow fadeInLeft animated" data-wow-delay=".5s">
-            <h5 style="padding-top: 40px;color: #97824B;font-size: 16px">人做过这道菜</h5>
+            <h5 style="padding-top: 40px;color: #97824B;font-size: 16px"> 人做过这道菜</h5>
           </div>
           <div class="col-md-2">
             <div class="leave form-group form-inline">
