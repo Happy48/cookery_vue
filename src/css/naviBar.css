@@ -1,0 +1,73 @@
+/**
+导航栏css
+ */
+#title_bar{
+  position:fixed;
+  left:0;
+  top:0;
+  width:100%;
+  height:79px;
+  background:transparent;
+  z-index: 98;
+  padding:20px;
+  -webkit-transition: linear 0.5s;
+  transition: linear 0.5s;
+}
+#search{
+  background:none;
+  border:0.1vw solid white;
+  -webkit-transition: linear 0.5s;
+  transition: linear 0.5s;
+}
+
+#menu_div{
+  position:absolute;
+  left:45%;
+  width:100%;
+  top:25px;
+}
+#menu_div li {
+  width: 6.5%;
+  display: inline-block;
+  margin-left: 0.2em
+}
+#menu_div li a,#login_part li a{
+  z-index:6;
+  text-decoration: none;
+  color: #fff;
+  display: block;
+  text-align: center;
+  font-size: 16px;
+  text-transform: uppercase;
+  border-bottom: 2px solid transparent;
+  -webkit-transition: linear 0.5s;
+  transition: linear 0.5s;
+  font-weight: 600;
+  padding: 5px 0;
+}
+#menu_div li a:hover,#menu_div li a.active,#login_part li a:hover,#login_part li a.active{
+  color:#97824B;
+  border-bottom: 2px solid #97824B;
+  -webkit-transition: linear 0.5s;
+  transition: linear 0.5s;
+  -webkit-transform: scale(1.15);
+  -ms-transform: scale(1.15);
+  transform: scale(1.15);
+  font-weight: 700;
+}
+
+#login_part{
+  position:absolute;
+  left:90%;
+  top:22px;
+  width:100%;
+}
+#login_part li {
+  width: 4%;
+  display: inline-block;
+}
+#personal_icon{
+  border-radius: 50%;
+  width:35px;
+  height:35px;
+}

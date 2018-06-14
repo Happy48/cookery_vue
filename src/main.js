@@ -4,8 +4,11 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import stores from 'vue-stores'
+import store from './vuex/store'
+import Vuex from 'vuex'
 
 Vue.use(stores)
+Vue.use(Vuex)
 
 Vue.config.productionTip = false
 
@@ -14,6 +17,7 @@ new Vue({
   el: '#app',
   components: { App },
   router,
+  store,
   template: '<App/>',
   data: {
     state: {

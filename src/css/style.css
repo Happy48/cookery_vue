@@ -982,12 +982,9 @@ p.reply a i{
 	font-size:2em;
 }
 .search{
-	position:relative;
-    top:0;
-    float:right;
 	border:none;
 	background:#005238;
-    marigin:0 auto;
+  marigin:0 auto;
 }
 .search input[type="text"] {
 	outline: none;
@@ -997,6 +994,9 @@ p.reply a i{
 	border: none;
 	color:#fff;
 	font-size: 1.2em;
+}
+.search input[type="text"]::placeholder {
+  color:#fff;
 }
 .search input[type="submit"] {
 	width: 30px;
