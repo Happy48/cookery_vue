@@ -67,5 +67,60 @@ export default {
    */
   getList () {
     return axios.get('/getList')
+  },
+  /**
+   * 获取你可能喜欢的菜品
+   */
+  getGuessLike (params) {
+    return axios.get('/guessLike?number=' + params['number'])
+  },
+  /**
+   * 获取关注的人的列表
+   */
+  getMyFollowList (params) {
+    return axios.get('myFollowList?token=' + params['token'])
+  },
+  /**
+   * 获取某位成员的信息
+   */
+  getUserInfo (params) {
+    return axios.get('userInfo?name=' + params['name'])
+  },
+
+  /**
+   * 获取某人的笔记列表
+   */
+  getUserNoteList (params) {
+    return axios.get('userNoteList?name=' + params['name'] + '&page=' + params['page'])
+  },
+  /**
+   * 获取我的收藏列表
+   */
+  getUserCollection (params) {
+    return axios.get('userCollection?token=' + params['token'])
+  },
+  /**
+   * 从某人的博客里面搜索
+   */
+  searchFromPeople (params) {
+    return axios.get('searchFromPeople?name=' + params['name'] + '&key=' + params['key'] + '&page=' + params['page'])
+  },
+  /**
+   * 根据分类寻找具体的事物
+   */
+  getNoteList (params) {
+    return axios.get('getNoteList?class=' + params['class'])
+  },
+  /**
+   * 根据noteId获取food的详情
+   */
+  getNoteDetail (params) {
+    return axios.get('getNoteDetail?noteId=' + params['noteId'])
+  },
+  /**
+   * 留下评论
+   */
+  leaveReply (params) {
+    return fetch('/leaveReply', params)
   }
 }
