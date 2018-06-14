@@ -16,18 +16,18 @@
           <div class="col-md-9">
             <div class="form-group">
               <i class="fa fa-user fa-lg"></i>
-              <input class="form-control required" type="text" placeholder="用户名" id="username" name="username" autofocus="autofocus" maxlength="20"/>
+              <input v-model="email" class="form-control required" type="text" placeholder="邮箱" id="email" name="email" autofocus="autofocus" maxlength="20" required/>
             </div>
             <div class="form-group">
               <i class="fa fa-lock fa-lg"></i>
-              <input class="form-control required" type="password" placeholder="密码" id="password" name="password" maxlength="20"/>
+              <input v-model="password" class="form-control required" type="password" placeholder="密码" id="password" name="password" maxlength="20" required/>
             </div>
             <a class='col-md-offset-7' href="register.html">马上注册！</a>
             <div class="leave">
               <form>
                 <div class="single-grid wow fadeInLeft animated" data-wow-delay=".5s">
                   <label class="hvr-rectangle-out">
-                    <input type="submit" value="登录">
+                    <input type="submit" @click="login" value="登录">
                   </label>
                 </div>
               </form>
@@ -39,7 +39,42 @@
   </div>
 </template>
 <script>
+import api from '@/api/getData'
 
+export default {
+  stores: {
+    token: 'state.token'
+  },
+  data () {
+    return {
+      email: '',
+      password: ''
+    }
+  },
+  methods: {
+    login () {
+      let information = {
+        email: this.email,
+        pass: this.password
+      }
+      api.login(information).then(res => {
+      }).catch(res => {
+        let data = res.data
+        if (data.code === '0') {
+          console.log(data.message)
+          this.token = data.message
+          this.$router.push('/')
+        } else if (data.code === '1') {
+          // TODO
+        }else if (data.code === '2') {
+          // TODO
+        }else if (data.code === '3') {
+          // TODO
+        }
+      })
+    }
+  }
+}
 </script>
 <style scoped>
 

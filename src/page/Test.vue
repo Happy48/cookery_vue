@@ -8,7 +8,6 @@
   </form>
 </template>
 <script>
-import api from '@/api/getData'
 import $ from 'jquery'
 export default {
   data () {
