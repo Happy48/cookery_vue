@@ -55,5 +55,11 @@ export default {
    */
   register (params) {
     return fetch('/register', params)
+  },
+  /**
+   * 获得首页推荐
+   */
+  getIndexRecommend () {
+    return axios.get('/indexRecommend')
   }
 }
