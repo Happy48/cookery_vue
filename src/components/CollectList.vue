@@ -88,8 +88,8 @@ export default {
       }
       api.getUserCollection(listInfo).then(res => {}).catch(res => {
         this.collectList = res.data
+        console.log(res.data)
       })
-
     }
   }
 }
