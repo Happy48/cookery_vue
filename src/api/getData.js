@@ -155,6 +155,18 @@ export default {
     return axios.get('/like?token=' + params['token'] + '&noteid=' + params['noteid'])
   },
   /**
+   * 判断是否已收藏
+   */
+  isCollect (params) {
+    return axios.get('/isCollect?token=' + params['token'] + '&noteid=' + params['noteid'])
+  },
+  /**
+   * 判断是否已喜欢
+   */
+  isLike (params) {
+    return axios.get('/isLike?token=' + params['token'] + '&noteid=' + params['noteid'])
+  },
+  /**
    * 添加新笔记
    */
   createNote (params) {
