@@ -112,19 +112,13 @@
         <div class="leave form-group form-inline">
           <label>&nbsp;&nbsp;&nbsp;个人简介:&nbsp;&nbsp;&nbsp;&nbsp;</label>
           <div class="single-grid wow fadeInLeft animated" data-wow-delay=".5s">
-            <textarea onfocus="this.value='';" onblur="if (this.value == '') {this.value = '介绍一下自己吧';}" v-model="introduction">介绍一下自己吧</textarea>
+            <textarea v-model="introduction">介绍一下自己吧</textarea>
+            <!--onfocus="this.value='';" onblur="if (this.value == '') {this.value = '介绍一下自己吧';}" -->
           </div>
           <form>
             <div class="single-grid wow fadeInLeft animated" data-wow-delay=".5s">
               <label class="hvr-rectangle-out">
-                <input type="submit" value="编辑">
-              </label>
-            </div>
-          </form>
-          <form>
-            <div class="single-grid wow fadeInLeft animated" data-wow-delay=".5s">
-              <label class="hvr-rectangle-out">
-                <input type="submit" @click="save_info" value="保存">
+                <input type="submit" @click="save_info" value="更新">
               </label>
             </div>
           </form>
@@ -180,11 +174,11 @@ export default {
       }).catch(res => {
         let data = res.data
         if (data.code === '0') {
-          alert('修改成功')
+          alert('更新成功')
         } else if (data.code === '1') {
-          alert('修改的用户名已存在')
+          alert('更改的用户名已存在')
         } else if (data.code === '2') {
-          alert('修改的邮箱已存在')
+          alert('更改的邮箱已存在')
         } else if (data.code === '3') {
           alert('不存在该用户')
         }
@@ -198,7 +192,7 @@ export default {
         this.introduction = user.introduction
         this.picUrl = user.icon
         this.address = user.address
-        this.sex = user.sex
+        this.sex = user.sex === false ? 0 : 1
         this.birthday = user.birthday
         this.phoneNumber = user.phoneNum
         this.userPwd = user.password
