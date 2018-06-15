@@ -524,7 +524,7 @@ ul.grid-news li b {
 }
 .events-bottom2 {
     padding: 2.9em;
-    background-color:#ECECEC;
+    /*background-color:#ECECEC;*/
 }
 .events-bottom2 h3{
     font-size: 2em;
@@ -722,11 +722,21 @@ i.glyphicon.glyphicon-calendar {
   margin-right: 0.3em;
 }
 a.comments{
+
+  margin-left: 5px;
 	float:right;
 	color:#7C7C7C;
 	text-decoration:none;
 	font-size:1em;
 }
+
+a.likes{
+  float:right;
+  color:#7C7C7C;
+  text-decoration:none;
+  font-size:1em;
+}
+
 i.glyphicon.glyphicon-comment {
   font-size: 14px;
   margin-right: 0.3em;
@@ -1996,4 +2006,39 @@ td.add-check a {
   border: 1px solid #bfbfbf;
   border-radius: 4px;
   vertical-align: middle;
+}
+
+.myimg{
+  width: 100%;
+  height:200px
+}
+
+.line-limit-length{
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.mutiline-limit-length{
+  height: 60px;
+  word-break:break-all;
+  display:-webkit-box;
+  -webkit-line-clamp:2;
+  -webkit-box-orient:vertical;
+  overflow:hidden;
+}
+
+.bloglist-limit-length{
+  height: 60px;
+  word-break:break-all;
+  display:-webkit-box;
+  -webkit-line-clamp:2;
+  -webkit-box-orient:vertical;
+  overflow:hidden;
+}
+
+.col_img{
+  box-shadow:4px 4px 5px  #aaaaaa;
+  width: 100%;
+  height:200px
 }

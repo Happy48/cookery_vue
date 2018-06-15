@@ -11,7 +11,7 @@
         </div>
         <div class="col-md-9" style="padding-right:50px">
           <blog-class-list :name="currentChooseLabel" :list="list"></blog-class-list>
-          <Pagination :total="total" :current-page='current' @pagechange="pagechange" ref="pagi" :display='display'></Pagination>
+          <Pagination style="margin-top:-50px " :total="total" :current-page='current' @pagechange="pagechange" ref="pagi" :display='display'></Pagination>
         </div>
       </div>
       <div class="clearfix"> </div>
