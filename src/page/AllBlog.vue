@@ -9,9 +9,14 @@
 
           <OtherLikeLabel :list="otherLikeData" :title="likeLabelTitle"></OtherLikeLabel>
         </div>
-        <blog-class-list :name="currentChooseLabel" :list="list"></blog-class-list>
+        <div class="col-md-9" style="padding-right:50px">
+          <blog-class-list :name="currentChooseLabel" :list="list"></blog-class-list>
+          <Pagination :total="total" :current-page='current' @pagechange="pagechange" ref="pagi" :display='display'></Pagination>
+        </div>
       </div>
+      <div class="clearfix"> </div>
     </div>
+    <Footer></Footer>
   </div>
 </template>
 <script>
@@ -21,6 +26,7 @@ import BlogSquareLabel from '@/components/BlogSquareLabel'
 import OtherLikeLabel from '@/components/OtherLikeLabel'
 import BlogClassList from '@/components/BlogClassList'
 import api from '@/api/getData'
+import Pagination from '@/components/Pagination'
 export default {
   data () {
     return {
@@ -43,7 +49,11 @@ export default {
       ],
       likeLabelTitle: '你可能喜欢',
       currentChooseLabel: '家常菜',
-      list: []
+      list: [],
+      total: 15,
+      display: 9,
+      current: 1,
+      tagName: ''
     }
   },
   components: {
@@ -51,7 +61,8 @@ export default {
     Footer,
     BlogSquareLabel,
     OtherLikeLabel,
-    BlogClassList
+    BlogClassList,
+    Pagination
   },
   created () {
     this.search()
@@ -101,8 +112,20 @@ export default {
         this.otherLikeData = notes
       })
     },
-    getBlogListByClass (...param) {
-      this.list = param
+    getBlogListByClass (param) {
+      this.tagName = param
+      api.getNoteList({ class: this.tagName, page: this.current - 1 }).then().catch(res => {
+        this.list = res.data
+        console.log(this.list)
+      })
+      api.getNoteListTotal({ class: this.tagName }).then().catch(res => {
+        this.total = res.data
+      })
+    },
+    pagechange: function (currentPage) {
+      api.getNoteList({ class: this.tagName, page: currentPage - 1 }).then().catch(res => {
+        this.list = res.data
+      })
     }
   }
 }

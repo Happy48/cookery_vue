@@ -1,6 +1,5 @@
 <template>
   <div>
-    <div class="col-md-9" style="padding-right:50px">
       <div class="events-top">
         <div class="search-in animated wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="500ms">
           <h4 class="col-md-8" style="padding-top:15px "> {{name}} </h4>
@@ -8,8 +7,8 @@
         <div class="clearfix"> </div>
       </div>
       <div class="blog-header">
-        <div :key="item.index" v-for="item in list" class=" blog-head">
-          <div :key="subItem.index" v-for="subItem in item" class="col-md-4 blog-top">
+        <div class=" blog-head">
+          <div :key="subItem.index" v-for="subItem in list" class="col-md-4 blog-top" style="margin-bottom: 50px">
             <div class="blog-in">
               <a @click="showMore(subItem.noteId)"><img class="img-responsive" :src="subItem.foodPic" alt=" "></a>
               <div class="blog-grid">
@@ -31,7 +30,6 @@
           <div class="clearfix"> </div>
         </div>
       </div>
-    </div>
     <div class="clearfix"> </div>
   </div>
 </template>

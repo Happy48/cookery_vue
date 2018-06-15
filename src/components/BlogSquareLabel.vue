@@ -17,7 +17,7 @@ export default {
           id: ''
         }
       ],
-      num: 0,
+      num: -1,
       blogList: [
         {
           foodPic: '/static/images/ev.jpg',
@@ -33,6 +33,7 @@ export default {
   },
   created () {
     this.getList()
+    this.getBlogList(-1, '全部')
   },
   methods: {
     getList () {
@@ -42,11 +43,7 @@ export default {
     },
     getBlogList (index, name) {
       this.num = index
-      console.log(name)
-      api.getNoteList({class: name}).then().catch(res => {
-        this.blogList = res.data
-        this.$emit('getBlogListByClass', this.blogList)
-      })
+      this.$emit('getBlogListByClass', name)
     }
   }
 }

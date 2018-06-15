@@ -153,11 +153,8 @@ export default {
   methods: {
     initBlogDetail () {
       this.noteId = this.$route.params.noteID
-      console.log(this.noteId)
-      // TODO remove
-      this.noteId = 5
       let information = {
-        noteId: 5
+        noteId: this.noteId
       }
       api.getNoteDetail(information).then().catch(res => {
         let note = res.data

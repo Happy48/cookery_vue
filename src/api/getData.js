@@ -122,7 +122,13 @@ export default {
    * 根据分类寻找具体的事物
    */
   getNoteList (params) {
-    return axios.get('getNoteList?class=' + params['class'])
+    return axios.get('getNoteList?class=' + params['class'] + '&page=' + params['page'])
+  },
+  /**
+   * 根据分类寻找具体的事物的总条数
+   */
+  getNoteListTotal (params) {
+    return axios.get('getNoteListTotal?class=' + params['class'])
   },
   /**
    * 根据noteId获取food的详情
