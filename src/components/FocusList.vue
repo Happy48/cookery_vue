@@ -37,18 +37,18 @@ export default {
   data () {
     return {
       forcusList: [
-          {
-            icon: '/static/images/me.jpg',
-            name: 'Lorem'
-          },
-          {
-            icon: '/static/images/me1.jpg',
-            name: 'Lorem'
-          },
-          {
-            icon: '/static/images/me2.jpg',
-            name: 'Lorem'
-          }
+        {
+          icon: '/static/images/me.jpg',
+          name: 'Lorem'
+        },
+        {
+          icon: '/static/images/me1.jpg',
+          name: 'Lorem'
+        },
+        {
+          icon: '/static/images/me2.jpg',
+          name: 'Lorem'
+        }
       ]
     }
   },

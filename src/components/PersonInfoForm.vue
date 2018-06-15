@@ -158,10 +158,10 @@ export default {
     }
   },
   created () {
-      if (this.name === '我') {
-        this.getMyInfo()
-      }
-    },
+    if (this.name === '我') {
+      this.getMyInfo()
+    }
+  },
   methods: {
     save_info () {
       let information = {
