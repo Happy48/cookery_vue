@@ -107,7 +107,7 @@
                 <tr id="step1">
                   <td><h4>1</h4></td>
                   <td >
-                    <textarea style="width: 400px;height:200px;outline:none" value=" " onfocus="this.value='';" onblur="if (this.value == '') {this.value = '';}"></textarea>
+                    <textarea style="width: 300px;height:200px;outline:none" value=" " onfocus="this.value='';" onblur="if (this.value == '') {this.value = '';}"></textarea>
                   </td>
                   <td>
                     <div class="imageFileInput">
@@ -121,7 +121,7 @@
                 <tr id="step2">
                   <td><h4>2</h4></td>
                   <td>
-                    <textarea style="width: 400px;height:200px;outline:none" value=" " onfocus="this.value='';" onblur="if (this.value == '') {this.value = '';}"></textarea>
+                    <textarea style="width: 300px;height:200px;outline:none" value=" " onfocus="this.value='';" onblur="if (this.value == '') {this.value = '';}"></textarea>
                   </td>
                   <td>
                     <div class="imageFileInput">
@@ -135,7 +135,7 @@
                 <tr id="step3">
                   <td><h4>3</h4></td>
                   <td>
-                    <textarea style="width: 400px;height:200px;outline:none" value=" " onfocus="this.value='';" onblur="if (this.value == '') {this.value = '';}"></textarea>
+                    <textarea style="width: 300px;height:200px;outline:none" value=" " onfocus="this.value='';" onblur="if (this.value == '') {this.value = '';}"></textarea>
                   </td>
                   <td>
                     <div class="imageFileInput">
@@ -149,7 +149,7 @@
                 <tr id="step4">
                   <td><h4>4</h4></td>
                   <td>
-                    <textarea style="width: 400px;height:200px;outline:none" value=" " onfocus="this.value='';" onblur="if (this.value == '') {this.value = '';}"></textarea>
+                    <textarea style="width: 300px;height:200px;outline:none" value=" " onfocus="this.value='';" onblur="if (this.value == '') {this.value = '';}"></textarea>
                   </td>
                   <td>
                     <div class="imageFileInput">
@@ -166,6 +166,13 @@
                 <a class="button gray-button2 small-button" onclick="addStep()">追加一行步骤</a>
               </div>
               <br>
+              <BlogTag></BlogTag>
+              <!--<div class="clearfix wow fadeInLeft animated" data-wow-delay=".5s">-->
+                <!--<h4>标签</h4>-->
+                <!--<br>-->
+                <!--<input type="checkbox" name="车辆" value="车" >宝马<br>-->
+                <!--<input type="checkbox" name="车辆" value="车" >梅赛德斯奔驰<br>-->
+              <!--</div>-->
               <br>
             </div>
           </div>
@@ -188,6 +195,11 @@
   </div>
 </template>
 <script>
+import BlogTag from '@/components/BlogTag'
+export default {
+  components: {BlogTag}
+}
+
 </script>
 <style>
 </style>
