@@ -153,6 +153,7 @@ export default {
   methods: {
     initBlogDetail () {
       this.noteId = this.$route.params.noteID
+      console.log(this.noteId)
       // TODO remove
       this.noteId = 5
       let information = {

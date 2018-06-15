@@ -11,17 +11,17 @@
         <div :key="item.index" v-for="item in list" class=" blog-head">
           <div :key="subItem.index" v-for="subItem in item" class="col-md-4 blog-top">
             <div class="blog-in">
-              <a href="single.html"><img class="img-responsive" :src="subItem.foodPic" alt=" "></a>
+              <a @click="showMore(subItem.noteId)"><img class="img-responsive" :src="subItem.foodPic" alt=" "></a>
               <div class="blog-grid">
-                <h3><a href="single.html">{{subItem.foodTitle}}</a></h3>
+                <h3><a @click="showMore(subItem.noteId)">{{subItem.foodTitle}}</a></h3>
                 <div class="date">
                   <span class="date-in"><i class="glyphicon glyphicon-calendar"> </i>{{subItem.foodCreateTime}}</span>
-                  <a href="single.html" class="comments"><i class="glyphicon glyphicon-comment"></i>{{subItem.foodLikes}}</a>
+                  <a @click="showMore(subItem.noteId)" class="comments"><i class="glyphicon glyphicon-comment"></i>{{subItem.foodLikes}}</a>
                   <div class="clearfix"> </div>
                 </div>
                 <p>{{subItem.foodDesc}}</p>
                 <div class="more">
-                  <a class="link link-yaku" href="single.html">
+                  <a class="link link-yaku" @click="showMore(subItem.noteId)">
                     <span>R</span><span>e</span><span>a</span><span>d</span> <span>M</span><span>o</span><span>r</span><span>e</span>
                   </a>
                 </div>
@@ -43,6 +43,16 @@ export default {
   ],
   data () {
     return {
+    }
+  },
+  methods: {
+    showMore (noteID) {
+      this.$router.push({
+        name: 'blogDetail',
+        params: {
+          noteID: noteID
+        }
+      })
     }
   }
 }

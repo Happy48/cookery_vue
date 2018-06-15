@@ -13,7 +13,7 @@
       <div class="clearfix"> </div>
     </div>
     <div :key="item.index" class="events-bottom" v-for="item in collectList">
-      <CollectItem :url="item.foodPic" :title="item.foodTitle" :description="item.foodDesc" direction="left"></CollectItem>
+      <CollectItem :foodPic="item.foodPic" :foodTitle="item.foodTitle" :foodDesc="item.foodDesc" direction="left" :foodLikes="item.foodLikes" :foodCreateTime="item.foodCreateTime" :foodCollect="item.foodCollect"  :noteId="item.noteId"></CollectItem>
     </div>
     <div style="width:75% ;margin: 0 auto">
       <Pagination :total="total" :current-page='current' @pagechange="pagechange" ref="pagi"></Pagination>
