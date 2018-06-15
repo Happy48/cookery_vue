@@ -56,7 +56,7 @@
         <br />
         <div class="form-group form-inline">
           <label style="float: left;padding-top:10px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;地区:&nbsp;&nbsp;&nbsp;&nbsp;</label>
-          <!--<input type="text"  disabled="true" id="location"/>-->
+          <!--<input type="text"  disabled="true" v-model="location"/>-->
           <select  class="form-control" name="location" id="location" style="width: auto;" v-model="address">
             <option value="选择省份">选择省份</option>
             <option value="北京">北京</option>
@@ -155,6 +155,7 @@ export default {
       userPwd: '',
       email: '',
       picUrl: ''
+      // location: ''
     }
   },
   created () {
@@ -196,6 +197,12 @@ export default {
         this.userName = user.userName
         this.introduction = user.introduction
         this.picUrl = user.icon
+        this.address = user.address
+        this.sex = user.sex
+        this.birthday = user.birthday
+        this.phoneNumber = user.phoneNum
+        this.userPwd = user.password
+        this.email = user.email
       })
     }
   }
