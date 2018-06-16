@@ -2,7 +2,7 @@
   <div class="col-md-9" style="padding-right: 50px">
     <div class="events-top">
       <div class="search-in animated wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="500ms">
-        <h4 class="col-md-8" style="padding-top:15px "> {{name}}的笔记 </h4>
+        <h4 class="col-md-8" style="padding-top:15px "> {{names}}的笔记 </h4>
         <div class="search col-md-4">
           <form>
             <input v-model="searchContent" type="text" placeholder="搜索笔记/食材" required="" >
@@ -13,7 +13,7 @@
       <div class="clearfix"> </div>
     </div>
     <div :key="item.index" class="events-bottom" v-for="item in collectList">
-      <CollectItem :foodPic="item.foodPic" :foodTitle="item.foodTitle" :foodDesc="item.foodDesc" direction="left" :foodLikes="item.foodLikes" :foodCreateTime="item.foodCreateTime" :foodCollect="item.foodCollect"  :noteId="item.noteId"></CollectItem>
+      <CollectItem :foodPic="item.foodPic" :foodTitle="item.foodTitle" :foodDesc="item.foodDesc" direction="left" :foodLikes="item.foodLikes" :foodCreateTime="item.foodCreateTime" :foodCollect="item.foodCollect"  :noteId="item.noteId" :name="names" :where="names"></CollectItem>
     </div>
     <div style="width:75% ;margin: 0 auto">
       <Pagination :total="total" :current-page='current' @pagechange="pagechange" ref="pagi"></Pagination>
@@ -77,7 +77,8 @@ export default {
       searchPage: 0,
       isSearched: false,
       total: 150,
-      current: 1
+      current: 1,
+      names: this.name
     }
   },
   created () {

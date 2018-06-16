@@ -44,7 +44,9 @@ export default {
       this.$router.push({
         name: 'blogDetail',
         params: {
-          noteID: noteID
+          noteID: noteID,
+          name: '我',
+          where: 'All'
         }
       })
     }

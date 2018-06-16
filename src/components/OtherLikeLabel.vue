@@ -1,5 +1,5 @@
 <template>
-  <div class="blog-bottom animated wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="500ms">
+  <div class="grid-categories animated wow fadeInLeft" data-wow-duration="1000ms" data-wow-delay="500ms">
     <h4 >{{title}}</h4>
     <div :key="item.foodPic" v-for="item in list" class="product-go">
       <a href="single.html" class="fashion"><img class="like_img" :src="item.foodPic" alt=""></a>

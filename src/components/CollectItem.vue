@@ -4,7 +4,7 @@
       <a @click="showMore"><img :src="foodPic" alt="" class="col_img"></a>
     </div>
     <div class="col-md-8 events-bottom2 animated wow fadeInLeft" data-wow-duration="1000ms" data-wow-delay="500ms" style="padding-left: 50px;padding-right: 30px">
-      <h3 class="line-limit-length">{{foodTitle}}</h3>
+      <h3 @click="showMore" class="line-limit-length">{{foodTitle}}</h3>
       <label><i class="glyphicon glyphicon-menu-up"></i></label>
       <div class="date">
         <span class="date-in"><i class="glyphicon glyphicon-calendar"> </i>{{foodCreateTime}}</span>
@@ -30,14 +30,18 @@ export default {
     'foodLikes',
     'foodCreateTime',
     'foodCollect',
-    'noteId'
+    'noteId',
+    'name',
+    'where'
   ],
   methods: {
     showMore () {
       this.$router.push({
         name: 'blogDetail',
         params: {
-          noteID: this.noteId
+          noteID: this.noteId,
+          name: this.name,
+          where: this.where
         }
       })
     }
