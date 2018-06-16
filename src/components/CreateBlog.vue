@@ -12,7 +12,7 @@
       <div class="col-lg-8 col-md-8 animated wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="500ms">
         <h3>基本信息</h3>
         <div class="single-grid wow fadeInLeft animated" data-wow-delay=".5s">
-          <input type="text" placeholder="添加菜谱名称" />
+          <input type="text" placeholder="添加菜谱名称" v-model='noteName'/>
         </div>
         <br />
         <div class="upload">
@@ -41,7 +41,7 @@
           </div>
         </div>
         <div class="single-grid wow fadeInLeft animated" data-wow-delay=".5s">
-          <textarea value=" " onfocus="this.value='';" onblur="if (this.value == '') {this.value = '添加菜谱描述';}">添加菜谱描述</textarea>
+          <textarea value=" " v-model="description_area" onfocus="this.value='';" onblur="if (this.value == '') {this.value = '添加菜谱描述';}">添加菜谱描述</textarea>
         </div>
         <div class="single">
           <div class="single-top">
@@ -50,64 +50,26 @@
               <br>
               <table class="table wow fadeInLeft animated" data-wow-delay=".5s" style="alignment: center;font-size:20px;width:70%;">
                 <tbody id="componentBody">
-                <tr id="co1">
-                  <td>
-                    <input type="text" placeholder="食材：如鸡蛋" style="width:100%;outline:none">
-                  </td>
-                  <td>
-                    <input type="text" placeholder="用量：如一只" style="width:100%;outline:none">
-                  </td>
-                  <td>
-                    <img src="/static/images/close.png" draggable="false" onclick="deleteCo(1)">
-                  </td>
-                </tr>
-                <tr id="co2">
-                  <td>
-                    <input type="text" placeholder="食材：如鸡蛋" style="width:100%;outline:none">
-                  </td>
-                  <td>
-                    <input type="text" placeholder="用量：如一只" style="width:100%;outline:none">
-                  </td>
-                  <td>
-                    <img src="/static/images/close.png" draggable="false" onclick="deleteCo(2)">
-                  </td>
-                </tr>
-                <tr id="co3">
-                  <td>
-                    <input type="text" placeholder="食材：如鸡蛋" style="width:100%;outline:none">
-                  </td>
-                  <td>
-                    <input type="text" placeholder="用量：如一只" style="width:100%;outline:none">
-                  </td>
-                  <td>
-                    <img src="/static/images/close.png" draggable="false" onclick="deleteCo(3)">
-                  </td>
-                </tr>
-                <tr id="co4">
-                  <td>
-                    <input type="text" placeholder="食材：如鸡蛋" style="width:100%;outline:none">
-                  </td>
-                  <td>
-                    <input type="text" placeholder="用量：如一只" style="width:100%;outline:none">
-                  </td>
-                  <td>
-                    <img src="/static/images/close.png" draggable="false" onclick="deleteCo(4)">
-                  </td>
-                </tr>
+                   <tr :key="material.id" v-for="(material,id) in materials">
+                      <td>{{id+1}}</td>
+                      <td><input type="text" v-model="material.name" placeholder="鸡蛋"/></td>
+                      <td><input type="text" v-model="material.unit" placeholder="3个"/></td>
+                      <td><img src="/static/images/close.png" draggable="false" @click="remove(id)"></td>
+                    </tr>
                 </tbody>
               </table>
               <div class="clearfix wow fadeInLeft animated" data-wow-delay=".5s">
-                <a class="button gray-button2 small-button" onclick="addComponent()">追加一行用料</a>
+                <a class="button gray-button2 small-button" @click="addMaterial">追加一行用料</a>
               </div>
               <br>
               <h4>做法</h4>
               <br>
               <table class="table wow fadeInLeft animated" data-wow-delay=".5s" style="font-size:20px;">
                 <tbody id="stepBody">
-                <tr id="step1">
-                  <td><h4>1</h4></td>
-                  <td >
-                    <textarea style="width: 300px;height:200px;outline:none" value=" " onfocus="this.value='';" onblur="if (this.value == '') {this.value = '';}"></textarea>
+                <tr :key="step.id" v-for="(step,id) in steps">
+                  <td><h4>{{id+1}}</h4></td>
+                  <td>
+                    <textarea v-model="step.information" style="width: 300px;height:200px;outline:none" value=" " onfocus="this.value='';" onblur="if (this.value == '') {this.value = '';}"></textarea>
                   </td>
                   <td>
                     <div class="imageFileInput">
@@ -115,64 +77,16 @@
                     </div>
                   </td>
                   <td>
-                    <img src="/static/images/closeB.png" style="padding-top: 60px" draggable="false" onclick="deleteStep(1)">
-                  </td>
-                </tr>
-                <tr id="step2">
-                  <td><h4>2</h4></td>
-                  <td>
-                    <textarea style="width: 300px;height:200px;outline:none" value=" " onfocus="this.value='';" onblur="if (this.value == '') {this.value = '';}"></textarea>
-                  </td>
-                  <td>
-                    <div class="imageFileInput">
-                      <input class="fileInput" type="file"  name="">
-                    </div>
-                  </td>
-                  <td>
-                    <img src="/static/images/closeB.png" style="padding-top: 60px" draggable="false" onclick="deleteStep(2)">
-                  </td>
-                </tr>
-                <tr id="step3">
-                  <td><h4>3</h4></td>
-                  <td>
-                    <textarea style="width: 300px;height:200px;outline:none" value=" " onfocus="this.value='';" onblur="if (this.value == '') {this.value = '';}"></textarea>
-                  </td>
-                  <td>
-                    <div class="imageFileInput">
-                      <input class="fileInput" type="file"  name="">
-                    </div>
-                  </td>
-                  <td>
-                    <img src="/static/images/closeB.png" style="padding-top: 60px" draggable="false" onclick="deleteStep(3)">
-                  </td>
-                </tr>
-                <tr id="step4">
-                  <td><h4>4</h4></td>
-                  <td>
-                    <textarea style="width: 300px;height:200px;outline:none" value=" " onfocus="this.value='';" onblur="if (this.value == '') {this.value = '';}"></textarea>
-                  </td>
-                  <td>
-                    <div class="imageFileInput">
-                      <input class="fileInput" type="file"  name="" >
-                    </div>
-                  </td>
-                  <td>
-                    <img src="/static/images/closeB.png" style="padding-top: 60px" draggable="false" onclick="deleteStep(4)">
+                    <img src="/static/images/closeB.png" style="padding-top: 60px" draggable="false" @click="deleteStep(id)">
                   </td>
                 </tr>
                 </tbody>
               </table>
               <div class="clearfix wow fadeInLeft animated" data-wow-delay=".5s">
-                <a class="button gray-button2 small-button" onclick="addStep()">追加一行步骤</a>
+                <a class="button gray-button2 small-button" @click="addStep">追加一行步骤</a>
               </div>
               <br>
-              <BlogTag></BlogTag>
-              <!--<div class="clearfix wow fadeInLeft animated" data-wow-delay=".5s">-->
-                <!--<h4>标签</h4>-->
-                <!--<br>-->
-                <!--<input type="checkbox" name="车辆" value="车" >宝马<br>-->
-                <!--<input type="checkbox" name="车辆" value="车" >梅赛德斯奔驰<br>-->
-              <!--</div>-->
+              <BlogTag v-on:blogTagSay="getCheckedTagNames"></BlogTag>
               <br>
             </div>
           </div>
@@ -180,9 +94,9 @@
             <h3>小贴士</h3>
             <form>
               <div class="single-grid wow fadeInLeft animated" data-wow-delay=".5s">
-                <textarea value=" " onfocus="this.value='';" onblur="if (this.value == '') {this.value = '添加小贴士';}">添加小贴士</textarea>
+                <textarea value=" " v-model="tip_area" onfocus="this.value='';" onblur="if (this.value == '') {this.value = '添加小贴士';}">添加小贴士</textarea>
                 <label class="hvr-rectangle-out">
-                  <input type="submit" value="上传">
+                  <input type="submit" value="上传" @click="save_new">
                 </label>
               </div>
             </form>
@@ -196,8 +110,74 @@
 </template>
 <script>
 import BlogTag from '@/components/BlogTag'
+import api from '@/api/getData'
 export default {
-  components: {BlogTag}
+  components: {BlogTag},
+  stores: {
+    token: 'state.token'
+  },
+  data () {
+    return {
+      noteName: '',
+      noteCover: '',
+      description_area: '',
+      material: {'name': '', 'unit': ''},
+      materials: [
+        {'name': '', 'unit': ''}
+      ],
+      step: {'img': '', 'information': ''},
+      steps: [
+        {'img': '234', 'information': '234'}
+      ],
+      practice: '',
+      tip_area: '',
+      subtag: ''
+    }
+  },
+  methods: {
+    getCheckedTagNames: function (msg) {
+      this.subtag = msg
+    },
+    remove: function (id) {
+      this.materials.splice(id, 1)
+    },
+    addMaterial: function () {
+      let newMaterial = {'name': '', 'unit': ''}
+      this.materials.push(newMaterial)
+    },
+    deleteStep: function (id) {
+      this.steps.splice(id, 1)
+    },
+    addStep: function () {
+      let newStep = {'img': '', 'information': ''}
+      this.steps.push(newStep)
+    },
+    save_new () {
+      let information = {
+        token: this.token,
+        noteName: this.noteName,
+        noteCover: '',
+        description: this.description_area,
+        material: JSON.stringify(this.materials),
+        practice: '123',
+        tip: this.tip_area,
+        subtag: this.subtag.join(',')
+      }
+      alert(information.description)
+      api.createNote(information).then(res => {
+      }).catch(res => {
+        let data = res.data
+        alert(data)
+        if (data.code === '0') {
+          alert('创建成功')
+        } else if (data.code === '1') {
+          alert('子标签不在定义范围之内')
+        } else if (data.code === '2') {
+          alert('不存在该用户')
+        }
+      })
+    }
+  }
 }
 
 </script>

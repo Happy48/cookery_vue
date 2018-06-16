@@ -4,7 +4,7 @@
     <br>
     <ul class="popular">
       <li :key="item.id" v-for="item in list">
-        <input type="checkbox" name="标签" :value="item.name" >{{item.name}}
+        <input type="checkbox" name="标签" :value="item.name" v-model="checkTags" @change="up">{{item.name}}
       </li>
     </ul>
   </div>
@@ -20,7 +20,8 @@ export default {
           name: '',
           id: ''
         }
-      ]
+      ],
+      checkTags: []
     }
   },
   created () {
@@ -32,8 +33,12 @@ export default {
         this.list = res.data
         console.log(this.list)
       })
+    },
+    up () {
+      this.$emit('blogTagSay', this.checkTags)
     }
   }
+
 }
 
 </script>
