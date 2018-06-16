@@ -13,7 +13,8 @@
       <div class="clearfix"> </div>
     </div>
     <div :key="item.noteId" class="events-bottom" v-for="item in collectList">
-        <CollectItem :url="item.foodPic" :title="item.foodTitle" :description="item.foodDesc" :direction="'right'"></CollectItem>
+      <CollectItem :foodPic="item.foodPic" :foodTitle="item.foodTitle" :foodDesc="item.foodDesc" direction="left" :foodLikes="item.foodLikes" :foodCreateTime="item.foodCreateTime" :foodCollect="item.foodCollect"  :noteId="item.noteId" :name="names" :where="names"></CollectItem>
+      <!--<CollectItem :url="item.foodPic" :title="item.foodTitle" :description="item.foodDesc" direction="right"></CollectItem>-->
     </div>
     <div style="width:75% ;margin: 0 auto">
       <div class="tcdPageCode"></div>
@@ -40,7 +41,7 @@ export default {
           foodDesc: '土司的吃法应该可以做到365天不变样，我给恩泽同学经常做的大概就是这9种经典吃法。Yummy Yummy Yummy！',
           foodCollect: 0,
           foodCreateTime: '',
-          noteId: 0,
+          noteId: 1,
           foodLikes: 0
         },
         {
@@ -49,7 +50,7 @@ export default {
           foodDesc: '英国人很懒的，所谓英式早餐一般从十一点开始供应，但是菜品丰富。早上起床做早餐給家人吃是一件很幸福的事',
           foodCollect: 0,
           foodCreateTime: '',
-          noteId: 0,
+          noteId: 2,
           foodLikes: 0
         },
         {
@@ -58,7 +59,7 @@ export default {
           foodDesc: '番茄汤是快手菜之一，用小美烧出来颜色味道都很浓郁！是奶奶一直做的汤，也是我喝过最好喝的番茄土豆汤',
           foodCollect: 0,
           foodCreateTime: '',
-          noteId: 0,
+          noteId: 3,
           foodLikes: 0
         },
         {
@@ -67,10 +68,11 @@ export default {
           foodDesc: '凯撒沙拉被称为“沙拉之王”，常年坐镇西餐厅，给人高大上却难亲近的印象。丘比告诉你，这道菜在家也能轻松做！只要一瓶凯撒沙拉口味的丘比沙拉汁，就...',
           foodCollect: 0,
           foodCreateTime: '',
-          noteId: 0,
+          noteId: 4,
           foodLikes: 0
         }
-      ]
+      ],
+      names: this.name
     }
   },
   created () {

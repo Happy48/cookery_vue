@@ -152,10 +152,11 @@ export default {
     }
   },
   created () {
-    // if (this.name === '我') {
-    //   this.getMyInfo()
-    // }
-    this.initPersonInfo()
+    if (this.name === '我') {
+      this.getMyInfo()
+    } else {
+      this.initPersonInfo()
+    }
   },
   methods: {
     save_info () {
