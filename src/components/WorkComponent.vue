@@ -8,13 +8,13 @@
         <div class="blog-in">
           <a href="single.html"><img class="img-responsive" :src="item.picture" alt=" "></a>
           <div class="blog-grid">
-            <h3><a href="single.html">{{item.userName}}</a></h3>
+            <h3><a @click="userInfo(item.userName)">{{item.userName}}</a></h3>
             <div class="date">
               <!--<span class="date-in"><i class="glyphicon glyphicon-calendar"> </i>22.08.2014</span>-->
               <!--<a href="single.html" class="comments"><i class="glyphicon glyphicon-comment"></i>24</a>-->
               <div class="clearfix"> </div>
             </div>
-            <p>{{item.desc}}</p>
+            <p class="mutiline-limit-length">{{item.desc}}</p>
           </div>
         </div>
       </div>
@@ -28,6 +28,18 @@ export default {
   props: [
     'workList'
   ],
+  methods: {
+    userInfo (userName) {
+      this.$router.push({
+        name: 'PersonalInfo',
+        params: {
+          userName: userName,
+          name: '我',
+          where: 'All'
+        }
+      })
+    }
+  },
   data () {
     return {
       number: 2273

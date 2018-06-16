@@ -4,12 +4,12 @@
       <h3>评论</h3>
       <div :key="item.index" v-for="item in commentList" class="media wow fadeInLeft animated" data-wow-delay=".5s">
         <div class="code-in">
-          <p class="smith"><a href="#">{{item.userName}}</a> <span>{{item.time}}</span></p>
+          <p class="smith"><a @click="userInfo(item.userName)">{{item.userName}}</a> <span>{{item.time}}</span></p>
           <p class="reply"><a href="#"><i class="glyphicon glyphicon-repeat"> </i>REPLY</a></p>
           <div class="clearfix"> </div>
         </div>
         <div class="media-left">
-          <a href="#">
+          <a @click="userInfo(item.userName)">
             <img :src="item.icon" alt="">
           </a>
         </div>
@@ -37,6 +37,18 @@ export default {
   props: [
     'commentList'
   ],
+  methods: {
+    userInfo (userName) {
+      this.$router.push({
+        name: 'PersonalInfo',
+        params: {
+          userName: userName,
+          name: '我',
+          where: 'All'
+        }
+      })
+    }
+  },
   data () {
     return {
       // commentList: [

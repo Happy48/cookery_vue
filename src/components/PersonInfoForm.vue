@@ -149,13 +149,13 @@ export default {
       userPwd: '',
       email: '',
       picUrl: ''
-      // location: ''
     }
   },
   created () {
-    if (this.name === '我') {
-      this.getMyInfo()
-    }
+    // if (this.name === '我') {
+    //   this.getMyInfo()
+    // }
+    this.initPersonInfo()
   },
   methods: {
     save_info () {
@@ -186,6 +186,22 @@ export default {
     },
     getMyInfo () {
       let list = {name: '梅子厨艺'}
+      api.getUserInfo(list).then(res => {}).catch(res => {
+        let user = res.data
+        this.userName = user.userName
+        this.introduction = user.introduction
+        this.picUrl = user.icon
+        this.address = user.address
+        this.sex = user.sex === false ? 0 : 1
+        this.birthday = user.birthday
+        this.phoneNumber = user.phoneNum
+        this.userPwd = user.password
+        this.email = user.email
+      })
+    },
+    initPersonInfo () {
+      this.userName = this.$route.params.userName
+      let list = {name: this.userName}
       api.getUserInfo(list).then(res => {}).catch(res => {
         let user = res.data
         this.userName = user.userName
