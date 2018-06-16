@@ -26,15 +26,30 @@ import CollectLabel from '@/components/CollectLabel'
 import AttentionLabel from '@/components/AttentionLabel'
 import OtherLikeLabel from '@/components/OtherLikeLabel'
 import BlogList from '@/components/BlogList'
-
+import api from '@/api/getData'
 export default {
+  stores: {
+    token: 'state.token'
+  },
   data () {
     return {
       noteLabelData: [
-        '早饭',
-        '午饭',
-        '晚饭',
-        '甜品'
+        {
+          name: '早饭',
+          id: 1
+        },
+        {
+          name: '中饭',
+          id: 2
+        },
+        {
+          name: '晚餐',
+          id: 3
+        },
+        {
+          name: '甜点',
+          id: 4
+        }
       ],
       collectData: [
         '早饭',
@@ -75,6 +90,21 @@ export default {
     OtherLikeLabel,
     AttentionLabel,
     BlogList
+  },
+  created () {
+    this.getNoteLabel()
+  },
+  methods: {
+    getNoteLabel () {
+      let info = {
+        token: this.token,
+        name: ''
+      }
+      api.getUserTagList(info).then().catch(res => {
+        console.log(res.data)
+        this.noteLabelData = res.data
+      })
+    }
   }
 }
 </script>

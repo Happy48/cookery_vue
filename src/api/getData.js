@@ -195,5 +195,11 @@ export default {
    */
   getNoteListTotalByUserID (params) {
     return axios.get('userNoteListTotalByUserID?name=' + params['name'])
+  },
+  /**
+   * 获取用户的笔记标签
+   */
+  getUserTagList (params) {
+    return axios.get('getUserTagList?token=' + params['token'] + '&name=' + params['name'])
   }
 }
