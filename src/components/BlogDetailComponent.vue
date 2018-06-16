@@ -26,22 +26,21 @@
           <div class="col-md-1 wow fadeInLeft animated" data-wow-delay=".5s">
             <h4 style="font-size: 30px">{{count}}</h4>
           </div>
-          <div class="col-md-9 wow fadeInLeft animated" data-wow-delay=".5s">
+          <div class="col-md-5 wow fadeInLeft animated" data-wow-delay=".5s">
             <h5 style="padding-top: 40px;color: #97824B;font-size: 16px"> 人做过这道菜</h5>
           </div>
-          <div class="col-md-2">
-            <div class="leave form-group form-inline">
+          <div class="col-md-6" id="likeCollectDiv">
               <form>
                 <div class="single-grid wow fadeInLeft animated" data-wow-delay=".5s">
                   <label class="hvr-rectangle-out">
-                    <input type="submit" value="喜欢">
+                    <input @click="addLike" type="submit" v-bind:value="likeText" v-bind:style="{background: likeColor}">
                   </label>
+                  &nbsp;&nbsp;&nbsp;
                   <label class="hvr-rectangle-out">
-                    <input type="submit" value="收藏">
+                    <input @click="addCollect" type="submit" v-bind:value="collectText" v-bind:style="{background: collectColor}">
                   </label>
                 </div>
               </form>
-            </div>
           </div>
         </div>
         <hr>
@@ -108,6 +107,9 @@ import CommentComponent from '@/components/CommentComponent'
 import api from '@/api/getData'
 
 export default {
+  stores: {
+    token: 'state.token'
+  },
   data () {
     return {
       noteId: 5,
@@ -117,7 +119,10 @@ export default {
       date: '08.09.2014',
       commentNumber: 5,
       desc: '你知道考伯沙拉吗？满满一盘色彩缤纷的沙拉哟！看着心情就好好',
-
+      likeColor: '#08523a',
+      collectColor: '#08523a',
+      likeText: '已喜欢',
+      collectText: '已收藏',
       peopleUrl: '/static/images/si1.jpg',
       name: 'Andy',
       works: [],
@@ -149,6 +154,7 @@ export default {
   },
   created () {
     this.initBlogDetail()
+    this.initialLikeAndCollect()
   },
   methods: {
     initBlogDetail () {
@@ -171,6 +177,75 @@ export default {
         this.works = note.workVOList
         this.comments = note.commentVOList
       })
+    },
+    initialLikeAndCollect () {
+      this.noteId = this.$route.params.noteID
+      let likeCollectInformation = {
+        token: this.token,
+        noteid: this.noteId
+      }
+      api.isLike(likeCollectInformation).then().catch(res => {
+        let isLikeCode = res.data.code
+        if (isLikeCode === '0') {
+          this.likeText = '已喜欢'
+          this.likeColor = 'grey'
+        } else if (isLikeCode === '1') {
+          this.likeText = '喜欢'
+          this.likeColor = '#08523a'
+        } else if (isLikeCode === '2') {
+          alert('不存在该用户')
+        }
+      })
+      api.isCollect(likeCollectInformation).then().catch(res => {
+        let isCollectCode = res.data.code
+        if (isCollectCode === '0') {
+          this.collectText = '已收藏'
+          this.collectColor = 'grey'
+        } else if (isCollectCode === '1') {
+          this.collectText = '收藏'
+          this.collectColor = '#08523a'
+        } else if (isCollectCode === '2') {
+          alert('不存在该用户')
+        }
+      })
+    },
+    addLike: function () {
+      this.noteId = this.$route.params.noteID
+      let likeInformation = {
+        token: this.token,
+        noteid: this.noteId
+      }
+      api.like(likeInformation).then().catch(res => {
+        let code = res.data.code
+        if (code === '0') {
+          this.likeColor = 'grey'
+          this.likeText = '已喜欢'
+        } else if (code === '1') {
+          this.likeColor = '#08523a'
+          this.likeText = '喜欢'
+        } else {
+          alert('不存在该用户')
+        }
+      })
+    },
+    addCollect: function () {
+      this.noteId = this.$route.params.noteID
+      let collectInformation = {
+        token: this.token,
+        noteid: this.noteId
+      }
+      api.collect(collectInformation).then().catch(res => {
+        let code = res.data.code
+        if (code === '0') {
+          this.collectColor = 'grey'
+          this.collectText = '已收藏'
+        } else if (code === '1') {
+          this.collectColor = '#08523a'
+          this.collectText = '收藏'
+        } else {
+          alert('不存在该用户')
+        }
+      })
     }
   },
   components: {
@@ -180,4 +255,7 @@ export default {
 }
 </script>
 <style>
+  #likeCollectDiv{
+    float:right
+  }
 </style>
