@@ -21,6 +21,8 @@
   </div>
 </template>
 <script>
+import api from '@/api/getData'
+import store from '@/store/todo_list.js'
 export default {
   props: [
     'foodPic',
@@ -36,6 +38,15 @@ export default {
   ],
   methods: {
     showMore () {
+      let information = {
+        noteId: this.noteId
+      }
+      api.getNoteDetail(information).then().catch(res => {
+        let note = res.data
+        this.name = note.userVO.userName
+        store.save(this.name)
+        console.log(this.name + ' detail')
+      })
       this.$router.push({
         name: 'blogDetail',
         params: {

@@ -24,6 +24,8 @@
 import CollectItem from '@/components/CollectItem'
 import api from '@/api/getData'
 import Pagination from '@/components/Pagination'
+import store from '@/store/todo_list.js'
+
 export default {
   stores: {
     token: 'state.token'
@@ -85,6 +87,9 @@ export default {
     if (this.name === '我') {
       this.getMyNoteList()
     } else {
+      console.log(this.name)
+      this.name = store.fetch()
+      this.names = store.fetch()
       this.getUserNoteList()
     }
   },

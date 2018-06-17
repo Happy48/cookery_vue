@@ -12,6 +12,8 @@
   </div>
 </template>
 <script>
+import store from '@/store/todo_list.js'
+
 export default {
   props: [
     'url',
@@ -19,6 +21,7 @@ export default {
   ],
   methods: {
     showMore () {
+      store.save(this.name)
       this.$router.push({
         name: 'hisBlogs',
         params: {
