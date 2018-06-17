@@ -4,7 +4,7 @@
     <h4>参照这个菜谱，大家做出 {{workList.length}} 作品</h4>
     <br>
     <div class=" blog-head">
-      <div :key="item.index" v-for="item in workList" class="col-md-4 blog-top">
+      <div :key="item.index" v-for="item in workList" class="col-md-4 blog-top" style="padding-top: 10px">
         <div class="blog-in">
           <a href="single.html"><img class="img-responsive" :src="item.picture" alt=" "></a>
           <div class="blog-grid">

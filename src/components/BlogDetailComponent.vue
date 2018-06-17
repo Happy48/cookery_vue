@@ -97,7 +97,7 @@
         </table>
         <work-component :workList="works"></work-component>
       </div>
-      <comment-component :commentList="comments"></comment-component>
+      <comment-component :commentList="comments" :noteId=this.noteId></comment-component>
     </div>
   </div>
 </template>

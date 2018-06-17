@@ -22,9 +22,10 @@
       <h3>说点什么吧～</h3>
       <form>
         <div class="single-grid wow fadeInLeft animated" data-wow-delay=".5s">
-          <textarea value=" " onfocus="this.value='';" onblur="if (this.value == '') {this.value = 'Comment';}">Comment</textarea>
+          <textarea v-model="comment">说说你的想法</textarea>
+          <!--<textarea value=" " onfocus="this.value='';" onblur="if (this.value == '') {this.value = 'Comment';}">Comment</textarea>-->
           <label class="hvr-rectangle-out">
-            <input type="submit" value="发布">
+            <input @click="leaveComment" type="submit" value="发布">
           </label>
         </div>
       </form>
@@ -33,11 +34,33 @@
 </template>
 
 <script>
+import api from '@/api/getData'
+
 export default {
+  stores: {
+    token: 'state.token'
+  },
   props: [
-    'commentList'
+    'commentList',
+    'noteId'
   ],
   methods: {
+    leaveComment () {
+      let information = {
+        token: this.token,
+        noteId: this.noteId,
+        content: this.comment
+      }
+      api.leaveReply(information).then(res => {
+      }).catch(res => {
+        let data = res.data
+        if (data.code === '0') {
+          alert('留言成功')
+        } else {
+          alert('出错')
+        }
+      })
+    },
     userInfo (userName) {
       this.$router.push({
         name: 'PersonalInfo',
@@ -51,6 +74,7 @@ export default {
   },
   data () {
     return {
+      comment: ''
       // commentList: [
       //   {
       //     userName: 'Andey ',
