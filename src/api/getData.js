@@ -213,5 +213,11 @@ export default {
    */
   getUserTagList (params) {
     return axios.get('getUserTagList?token=' + params['token'] + '&name=' + params['name'])
+  },
+  /**
+   * 获取笔记的标签
+   */
+  getTagByNoteId (params) {
+    return axios.get('getTagByNoteId?noteId=' + params['noteId'])
   }
 }

@@ -34,7 +34,12 @@ export default {
   },
   created () {
     this.getList()
-    this.getBlogList(-1, '全部')
+    if (this.$route.params.currentChooseLabel !== '全部菜品') {
+      this.$emit('getBlogListByClass', this.$route.params.currentChooseLabel)
+      console.log(this.$route.params.currentChooseLabel)
+    } else {
+      this.getBlogList(-1, '全部')
+    }
   },
   methods: {
     getList () {

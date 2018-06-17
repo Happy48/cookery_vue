@@ -108,14 +108,13 @@
 
     <div class="row search-in animated wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="500ms">
       <div class="col-lg-1 col-md-1"></div>
-      <div class="col-lg-7 col-md-7 search-in animated wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="500ms">
+      <div class="col-lg-9 col-md-9 search-in animated wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="500ms">
         <div class="leave form-group form-inline">
-          <label>&nbsp;&nbsp;&nbsp;个人简介:&nbsp;&nbsp;&nbsp;&nbsp;</label>
-          <div class="single-grid wow fadeInLeft animated" data-wow-delay=".5s">
+          <label >&nbsp;&nbsp;&nbsp;个人简介:&nbsp;&nbsp;&nbsp;&nbsp;</label>
+          <div style="padding-left: 90px" class="single-grid wow fadeInLeft animated" data-wow-delay=".5s">
             <textarea v-model="introduction">介绍一下自己吧</textarea>
-            <!--onfocus="this.value='';" onblur="if (this.value == '') {this.value = '介绍一下自己吧';}" -->
           </div>
-          <form>
+          <form style="padding-left: 90px" >
             <div class="single-grid wow fadeInLeft animated" data-wow-delay=".5s">
               <label class="hvr-rectangle-out">
                 <input type="submit" @click="save_info" value="更新">
@@ -124,7 +123,7 @@
           </form>
         </div>
       </div>
-      <div class="col-lg-4 col-md-4"></div>
+      <div class="col-lg-2 col-md-2"></div>
     </div>
   </div>
 </template>

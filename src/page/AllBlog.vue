@@ -41,6 +41,12 @@ export default {
     Pagination,
     LeftPart
   },
+  // created () {
+  //   if (this.$route.params.currentChooseLabel !== '全部菜品') {
+  //     this.getBlogListByClass(this.$route.params.currentChooseLabel)
+  //     console.log(this.$route.params.currentChooseLabel)
+  //   }
+  // },
   methods: {
     reduceArray (arr, count) {
       let len = []

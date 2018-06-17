@@ -6,7 +6,7 @@
           <a href="index.html">首页</a>
         </li>
         <li class="breadcrumb-item">
-          <a href="#">沙拉</a>
+          <a @click="getBlogList(tag)">{{tag}}</a>
         </li>
         <li class="breadcrumb-item active">{{title}}</li>
       </ol>
@@ -112,6 +112,7 @@ export default {
   },
   data () {
     return {
+      tag: '沙拉',
       noteId: 5,
       title: '营养齐全的【Cobb Salad】',
       url: '/static/images/ss.jpg',
@@ -153,10 +154,33 @@ export default {
     }
   },
   created () {
+    this.initTag()
     this.initBlogDetail()
     this.initialLikeAndCollect()
   },
   methods: {
+    getBlogList (name) {
+      this.$router.push({
+        name: 'AllBlog',
+        params: {
+          currentChooseLabel: name,
+          tagName: name,
+          name: '我',
+          where: 'All'
+        }
+      })
+      this.$emit('getBlogListByClass', name)
+    },
+    initTag () {
+      this.noteId = this.$route.params.noteID
+      let information = {
+        noteId: this.noteId
+      }
+      api.getTagByNoteId(information).then().catch(res => {
+        let taglist = res.data
+        this.tag = taglist[0].name
+      })
+    },
     initBlogDetail () {
       this.noteId = this.$route.params.noteID
       let information = {
