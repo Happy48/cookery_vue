@@ -219,5 +219,17 @@ export default {
    */
   getTagByNoteId (params) {
     return axios.get('getTagByNoteId?noteId=' + params['noteId'])
+  },
+  /**
+   * 获得关注的页数
+   */
+  getMyFollowTotal (params) {
+    return axios.get('myFollowTotal?token=' + params['token'])
+  },
+  /**
+   * 按照页数获取关注列表
+   */
+  getMyFollowListByPage (params) {
+    return axios.get('myFollowListByPage?token=' + params['token'] + '&page=' + params['page'])
   }
 }

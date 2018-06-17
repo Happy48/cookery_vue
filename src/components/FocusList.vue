@@ -2,7 +2,7 @@
   <div class="col-md-9" style="padding-right: 50px">
     <div class="events-top">
       <div class="search-in animated wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="500ms">
-        <h4 class="col-md-8" style="padding-top:15px "> 我的关注 </h4>
+        <h4 class="col-md-8" style="padding-top:15px "> {{names}}的关注 </h4>
         <div class="search col-md-4">
           <form>
             <input type="text" placeholder="Search" required="" >
@@ -21,11 +21,15 @@
       <!--<focus-item :key="subItem.icon" v-for="subItem in item"  :url="subItem.icon" :name="subItem.name"></focus-item>-->
       <!--<div class="clearfix"> </div>-->
     <!--</div>-->
+    <div style="width:75% ;margin: 0 auto">
+      <PaginationFollow :total="total" :current-page='current' @pagechange="pagechange" ref="pagi"></PaginationFollow>
+    </div>
   </div>
 </template>
 <script>
 import FocusItem from '@/components/FocusItem'
 import api from '@/api/getData'
+import PaginationFollow from '@/components/PaginationFollow'
 
 export default {
   stores: {
@@ -49,7 +53,11 @@ export default {
           icon: '/static/images/me2.jpg',
           name: 'Lorem'
         }
-      ]
+      ],
+      page: 0,
+      total: 150,
+      current: 1,
+      names: this.name
     }
   },
   created () {
@@ -58,12 +66,33 @@ export default {
     }
   },
   components: {
-    FocusItem
+    FocusItem,
+    PaginationFollow
   },
   methods: {
     getMyFollow () {
       let list = {token: this.token}
-      api.getMyFollowList(list).then(res => {}).catch(res => { this.forcusList = res.data })
+      api.getMyFollowTotal(list).then(res => {}).catch(res => { this.total = res.data })
+      let listInfo = {
+        token: this.token,
+        page: this.page
+      }
+      api.getMyFollowListByPage(listInfo).then(res => {}).catch(res => {
+        this.forcusList = res.data
+      })
+      // let list = {token: this.token}
+      // api.getMyFollowList(list).then(res => {}).catch(res => { this.forcusList = res.data })
+    },
+    pagechange: function (currentPage) {
+      console.log(currentPage)
+      var p = currentPage
+      let followPage = this
+      followPage.page = p - 1
+      if (followPage.name === '我') {
+        followPage.getMyFollow()
+      } else {
+        followPage.getMyFollow()
+      }
     }
   }
 }

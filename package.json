@@ -16,6 +16,7 @@
     "less": "^3.0.4",
     "less-loader": "^4.1.0",
     "vue": "^2.5.2",
+    "vue-concise-slider": "^2.4.8",
     "vue-router": "^3.0.1",
     "vue-stores": "^1.0.3"
   },
