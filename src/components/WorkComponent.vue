@@ -20,10 +20,12 @@
       </div>
       <div class="clearfix"> </div>
     </div>
+    <Carousel :img="workList"></Carousel>
     <hr>
   </div>
 </template>
 <script>
+import Carousel from '@/components/Carousel'
 export default {
   props: [
     'workList'
@@ -42,26 +44,19 @@ export default {
   },
   data () {
     return {
-      number: 2273
+      number: 2273,
       // workList: [
       //   {
-      //     picture: '/static/images/bl3.jpg',
-      //     userName: 'ELENA',
-      //     desc: '好吃到出乎意料'
-      //   },
-      //   {
-      //     url: '/static/images/bl4.jpg',
-      //     userName: 'ELENA',
-      //     desc: '没有鸡胸肉 做了牛油果大虾沙拉'
-      //   },
-      //   {
-      //     url: '/static/images/bl5.jpg',
-      //     userName: 'ELENA',
-      //     desc: '清理了家里各种一点点的库...'
+      //     picture: '',
+      //     userName: '',
+      //     desc: ''
       //   }
       // ]
     }
-  }
+  },
+  components: {
+    Carousel
+  },
 }
 </script>
 <style>
