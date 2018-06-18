@@ -38,7 +38,6 @@ export default {
       this.$emit('blogTagSay', this.checkTags)
     }
   }
-
 }
 
 </script>

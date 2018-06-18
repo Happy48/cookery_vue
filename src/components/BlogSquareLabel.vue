@@ -3,7 +3,7 @@
     <h4>笔记广场</h4>
     <ul class="popular">
       <li :key="item.index" v-for="(item,$index) in list" v-if='$index<10' :class="{ active: $index === num }" @click="getBlogList($index,item.name)"><a href="#"><i class="glyphicon glyphicon-tags"> </i>{{item.name}}</a></li>
-      <li><a class="all-tags" style="color: #005238"> &gt;&gt; 全部笔记分类 &lt;&lt; </a></li>
+      <li><a class="all-tags" style="color: #005238" @click="allTag()"> &gt;&gt; 全部笔记分类 &lt;&lt; </a></li>
     </ul>
   </div>
 </template>
@@ -42,6 +42,11 @@ export default {
     }
   },
   methods: {
+    allTag () {
+      this.$router.push({
+        name: 'AllTag'
+      })
+    },
     getList () {
       api.getList().then().catch(res => {
         this.list = res.data

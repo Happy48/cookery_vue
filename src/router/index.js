@@ -12,6 +12,7 @@ const focus = r => require.ensure([], () => r(require('@/page/Focus')), 'focus')
 const hisBlogs = r => require.ensure([], () => r(require('@/page/OtherPeopleBlog')), 'hisBlogs')
 const myBlogs = r => require.ensure([], () => r(require('@/page/MyBlogs')), 'myBlogs')
 const blogDetail = r => require.ensure([], () => r(require('@/page/BlogDetail')), 'blogDetail')
+const allTag = r => require.ensure([], () => r(require('@/page/AllTag')), 'allTag')
 
 const test = r => require.ensure([], () => r(require('@/page/Test')), 'test')
 
@@ -78,6 +79,11 @@ export default new Router({
       path: '/test',
       name: 'test',
       component: test
+    },
+    {
+      path: '/allTag',
+      name: 'AllTag',
+      component: allTag
     }
   ]
 })
