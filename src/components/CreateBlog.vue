@@ -21,7 +21,7 @@
         <br />
         <div class="single-grid wow fadeInLeft animated" data-wow-delay=".5s">
           <h4>菜谱描述</h4>
-          <textarea value=" " v-model="description_area" onfocus="this.value='';" onblur="if (this.value == '') {this.value = '添加菜谱描述';}">添加菜谱描述</textarea>
+          <textarea value=" " v-model="description_area" onblur="if (this.value == '') {this.value = '添加菜谱描述';}">添加菜谱描述</textarea>
         </div>
         <div class="single">
           <div class="single-top">
@@ -49,10 +49,10 @@
                 <tr :key="step.id" v-for="(step,id) in steps">
                   <td><h4>{{id+1}}</h4></td>
                   <td>
-                    <textarea v-model="step.information" style="width: 300px;height:200px;outline:none" value=" " onfocus="this.value='';" onblur="if (this.value == '') {this.value = '';}"></textarea>
+                    <textarea v-model="step.information" style="width: 300px;height:200px;outline:none" value=" " onblur="if (this.value == '') {this.value = '';}"></textarea>
                   </td>
                   <td>
-                    <div id="step_img_div"><ImageUpload v-bind:uploadImgDes="uploadStepImg" v-on:changeUrl="getStepPicUrl" v-bind:picCurrentUrl='nullValue' v-model="step.img" ></ImageUpload></div>
+                    <div id="step_img_div"><ImageUpload v-bind:stepIndex="step.id" v-bind:uploadImgDes="uploadStepImg" v-on:changeUrl="getStepPicUrl" v-bind:picCurrentUrl='step.img' ></ImageUpload></div>
                   </td>
                   <td>
                     <img src="/static/images/closeB.png" style="padding-top: 60px" draggable="false" @click="deleteStep(id)">
@@ -107,14 +107,13 @@ export default {
       ],
       step: {'id': '', 'img': '', 'information': ''},
       steps: [
-        {'id': '1', 'img': '234', 'information': '234'}
+        {'id': '1', 'img': '', 'information': '第一步的做法'}
       ],
       practice: '',
       tip_area: '',
       subtag: '',
       uploadStepImg: '点击上传步骤图',
-      uploadCover: '点击上传菜谱封面',
-      nullValue: ''
+      uploadCover: '点击上传菜谱封面'
     }
   },
   methods: {
@@ -135,12 +134,14 @@ export default {
       let newStep = {'id': this.steps.length + 1, 'img': '', 'information': ''}
       this.steps.push(newStep)
     },
-    getCoverUrl: function (file) {
-      this.noteCover = file
+    getCoverUrl: function (coverUrl) {
+      this.noteCover = coverUrl
     },
-    getStepPicUrl: function (file, id) {
+    getStepPicUrl: function (url, index) {
+      this.$set(this.steps[index - 1], 'img', url)
     },
     save_new () {
+      let self = this
       for (let i in this.steps) {
         let index = parseInt(i) + 1
         this.$set(this.steps[i], 'id', index)
@@ -148,7 +149,7 @@ export default {
       let information = {
         token: this.token,
         noteName: this.noteName,
-        noteCover: '',
+        noteCover: this.noteCover,
         description: this.description_area,
         material: JSON.stringify(this.materials),
         practice: JSON.stringify(this.steps),
@@ -158,9 +159,9 @@ export default {
       api.createNote(information).then(res => {
       }).catch(res => {
         let data = res.data
-        alert(data)
         if (data.code === '0') {
           alert('创建成功')
+          self.reload()
         } else if (data.code === '1') {
           alert('子标签不在定义范围之内')
         } else if (data.code === '2') {

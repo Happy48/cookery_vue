@@ -4,7 +4,7 @@
     <br>
     <ul class="popular">
       <li :key="item.id" v-for="item in list">
-        <input type="checkbox" name="标签" :value="item.name" v-model="checkTags" @change="up">{{item.name}}
+        <input type="checkbox" name="标签" :value="item.name" v-model="checkTags" @change="up">&nbsp;{{item.name}}
       </li>
     </ul>
   </div>

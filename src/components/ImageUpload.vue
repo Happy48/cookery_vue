@@ -2,7 +2,7 @@
   <div id="cover_input_div">
     <label>
       <input type="file" accept="image/jpeg,image/x-png,image/gif" id="file_input" value="" @change="changeUrl"/>
-      <img :src="this.picCurrentUrl.length==0?dataUrl:myPicCurrentUrl" id="img_preview" v-bind:style="{width: imgWidth, height: imgHeight}"/>
+      <img :src="this.picCurrentUrl.length==0 && this.myPicCurrentUrl.length==0?dataUrl:this.myPicCurrentUrl" id="img_preview" v-bind:style="{width: imgWidth, height: imgHeight}"/>
       <label for="file_input" id="input_label"></label>
       <span class="glyphicon glyphicon-paperclip" style="font-size:20px"><br /><label style="font-size:15px">{{uploadImgDes}}</label></span>
     </label>
@@ -13,7 +13,7 @@
 import OSS from 'ali-oss'
 export default {
   props:
-    ['uploadImgDes', 'picCurrentUrl'],
+    ['stepIndex', 'uploadImgDes', 'picCurrentUrl'],
   data () {
     return {
       dataUrl: '/static/images/transparentBg.png',
@@ -60,13 +60,17 @@ export default {
       let _this = this
       let aliUrl = ''
       if (event.target.files.length > 0) {
-        this.imgPreview(event.target.files[0])
+        _this.imgPreview(event.target.files[0])
         var file = event.target.files[0]
         var type = file.name.split('.')[1]
         var storeAs = this.getUuid() + '.' + type
         this.client.multipartUpload(storeAs, file).then(function (result) {
           aliUrl = result.res.requestUrls[0].split('?')[0]
-          _this.$emit('changeUrl', aliUrl)
+          if (_this.uploadImgDes === '点击上传步骤图') {
+            _this.$emit('changeUrl', aliUrl, _this.stepIndex)
+          } else {
+            _this.$emit('changeUrl', aliUrl)
+          }
           _this.myPicCurrentUrl = aliUrl
         }).catch(function (err) {
           console.log(err)
