@@ -179,6 +179,19 @@ export default {
     return fetch('/changeInfo', params)
   },
   /**
+   * 修改个人头像
+   */
+  changeHeadIcon (params) {
+    return axios.get('/changeHeadIcon?token=' + params['token'] + '&imgUrl=' + params['imgUrl'])
+  },
+
+  /**
+   * 获取某位成员的信息（根据token）
+   */
+  getUserInfoByToken (params) {
+    return axios.get('userInfoByToken?token=' + params['token'])
+  },
+  /**
    * 从个人的博客里面搜索
    */
   searchMyBlog (params) {

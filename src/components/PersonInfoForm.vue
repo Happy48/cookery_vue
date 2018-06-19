@@ -100,8 +100,9 @@
       </div>
       <div class="col-lg-6 col-md-6">
         <div class="input-group search-in animated wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="500ms">
-          <label style="float: left;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;头像:&nbsp;&nbsp;&nbsp;&nbsp;</label>
-          <img class="fl avator-img" id="js-portrait" :src="picUrl" data-portrait="58492fe600012e8e01800180" width="180" height="180">
+          <label style="float: left;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;头像:</label>
+          <div id="img_div"><ImageUpload v-bind:uploadImgDes="uploadHeaderIconImg" v-bind:picCurrentUrl="picUrl" v-on:changeUrl="getHeaderIcon"></ImageUpload></div>
+          <label id="headerIconLabel" v-bind:style="{color: headerIconMsgColor}">{{headerIconMsg}}</label>
         </div>
       </div>
     </div>
@@ -129,8 +130,10 @@
 </template>
 <script>
 import api from '@/api/getData'
+import ImageUpload from '@/components/ImageUpload'
 
 export default {
+  components: { ImageUpload },
   stores: {
     token: 'state.token'
   },
@@ -147,7 +150,11 @@ export default {
       phoneNumber: '',
       userPwd: '',
       email: '',
-      picUrl: ''
+      picUrl: '',
+      picFile: '',
+      uploadHeaderIconImg: '上传头像',
+      headerIconMsg: '(点击图片可修改头像)',
+      headerIconMsgColor: ''
     }
   },
   created () {
@@ -158,6 +165,29 @@ export default {
     }
   },
   methods: {
+    getHeaderIcon (aliUrl) {
+      this.picUrl = aliUrl
+      let information = {
+        token: this.token,
+        imgUrl: this.picUrl
+      }
+      api.changeHeadIcon(information).then(res => {
+      }).catch(res => {
+        let data = res.data
+        if (data.code === '0') {
+          this.headerIconMsg = '头像修改成功'
+          this.headerIconMsgColor = '#145b43'
+        } else if (data.code === '1') {
+          this.headerIconMsg = '头像修改失败，请重新尝试'
+          this.headerIconMsgColor = 'red'
+        } else if (data.code === '2') {
+          this.headerIconMsg = '用户登录失效，请重新登录'
+          this.headerIconMsgColor = 'red'
+          this.headerIconMsg = '点击图片可修改头像'
+          this.headerIconMsgColor = ''
+        }
+      })
+    },
     save_info () {
       let information = {
         token: this.token,
@@ -185,8 +215,8 @@ export default {
       })
     },
     getMyInfo () {
-      let list = {name: '梅子厨艺'}
-      api.getUserInfo(list).then(res => {}).catch(res => {
+      let list = {token: this.token}
+      api.getUserInfoByToken(list).then(res => {}).catch(res => {
         let user = res.data
         this.userName = user.userName
         this.introduction = user.introduction
@@ -221,5 +251,19 @@ export default {
 <style scoped>
   #data1{
     width:175px;
+  }
+  #img_div{
+    position:absolute;
+    top:30px;
+    left:60px;
+    width:200px;
+    height:200px;
+  }
+  #headerIconLabel{
+    position:relative;
+    float:right;
+    right:0;
+    -webkit-transition: linear 1.0s;
+    transition: linear 1.0s;
   }
 </style>

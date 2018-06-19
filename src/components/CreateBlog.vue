@@ -10,37 +10,17 @@
     <div class="row search-in animated wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="500ms">
       <div class="col-lg-1 col-md-1"></div>
       <div class="col-lg-8 col-md-8 animated wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="500ms">
-        <h3>基本信息</h3>
+        <h4>菜谱名称</h4>
         <div class="single-grid wow fadeInLeft animated" data-wow-delay=".5s">
           <input type="text" placeholder="添加菜谱名称" v-model='noteName'/>
         </div>
         <br />
-        <div class="upload">
-          <div class="upload-files">
-            <header>
-              <p>
-                <i class="fa fa-cloud-upload" aria-hidden="true"></i>
-                <span class="up">菜谱封面</span>
-              </p>
-            </header>
-            <div class="body" id="drop">
-              <i class="fa fa-file-text-o pointer-none" aria-hidden="true"></i>
-              <p class="pointer-none"><b>拖放到这里</b><br /><a href="" id="triggerFile">浏览</a>开始上传</p>
-              <!--<input type="file" multiple="multiple" />-->
-              <input class="fileInput" type="file"  name="" >
-            </div>
-            <footer>
-              <div class="divider">
-                <span><AR>图片</AR></span>
-              </div>
-              <div class="list-files">
-                <!--   template   -->
-              </div>
-              <button class="importar">UPDATE FILES</button>
-            </footer>
-          </div>
-        </div>
+        <h4>菜谱封面</h4>
+        <br />
+        <div id="cover_upload_div"><ImageUpload v-bind:uploadImgDes="uploadCover" v-bind:picCurrentUrl="noteCover" v-on:changeUrl="getCoverUrl"></ImageUpload></div>
+        <br />
         <div class="single-grid wow fadeInLeft animated" data-wow-delay=".5s">
+          <h4>菜谱描述</h4>
           <textarea value=" " v-model="description_area" onfocus="this.value='';" onblur="if (this.value == '') {this.value = '添加菜谱描述';}">添加菜谱描述</textarea>
         </div>
         <div class="single">
@@ -48,7 +28,7 @@
             <div class="lone-line">
               <h4>用料</h4>
               <br>
-              <table class="table wow fadeInLeft animated" data-wow-delay=".5s" style="alignment: center;font-size:20px;width:70%;">
+              <table class="table wow fadeInLeft animated" data-wow-delay=".5s" style="alignment: center;font-size:20px;width:70%">
                 <tbody id="componentBody">
                    <tr :key="material.id" v-for="(material,id) in materials">
                       <td>{{id+1}}</td>
@@ -72,9 +52,7 @@
                     <textarea v-model="step.information" style="width: 300px;height:200px;outline:none" value=" " onfocus="this.value='';" onblur="if (this.value == '') {this.value = '';}"></textarea>
                   </td>
                   <td>
-                    <div class="imageFileInput">
-                      <input class="fileInput" type="file"  name="">
-                    </div>
+                    <div id="step_img_div"><ImageUpload v-bind:uploadImgDes="uploadStepImg" v-on:changeUrl="getStepPicUrl" v-bind:picCurrentUrl='nullValue' v-model="step.img" ></ImageUpload></div>
                   </td>
                   <td>
                     <img src="/static/images/closeB.png" style="padding-top: 60px" draggable="false" @click="deleteStep(id)">
@@ -110,9 +88,10 @@
 </template>
 <script>
 import BlogTag from '@/components/BlogTag'
+import ImageUpload from '@/components/ImageUpload'
 import api from '@/api/getData'
 export default {
-  components: {BlogTag},
+  components: {BlogTag, ImageUpload},
   stores: {
     token: 'state.token'
   },
@@ -123,15 +102,19 @@ export default {
       description_area: '',
       material: {'name': '', 'unit': ''},
       materials: [
+        {'name': '', 'unit': ''},
         {'name': '', 'unit': ''}
       ],
-      step: {'img': '', 'information': ''},
+      step: {'id': '', 'img': '', 'information': ''},
       steps: [
-        {'img': '234', 'information': '234'}
+        {'id': '1', 'img': '234', 'information': '234'}
       ],
       practice: '',
       tip_area: '',
-      subtag: ''
+      subtag: '',
+      uploadStepImg: '点击上传步骤图',
+      uploadCover: '点击上传菜谱封面',
+      nullValue: ''
     }
   },
   methods: {
@@ -149,21 +132,29 @@ export default {
       this.steps.splice(id, 1)
     },
     addStep: function () {
-      let newStep = {'img': '', 'information': ''}
+      let newStep = {'id': this.steps.length + 1, 'img': '', 'information': ''}
       this.steps.push(newStep)
     },
+    getCoverUrl: function (file) {
+      this.noteCover = file
+    },
+    getStepPicUrl: function (file, id) {
+    },
     save_new () {
+      for (let i in this.steps) {
+        let index = parseInt(i) + 1
+        this.$set(this.steps[i], 'id', index)
+      }
       let information = {
         token: this.token,
         noteName: this.noteName,
         noteCover: '',
         description: this.description_area,
         material: JSON.stringify(this.materials),
-        practice: '123',
+        practice: JSON.stringify(this.steps),
         tip: this.tip_area,
         subtag: this.subtag.join(',')
       }
-      alert(information.description)
       api.createNote(information).then(res => {
       }).catch(res => {
         let data = res.data
@@ -182,4 +173,14 @@ export default {
 
 </script>
 <style>
+  #cover_upload_div{
+    position:relative;
+    width:300px;
+    height:250px;
+  }
+  #step_img_div{
+    width:150px;
+    height:120px;
+    font-size:13px;
+  }
 </style>
