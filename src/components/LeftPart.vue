@@ -79,8 +79,6 @@ export default {
       this.recommend()
     } else if (this.where === 'All') {
       this.recommend()
-    } else {
-      this.getOtherNoteLabel()
     }
   },
   methods: {

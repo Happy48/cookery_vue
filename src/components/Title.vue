@@ -77,7 +77,7 @@ export default {
       this.$router.push({
         name: 'AllBlog',
         params: {
-          title: '搜索结果',
+          currentChooseLabel: '搜索结果',
           query: this.searchText
         }
       })

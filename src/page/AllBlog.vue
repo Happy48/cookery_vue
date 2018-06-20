@@ -7,7 +7,7 @@
         <LeftPart :where="where" v-on:getBlogListByClass="getBlogListByClass"></LeftPart>
         <div class="col-md-9" style="padding-right:50px">
           <blog-class-list :name="currentChooseLabel" :list="list"></blog-class-list>
-          <Pagination style="margin-top:-50px " :total="total" :current-page='current' @pagechange="pagechange" ref="pagi" :display='display'></Pagination>
+          <Pagination v-if="list.size!=0" style="margin-top:-50px " :total="total" :current-page='current' @pagechange="pagechange" ref="pagi" :display='display'></Pagination>
         </div>
       </div>
       <div class="clearfix"> </div>
@@ -41,12 +41,15 @@ export default {
     Pagination,
     LeftPart
   },
-  // created () {
-  //   if (this.$route.params.currentChooseLabel !== '全部菜品') {
-  //     this.getBlogListByClass(this.$route.params.currentChooseLabel)
-  //     console.log(this.$route.params.currentChooseLabel)
-  //   }
-  // },
+  created () {
+    var label = this.$route.params.currentChooseLabel
+    if (label === '搜索结果') {
+      console.log('search')
+      this.search(label)
+    } else if (label !== '全部菜品') {
+      this.getBlogListByClass(this.$route.params.currentChooseLabel)
+    }
+  },
   methods: {
     reduceArray (arr, count) {
       let len = []
@@ -73,14 +76,12 @@ export default {
       }
       return ar
     },
-    search () {
-      this.currentChooseLabel = this.$route.params.title
+    search (label) {
+      this.currentChooseLabel = label
       let query = this.$route.params.query
       api.search(query, 0).then().catch(res => {
-        console.log(res.data)
         this.list = this.reduceArray(res.data, 3)
       })
-      console.log(this.list)
     },
     getBlogListByClass (param) {
       this.tagName = param
