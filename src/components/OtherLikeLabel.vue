@@ -9,6 +9,11 @@
       </div>
       <div class="clearfix"> </div>
     </div>
+    <div>
+      <a @click="recommend">
+        <span class="glyphicon glyphicon-refresh" aria-hidden="true">猜你喜欢</span>
+      </a>
+    </div>
   </div>
 </template>
 <script>
@@ -27,6 +32,11 @@ export default {
           where: 'All'
         }
       })
+    },
+    recommend () {
+      console.log('ddd')
+      let data = {}
+      this.$emit('recommend', data);
     }
   }
 }

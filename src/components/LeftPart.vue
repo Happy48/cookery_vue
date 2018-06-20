@@ -2,13 +2,13 @@
   <div>
     <div class="col-md-3 categories-grid" v-if='isAll' style="padding-left: 50px">
       <blog-square-label v-on:getBlogListByClass="getBlogListByClass"></blog-square-label>
-      <OtherLikeLabel :list="otherLikeData" :title="likeLabelTitle"></OtherLikeLabel>
+      <OtherLikeLabel v-on:recommend="recommend"  :list="otherLikeData" :title="likeLabelTitle"></OtherLikeLabel>
     </div>
     <div class="col-md-3 categories-grid" v-if="isMe" style="padding-left: 50px">
       <NoteLabel :list="noteLabelData"></NoteLabel>
       <CollectLabel :list="collectData"></CollectLabel>
       <AttentionLabel :list="attentionData"></AttentionLabel>
-      <OtherLikeLabel :list="otherLikeData" :title="likeLabelTitle"></OtherLikeLabel>
+      <OtherLikeLabel v-on:recommend="recommend" :list="otherLikeData" :title="likeLabelTitle"></OtherLikeLabel>
     </div>
     <div class="col-md-3 categories-grid" v-if="isOther" style="padding-left: 50px">
       <NoteLabel :list="noteLabelData"></NoteLabel>
@@ -74,15 +74,16 @@ export default {
     }
   },
   created () {
+    let data = {}
     if (this.where === '我') {
       this.getMyNoteLabel()
-      this.recommend()
+      this.recommend(data)
     } else if (this.where === 'All') {
-      this.recommend()
+      this.recommend(data)
     }
   },
   methods: {
-    recommend () {
+    recommend (data) {
       let information = {
         number: 3
       }
