@@ -44,5 +44,5 @@ export default {
 
 <style scoped>
 ul{overflow:hidden;width:100%;}
-ul li{width:25%;float:left;}
+ul li{width:25%;float:left;font-size:16px;}
 </style>

@@ -12,7 +12,7 @@
       <div class="col-lg-8 col-md-8 animated wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="500ms">
         <h4>菜谱名称</h4>
         <div class="single-grid wow fadeInLeft animated" data-wow-delay=".5s">
-          <input type="text" placeholder="添加菜谱名称" v-model='noteName'/>
+          <input type="text" placeholder="添加菜谱名称" v-model='noteName' style="font-size:17px;" id="noteNameInput"/>
         </div>
         <br />
         <h4>菜谱封面</h4>
@@ -21,47 +21,47 @@
         <br />
         <div class="single-grid wow fadeInLeft animated" data-wow-delay=".5s">
           <h4>菜谱描述</h4>
-          <textarea value=" " v-model="description_area" onblur="if (this.value == '') {this.value = '添加菜谱描述';}">添加菜谱描述</textarea>
+          <textarea value=" " v-model="description_area" placeholder="添加菜谱描述" style="font-size:17px;">添加菜谱描述</textarea>
         </div>
         <div class="single">
           <div class="single-top">
             <div class="lone-line">
               <h4>用料</h4>
               <br>
-              <table class="table wow fadeInLeft animated" data-wow-delay=".5s" style="alignment: center;font-size:20px;width:70%">
+              <table class="table wow fadeInLeft animated" data-wow-delay=".5s" style="alignment: center;font-size:17px;" id="material_table">
                 <tbody id="componentBody">
                    <tr :key="material.id" v-for="(material,id) in materials">
-                      <td>{{id+1}}</td>
-                      <td><input type="text" v-model="material.name" placeholder="鸡蛋"/></td>
-                      <td><input type="text" v-model="material.unit" placeholder="3个"/></td>
+                      <!--<td>{{id+1}}</td>-->
+                      <td><input type="text" v-model="material.name" placeholder="食材：如鸡蛋"/></td>
+                      <td><input type="text" v-model="material.unit" placeholder="用量：如1只"/></td>
                       <td><img src="/static/images/close.png" draggable="false" @click="remove(id)"></td>
                     </tr>
                 </tbody>
               </table>
               <div class="clearfix wow fadeInLeft animated" data-wow-delay=".5s">
-                <a class="button gray-button2 small-button" @click="addMaterial">追加一行用料</a>
+                <button @click="addMaterial" class="addButton">追加一行用料</button>
               </div>
               <br>
               <h4>做法</h4>
               <br>
-              <table class="table wow fadeInLeft animated" data-wow-delay=".5s" style="font-size:20px;">
+              <table class="table wow fadeInLeft animated" data-wow-delay=".5s" style="alignment: center;font-size:17px;"  id="practice_table">
                 <tbody id="stepBody">
                 <tr :key="step.id" v-for="(step,id) in steps">
-                  <td><h4>{{id+1}}</h4></td>
+                  <td><h4 style="padding-top:0">{{id+1}}</h4></td>
                   <td>
-                    <textarea v-model="step.information" style="width: 300px;height:200px;outline:none" value=" " onblur="if (this.value == '') {this.value = '';}"></textarea>
+                    <textarea v-model="step.information" placeholder="添加菜谱步骤" onblur="if (this.value == '') {this.value = '';}"></textarea>
                   </td>
                   <td>
                     <div id="step_img_div"><ImageUpload v-bind:stepIndex="step.id" v-bind:uploadImgDes="uploadStepImg" v-on:changeUrl="getStepPicUrl" v-bind:picCurrentUrl='step.img' ></ImageUpload></div>
                   </td>
                   <td>
-                    <img src="/static/images/closeB.png" style="padding-top: 60px" draggable="false" @click="deleteStep(id)">
+                    <img src="/static/images/close.png" draggable="false" style="padding-top:70%" @click="deleteStep(id)">
                   </td>
                 </tr>
                 </tbody>
               </table>
               <div class="clearfix wow fadeInLeft animated" data-wow-delay=".5s">
-                <a class="button gray-button2 small-button" @click="addStep">追加一行步骤</a>
+                <button @click="addStep" class="addButton">追加一行步骤</button>
               </div>
               <br>
               <BlogTag v-on:blogTagSay="getCheckedTagNames"></BlogTag>
@@ -69,10 +69,10 @@
             </div>
           </div>
           <div class="leave">
-            <h3>小贴士</h3>
+            <h4>小贴士</h4>
             <form>
               <div class="single-grid wow fadeInLeft animated" data-wow-delay=".5s">
-                <textarea value=" " v-model="tip_area" onfocus="this.value='';" onblur="if (this.value == '') {this.value = '添加小贴士';}">添加小贴士</textarea>
+                <textarea value=" " v-model="tip_area" onfocus="this.value='';" placeholder="添加小贴士" style="font-size:17px;" onblur="if (this.value == '') {this.value = '添加小贴士';}">添加小贴士</textarea>
                 <label class="hvr-rectangle-out">
                   <input type="submit" value="上传" @click="save_new">
                 </label>
@@ -107,7 +107,9 @@ export default {
       ],
       step: {'id': '', 'img': '', 'information': ''},
       steps: [
-        {'id': '1', 'img': '', 'information': '第一步的做法'}
+        {'id': '1', 'img': '', 'information': ''},
+        {'id': '2', 'img': '', 'information': ''},
+        {'id': '3', 'img': '', 'information': ''}
       ],
       practice: '',
       tip_area: '',
@@ -176,12 +178,54 @@ export default {
 <style>
   #cover_upload_div{
     position:relative;
-    width:300px;
-    height:250px;
+    width:100%;
+    height:300px;
   }
   #step_img_div{
     width:150px;
     height:120px;
     font-size:13px;
+  }
+  #noteNameInput:focus{
+    background: #f7ecb5;
+    border:1px solid #f7ecb5;
+  }
+  #material_table {
+    width: 100%;
+    border: 1px solid #9d9d9d;
+    border-collapse: collapse;
+  }
+  #material_table th, #material_table td{
+    border:1px solid #9d9d9d;
+  }
+  #material_table input{
+    border: 0;
+    outline:none;
+  }
+  #practice_table{
+    width:100%;
+  }
+  #practice_table textarea{
+    width:200px;
+    height:120px;
+    outline:none;
+  }
+  textarea:focus{
+    background: #f7ecb5;
+    border:1px solid #f7ecb5;
+  }
+  input:focus{
+    background: #f7ecb5;
+    border:1px solid #f7ecb5;
+  }
+
+  .addButton{
+    background:#3c763d;
+    color:#fff;
+    outline:none;
+    border:none;
+  }
+  .addButton:active{
+    background:#145b43;
   }
 </style>
