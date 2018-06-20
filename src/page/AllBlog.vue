@@ -6,8 +6,12 @@
       <div class="events">
         <LeftPart :where="where" v-on:getBlogListByClass="getBlogListByClass"></LeftPart>
         <div class="col-md-9" style="padding-right:50px">
-          <blog-class-list :name="currentChooseLabel" :list="list"></blog-class-list>
-          <Pagination v-if="list.size!=0" style="margin-top:-50px " :total="total" :current-page='current' @pagechange="pagechange" ref="pagi" :display='display'></Pagination>
+          <blog-class-list v-if="list.length!==0" :name="currentChooseLabel" :list="list"></blog-class-list>
+          <div v-if="list.length===0" style="align-items: center">
+            <img src="/static/images/searchBlank.png" width="500px"/>
+            <p>您搜索的商品不存在，请换一组关键词</p>
+          </div>
+          <Pagination v-if="list.length!==0" style="margin-top:-50px " :total="total" :current-page='current' @pagechange="pagechange" ref="pagi" :display='display'></Pagination>
         </div>
       </div>
       <div class="clearfix"> </div>
@@ -44,8 +48,8 @@ export default {
   created () {
     var label = this.$route.params.currentChooseLabel
     if (label === '搜索结果') {
-      console.log('search')
       this.search(label)
+      console.log(this.list)
     } else if (label !== '全部菜品') {
       this.getBlogListByClass(this.$route.params.currentChooseLabel)
     }
@@ -82,6 +86,7 @@ export default {
       api.search(query, 0).then().catch(res => {
         this.list = this.reduceArray(res.data, 3)
       })
+      console.log()
     },
     getBlogListByClass (param) {
       this.tagName = param
