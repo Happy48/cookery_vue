@@ -5,7 +5,7 @@
         <h4 class="col-md-8" style="padding-top:15px "> {{names}}的关注 </h4>
         <div class="search col-md-4">
           <form>
-            <input type="text" placeholder="Search" required="" >
+            <input type="text" placeholder="搜索笔记/食材" required="" >
             <input type="submit" value="" >
           </form>
         </div>
