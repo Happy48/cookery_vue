@@ -12,7 +12,11 @@
       </div>
       <div class="clearfix"> </div>
     </div>
-    <div :key="item.noteId" class="events-bottom" v-for="item in collectList">
+    <div v-if='collectList.length===0' style="align-items: center">
+      <img src="/static/images/searchBlank.png" width="500px"/>
+      <p>收藏的作品会出现在这里哟～</p>
+    </div>
+    <div v-if="collectList.length!==0" :key="item.noteId" class="events-bottom" v-for="item in collectList">
       <CollectItem :foodPic="item.foodPic" :foodTitle="item.foodTitle" :foodDesc="item.foodDesc" direction="left" :foodLikes="item.foodLikes" :foodCreateTime="item.foodCreateTime" :foodCollect="item.foodCollect"  :noteId="item.noteId" :name="names" :where="names"></CollectItem>
       <!--<CollectItem :url="item.foodPic" :title="item.foodTitle" :description="item.foodDesc" direction="right"></CollectItem>-->
     </div>

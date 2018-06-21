@@ -13,7 +13,11 @@
       <div class="clearfix"> </div>
     </div>
 
-    <div class="menu-bottom animated wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="500ms">
+    <div v-if='forcusList.length===0' style="align-items: center">
+      <img src="/static/images/searchBlank.png" width="500px"/>
+      <p>高冷如你，多多关注喜欢的博主哟～</p>
+    </div>
+    <div v-if="forcusList.length!==0"  class="menu-bottom animated wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="500ms">
       <focus-item :key="subItem.icon" v-for="subItem in forcusList"  :url="subItem.icon" :name="subItem.name"></focus-item>
       <div class="clearfix"> </div>
     </div>
@@ -21,7 +25,7 @@
       <!--<focus-item :key="subItem.icon" v-for="subItem in item"  :url="subItem.icon" :name="subItem.name"></focus-item>-->
       <!--<div class="clearfix"> </div>-->
     <!--</div>-->
-    <div style="width:75% ;margin: 0 auto">
+    <div v-if="forcusList.length!==0" style="width:75% ;margin: 0 auto">
       <PaginationFollow :total="total" :current-page='current' @pagechange="pagechange" ref="pagi"></PaginationFollow>
     </div>
   </div>
@@ -40,20 +44,7 @@ export default {
   ],
   data () {
     return {
-      forcusList: [
-        {
-          icon: '/static/images/me.jpg',
-          name: 'Lorem'
-        },
-        {
-          icon: '/static/images/me1.jpg',
-          name: 'Lorem'
-        },
-        {
-          icon: '/static/images/me2.jpg',
-          name: 'Lorem'
-        }
-      ],
+      forcusList: [],
       page: 0,
       total: 150,
       current: 1,
@@ -80,6 +71,7 @@ export default {
       api.getMyFollowListByPage(listInfo).then(res => {}).catch(res => {
         this.forcusList = res.data
       })
+      console.log(this.forcusList.length)
       // let list = {token: this.token}
       // api.getMyFollowList(list).then(res => {}).catch(res => { this.forcusList = res.data })
     },
@@ -93,6 +85,7 @@ export default {
       } else {
         followPage.getMyFollow()
       }
+      console.log(this.forcusList.length)
     }
   }
 }
