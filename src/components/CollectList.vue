@@ -5,8 +5,8 @@
         <h4 class="col-md-8" style="padding-top:15px "> 我的收藏 </h4>
         <div class="search col-md-4">
           <form>
-            <input type="text" placeholder="搜索笔记/食材" required="" >
-            <input type="submit" value="" >
+            <input @keyup.enter="search" v-model="searchText" type="text" placeholder="搜索笔记/食材" required="" >
+            <input @click='search' type="submit" value="" >
           </form>
         </div>
       </div>
@@ -76,7 +76,8 @@ export default {
           foodLikes: 0
         }
       ],
-      names: this.name
+      names: this.name,
+      searchText: ''
     }
   },
   created () {
@@ -96,6 +97,13 @@ export default {
         this.collectList = res.data
         console.log(res.data)
       })
+    },
+    search () {
+      let searchText = this.searchText
+      this.collectList = this.collectList.filter(function (item) {
+        return item.foodTitle.indexOf(searchText) !== -1 || item.foodDesc.indexOf(searchText) !== -1
+      })
+      console.log(this.collectList)
     }
   }
 }
