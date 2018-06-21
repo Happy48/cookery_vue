@@ -9,7 +9,7 @@
       </div>
       <div class="clearfix"></div>
     </div>
-    <div>
+    <div style="text-align: center;margin-top: 15px">
       <a @click="recommend">
         <span class="glyphicon glyphicon-refresh" aria-hidden="true">猜你喜欢</span>
       </a>
