@@ -1,13 +1,13 @@
 <template>
   <div class="grid-categories animated wow fadeInLeft" data-wow-duration="1000ms" data-wow-delay="500ms">
     <h4 >{{title}}</h4>
-    <div :key="item.foodPic" v-for="item in list" class="product-go">
+    <div :key="item.index" v-for="item in list" class="product-go">
       <a @click="showMore(item.noteId)" class="fashion"><img class="like_img" :src="item.foodPic" alt=""></a>
       <div class="grid-product">
         <div class="line-limit-length"><a @click="showMore(item.noteId)" class="elit ">{{item.foodTitle}}</a></div>
         <p class="likelist-limit-length">{{item.foodDesc}}</p>
       </div>
-      <div class="clearfix"> </div>
+      <div class="clearfix"></div>
     </div>
     <div>
       <a @click="recommend">
@@ -34,9 +34,8 @@ export default {
       })
     },
     recommend () {
-      console.log('ddd')
       let data = {}
-      this.$emit('recommend', data);
+      this.$emit('recommend', data)
     }
   }
 }
