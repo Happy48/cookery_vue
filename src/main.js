@@ -6,7 +6,10 @@ import router from './router'
 import stores from 'vue-stores'
 import Share from 'vue-social-share'
 import 'vue-social-share/dist/client.css'
+import VueAwesomeSwiper from 'vue-awesome-swiper'
+import 'swiper/dist/css/swiper.css'
 
+Vue.use(VueAwesomeSwiper)
 Vue.use(stores)
 Vue.use(Share)
 

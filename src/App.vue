@@ -24,6 +24,7 @@ export default {
 @import "./css/style.css";
 @import "./css/upload.css";
 @import "./css/share.scss";
+
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;

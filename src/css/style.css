@@ -47,8 +47,8 @@ i.glyphicon.glyphicon-menu-hamburger {
 .header{
 	background:url(/static/images/ss.jpg) no-repeat left;
 	width:100%;
-	background-size:cover;
-	min-height:750px;
+  background-size:cover;
+	height:550px;
 	display:block;
 	    padding-top: 1em;
 }
@@ -1255,7 +1255,7 @@ ul.in li a {
     margin-top: 8em;
 }
 .header {
-    min-height: 700px;
+    min-height: 550px;
 }
 .head {
     min-height: 89px;
@@ -2062,3 +2062,33 @@ td.add-check a {
   font-weight: bold;
 }
 
+#down{
+  margin-top: -4em;
+}
+
+.indexblog{
+  /*padding: 0 10px 0 10px;*/
+  margin: 20px;
+  box-shadow: 0 0 10px   #aaaaaa;
+}
+
+.indexblog-title{
+  text-align:center ;
+  padding: 1em 1em 0.5em 1em;
+}
+
+.indexblog-desc{
+  text-align:center ;
+  padding: 0 1em 1em 1em;
+}
+
+.indexblog-pic{
+  width: 100%;
+  height: 150px;
+}
+.indexblog-time{
+  text-align: left;
+}
+.indexhot-desc{
+   padding: 0 1em 1em 1em;
+}
