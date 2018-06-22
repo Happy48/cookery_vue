@@ -4,8 +4,11 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import stores from 'vue-stores'
+import Share from 'vue-social-share'
+import 'vue-social-share/dist/client.css'
 
 Vue.use(stores)
+Vue.use(Share)
 
 Vue.config.productionTip = false
 

@@ -52,13 +52,17 @@ export default {
         params: {
           noteID: this.noteId,
           name: this.name,
-          where: this.where
+          where: this.where,
+          foodTitle: this.foodTitle,
+          foodDesc: this.foodDesc,
+          foodPic: this.foodPic
         }
       })
     }
   }
 }
 </script>
+
 <style>
 
 </style>

@@ -8,12 +8,12 @@
         <li class="breadcrumb-item">
           <a @click="getBlogList(tag)">{{tag}}</a>
         </li>
-        <li class="breadcrumb-item active">{{title}}</li>
+        <li class="breadcrumb-item active">{{foodTitle}}</li>
       </ol>
     </nav>
     <div class="events-top">
       <div class="search-in animated wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="500ms">
-        <h4 class="col-md-12" style="padding-top:15px ">{{title}}</h4>
+        <h4 class="col-md-12" style="padding-top:15px ">{{foodTitle}}</h4>
       </div>
       <div class="clearfix"> </div>
     </div>
@@ -53,7 +53,8 @@
                 <li><a href="#"><i class="glyphicon glyphicon-comment"> </i>{{commentNumber}} 评论</a></li>
                 <li><a href="#"><i class="glyphicon glyphicon-share"> </i>分享</a></li>
               </ul>
-              <p class="wow fadeInLeft animated" data-wow-delay=".5s">{{desc}}</p>
+              <share :config="config"></share>
+              <p class="wow fadeInLeft animated" data-wow-delay=".5s">{{foodDesc}}</p>
             </div>
           </div>
           <div class="col-md-6">
@@ -84,7 +85,7 @@
           </tbody>
         </table>
         <hr>
-        <h4>{{title}} 的做法</h4>
+        <h4>{{foodTitle}} 的做法</h4>
         <br>
         <table class="table wow fadeInLeft animated" data-wow-delay=".5s" style="font-size:20px;width:100%;">
           <tbody>
@@ -114,12 +115,12 @@ export default {
     return {
       tag: '沙拉',
       noteId: 5,
-      title: '营养齐全的【Cobb Salad】',
+      foodTitle: '营养齐全的【Cobb Salad】',
       url: '/static/images/ss.jpg',
       count: 2373,
       date: '08.09.2014',
       commentNumber: 5,
-      desc: '你知道考伯沙拉吗？满满一盘色彩缤纷的沙拉哟！看着心情就好好',
+      foodDesc: '你知道考伯沙拉吗？满满一盘色彩缤纷的沙拉哟！看着心情就好好',
       likeColor: '#08523a',
       collectColor: '#08523a',
       likeText: '已喜欢',
@@ -150,7 +151,17 @@ export default {
           desc: '小番茄对半切开排入盘中，水煮蛋切开成小块，洋葱切小块，放入盘中',
           picUrl: '/static/images/bl4.jpg'
         }
-      ]
+      ],
+      config: {
+        url: 'http://localhost:8080/#/blogDetail?noteID=' + (this.$route.params.noteID), // localhost需要改成具体ip地址才能成功分享。网址,默认使用 window.location.href
+        source: 'http://localhost:8080/', // 来源（QQ空间会用到）, 默认读取head标签：<meta name="site" content="http://overtrue" />
+        title: this.$route.params.foodTitle, // 标题，默认读取 document.title 或者 <meta name="title" content="share.js" />
+        description: this.$route.params.foodDesc, // 描述, 默认读取head标签：<meta name="description" content="PHP弱类型的实现原理分析" />
+        image: this.$route.params.foodPic, // 图片, 默认取网页中第一个img标签
+        disabled: ['google', 'facebook', 'twitter', 'linkedin', 'diandian'], // 禁用的站点
+        wechatQrcodeTitle: '微信扫一扫：分享', // 微信二维码提示文字
+        wechatQrcodeHelper: '<div>微信里点“发现”，扫一扫。</div>'
+      }
     }
   },
   created () {
@@ -188,18 +199,23 @@ export default {
       }
       api.getNoteDetail(information).then().catch(res => {
         let note = res.data
-        this.title = note.foodTitle
+        this.foodTitle = note.foodTitle
         this.url = note.foodPic
         this.count = note.workVOList.length
         this.date = note.foodCreateTime
         this.commentNumber = note.commentVOList.length
-        this.desc = note.foodDesc
+        this.foodDesc = note.foodDesc
         this.peopleUrl = note.userVO.icon
         this.name = note.userVO.userName
         this.materialList = note.materialVOList
         this.steps = note.stepVOList
         this.works = note.workVOList
         this.comments = note.commentVOList
+
+        this.config['title'] = this.foodTitle
+        this.config['description'] = this.foodDesc
+
+        console.log(this.config)
       })
     },
     initialLikeAndCollect () {
