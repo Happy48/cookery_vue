@@ -84,6 +84,11 @@ export default new Router({
       path: '/allTag',
       name: 'AllTag',
       component: allTag
+    },
+    {
+      path: '/blogDetail/:noteID',
+      name: 'blogDetail',
+      component: blogDetail
     }
   ]
 })
