@@ -1,6 +1,7 @@
 body{
 	background:#fff;
 	font-family: Helvetica;
+  height: 100%;
 }
 body a{
 	transition: 0.5s all;
@@ -48,7 +49,7 @@ i.glyphicon.glyphicon-menu-hamburger {
 	background:url(/static/images/ss.jpg) no-repeat left;
 	width:100%;
   background-size:cover;
-	height:550px;
+	min-height:550px;
 	display:block;
 	    padding-top: 1em;
 }
@@ -2091,4 +2092,13 @@ td.add-check a {
 }
 .indexhot-desc{
    padding: 0 1em 1em 1em;
+}
+
+.login-container{
+  background:url(/static/images/ss.jpg) no-repeat left;
+  width:100%;
+  background-size:cover;
+  height:100%;
+  display:block;
+  padding-top: 1em;
 }

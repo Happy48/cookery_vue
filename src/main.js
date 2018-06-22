@@ -23,7 +23,8 @@ new Vue({
   template: '<App/>',
   data: {
     state: {
-      token: '8797723cc026626cb9b2a45e5d258d46'
+      // token: '8797723cc026626cb9b2a45e5d258d46'
+      token: ''
     }
   }
 })

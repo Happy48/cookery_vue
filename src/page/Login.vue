@@ -1,19 +1,14 @@
 <template>
-  <div class="header">
-    <div class="container">
-      <div class="logo animated wow pulse" data-wow-duration="1000ms" data-wow-delay="500ms">
-        <h2 style="font-family: Helvetica"><a href="index.html"><img src="/static/images/oo.png" alt="">大厨笔记</a></h2>
-      </div>
-      <div class="clearfix"></div>
-    </div>
+  <div class="login-container">
+    <Title></Title>
     <!-- start search-->
-    <div class="banner">
+    <div class="">
       <div class="form row animated wow fadeInLeft" data-wow-duration="1000ms" data-wow-delay="500ms">
         <br>
-        <h2 style="color: white">登录</h2>
+        <h2 style="color: white;text-align: center">登录</h2>
         <div class="form-horizontal col-md-offset-3" id="login_form">
 
-          <div class="col-md-9">
+          <div class="col-md-9 login-input">
             <div class="form-group">
               <i class="fa fa-user fa-lg"></i>
               <input v-model="email" class="form-control required" type="text" placeholder="邮箱" id="email" name="email" autofocus="autofocus" maxlength="20" required/>
@@ -22,7 +17,7 @@
               <i class="fa fa-lock fa-lg"></i>
               <input v-model="password" class="form-control required" type="password" placeholder="密码" id="password" name="password" maxlength="20" required/>
             </div>
-            <a class='col-md-offset-7' ><router-link to="register">马上注册</router-link></a>
+            <a class="form-group" style="float: right"><router-link to="register"><b>还没账号？马上注册</b></router-link></a>
             <div class="leave">
               <form>
                 <div class="single-grid wow fadeInLeft animated" data-wow-delay=".5s">
@@ -40,10 +35,14 @@
 </template>
 <script>
 import api from '@/api/getData'
+import Title from '@/components/Title'
 
 export default {
   stores: {
     token: 'state.token'
+  },
+  components: {
+    Title
   },
   data () {
     return {
@@ -81,19 +80,26 @@ export default {
   .form{
     background: rgba(255,255,255,0.4);
     width:400px;
-    height: 300px;
-    margin:120px auto;
+    height: 320px;
+    margin:190px auto;
+    padding: 10px;
   }
   /*阴影*/
   .fa{
     display: inline-block;
     top: 27px;
-    right: 6px;
+    right: -7px;
     position: relative;
     color: #ccc;
   }
   input[type="text"],input[type="password"]{
     padding-left:26px;
+  }
+  .single-grid input[type="submit"]{
+    margin:0 0 0 40px;
+  }
+  .login-input{
+    margin-left: -10px;
   }
 
 </style>
