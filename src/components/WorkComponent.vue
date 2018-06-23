@@ -1,6 +1,5 @@
 <template>
-  <div>
-    <hr>
+  <div v-show="workList.length > 0" style="border-top:0.1vw solid #dddddd;">
     <h4>参照这个菜谱，大家做出{{workList.length}}个作品</h4>
     <div class=" blog-head">
       <div :key="item.index" v-for="item in workList" class="col-md-4 blog-top" style="padding-top: 10px">
@@ -20,7 +19,6 @@
       <div class="clearfix"> </div>
     </div>
     <Carousel :img="workList"></Carousel>
-    <hr>
   </div>
 </template>
 <script>

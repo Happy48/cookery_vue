@@ -1,6 +1,7 @@
 <template>
   <div>
-    <div class="comment">
+    <hr>
+    <div class="comment" v-show="commentList.length > 0">
       <h4>评论</h4>
       <div :key="item.index" v-for="item in commentList" class="media wow fadeInLeft animated" data-wow-delay=".5s">
         <div class="code-in">
@@ -19,7 +20,7 @@
       </div>
     </div>
     <div class="leave">
-      <hr>
+      <br />
       <h4>说点什么吧～</h4>
       <form>
         <div class="single-grid wow fadeInLeft animated" data-wow-delay=".5s">
@@ -103,6 +104,6 @@ export default {
 <style>
   h4{
     color:rgb(14, 92, 67);
-    font-size:25px;
+    font-size:23px;
   }
 </style>
