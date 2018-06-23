@@ -74,6 +74,9 @@
           </div>
         </div>
         <hr>
+        <h4>{{foodTitle}}的相关分类</h4><br>
+        <p style="font-size:20px;">{{tagList}}</p>
+        <hr>
         <h4>用料</h4>
         <br>
         <table class="table wow fadeInLeft animated" data-wow-delay=".5s" style="alignment: center;font-size:20px;width:70%;border-bottom: 1px gray;">
@@ -85,7 +88,7 @@
           </tbody>
         </table>
         <hr>
-        <h4>{{foodTitle}}的做法</h4>
+        <h4>做法</h4>
         <br>
         <table class="table wow fadeInLeft animated" data-wow-delay=".5s" style="font-size:20px;width:100%;">
           <tbody>
@@ -114,6 +117,7 @@ export default {
   data () {
     return {
       tag: '沙拉',
+      tagList: '',
       noteId: 5,
       foodTitle: '营养齐全的【Cobb Salad】',
       url: '/static/images/ss.jpg',
@@ -190,6 +194,11 @@ export default {
       api.getTagByNoteId(information).then().catch(res => {
         let taglist = res.data
         this.tag = taglist[0].name
+        var tagtmpList = []
+        for (let i = 0; i < taglist.length; i++) {
+          tagtmpList.push(taglist[i].name)
+        }
+        this.tagList = tagtmpList.join('，')
       })
     },
     initBlogDetail () {
