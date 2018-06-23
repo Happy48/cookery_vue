@@ -131,9 +131,13 @@
 <script>
 import api from '@/api/getData'
 import ImageUpload from '@/components/ImageUpload'
+import Title from '@/components/Title'
+import SubTitle from '@/components/SubTitle'
+var title = Title
+var subTitle = SubTitle
 
 export default {
-  components: { ImageUpload },
+  components: { ImageUpload, Title, SubTitle },
   stores: {
     token: 'state.token'
   },
@@ -177,6 +181,8 @@ export default {
         if (data.code === '0') {
           this.headerIconMsg = '头像修改成功'
           this.headerIconMsgColor = '#145b43'
+          title.titlePicUrl = this.picUrl
+          subTitle.subPicUrl = this.picUrl
         } else if (data.code === '1') {
           this.headerIconMsg = '头像修改失败，请重新尝试'
           this.headerIconMsgColor = 'red'

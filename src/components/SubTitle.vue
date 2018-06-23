@@ -2,7 +2,7 @@
   <div class="header head">
     <div class="container navi" id="title_bar" v-bind:style="{background: backgroundColor}">
       <div class="logo animated wow pulse" data-wow-duration="1000ms" data-wow-delay="500ms">
-        <h2 style="font-family: Helvetica;margin-top: 0px;margin-left: 15px;margin-right: 23px"><a href="index.html"><img src="/static/images/oo.png" alt="">大厨笔记</a></h2>
+        <h2 style="font-family: Helvetica;margin-top: 6px;margin-left: 15px;margin-right: 23px"><a href="index.html"><img src="/static/images/oo.png" alt="">大厨笔记</a></h2>
       </div>
 
       <div class="col-md-3 search" id='search' v-bind:style="{background: searchBackground, border: borderStyle}">
@@ -13,30 +13,27 @@
       </div>
 
       <div id="menu_div">
-        <ul v-if="isLogin">
-          <li><router-link to="/">首页</router-link></li>
-          <li><router-link to="allBlog">笔记广场</router-link></li>
-          <li><router-link to="focus">我的关注</router-link></li>
-          <li><router-link to="collect">我的收藏</router-link></li>
-          <li><router-link to="myBlogs">我的笔记</router-link></li>
-          <li><router-link to="createNote">写笔记</router-link></li>
-        </ul>
-        <ul v-else>
-          <li><a href="index.html">首页</a></li>
-          <li><router-link to="allBlog">笔记广场</router-link></li>
-        </ul>
+        <li><router-link to="/">首页</router-link></li>
+        <li><router-link to="allBlog">笔记广场</router-link></li>
       </div>
 
       <div id="login_part">
         <ul v-if="isLogin">
-          <li><router-link to="personalInfo"><img id="personal_icon" src="http://img.mukewang.com/58492fe600012e8e01800180-200-200.jpg"></router-link></li>
+          <li><a @click="show_div"><img id="personal_icon" v-bind:src="subPicUrl"></a></li>
           <li @click="logout"><a>登出</a></li>
         </ul>
 
         <ul v-else>
-          <li @click="login"><a>登录</a></li>
+          <li><router-link to="login">登录</router-link></li>
           <li><router-link to="register">注册</router-link></li>
         </ul>
+      </div>
+      <div v-if="isLogin" id="drop_down_div" v-show="visible" ref="main">
+        <li><router-link to="focus">我的关注</router-link></li>
+        <li><router-link to="collect">我的收藏</router-link></li>
+        <li><router-link to="myBlogs">我的笔记</router-link></li>
+        <li><router-link to="personalInfo">我的账户</router-link></li>
+        <li><router-link to="createNote">写笔记</router-link></li>
       </div>
 
     </div>
@@ -44,6 +41,7 @@
 
 </template>
 <script>
+import api from '@/api/getData'
 export default {
   stores: {
     token: 'state.token'
@@ -52,12 +50,31 @@ export default {
     return {
       backgroundColor: 'transparent',
       searchBackground: 'none',
-      borderStyle: '0.1em white solid'
+      borderStyle: '0.1em white solid',
+      subPicUrl: '',
+      visible: false
+    }
+  },
+  created () {
+    if (this.token !== '') {
+      this.getSubHeadIcon()
     }
   },
   methods: {
-    login: function () {
-      this.token = '539aab779e71efb02749a7ed50cfdf15'
+    show_div () {
+      if (this.visible === false) {
+        this.visible = true
+      } else {
+        this.visible = false
+      }
+    },
+    getSubHeadIcon () {
+      let list = {token: this.token}
+      let _this = this
+      api.getUserInfoByToken(list).then(res => {}).catch(res => {
+        let user = res.data
+        _this.subPicUrl = user.icon
+      })
     },
     logout: function () {
       this.token = ''

@@ -1,7 +1,6 @@
 <template>
   <div class="clearfix wow fadeInLeft animated" data-wow-delay=".5s">
     <h4>标签</h4>
-    <br>
     <ul class="popular">
       <li :key="item.id" v-for="item in list">
         <input type="checkbox" name="标签" :value="item.name" v-model="checkTags" @change="up">&nbsp;{{item.name}}
