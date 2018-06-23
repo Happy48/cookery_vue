@@ -13,14 +13,20 @@
     </nav>
     <div class="events-top">
       <div class="search-in animated wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="500ms">
-        <h4 class="col-md-12" style="padding-top:15px">{{foodTitle}}</h4>
+        <h4 class="col-md-12" style="padding-top:15px; margin-bottom:8px; padding-left:0;">{{foodTitle}}</h4>
+        <ul class="grid-blog" style="display: inline; padding-top:15px;">
+          <li><span><i class="glyphicon glyphicon-time"> </i>{{date}}</span></li>
+          <li><a href="#"><i class="glyphicon glyphicon-comment"> </i>{{commentNumber}} 评论</a></li>
+          <li><a href="#"><i class="glyphicon glyphicon-share"> </i>分享</a></li>
+          <li><share :config="config"></share></li>
+        </ul>
       </div>
       <div class="clearfix"> </div>
     </div>
     <hr>
     <div class="single">
       <div class="single-top">
-        <div style="width:100%; max-height:400px; overflow: hidden">
+        <div style="width:100%; max-height:450px; overflow: hidden">
           <img class="img-responsive wow fadeInUp animated" data-wow-delay=".5s" :src="url" alt=""/>
         </div>
         <div class="row">
@@ -44,27 +50,22 @@
         </div>
         <hr>
         <div class="row">
-          <div class="col-md-6">
+          <div class="col-md-7">
             <div class="lone-line">
-              <h4>关于作者</h4>
-              <ul class="grid-blog">
-                <li><span><i class="glyphicon glyphicon-time"> </i>{{date}}</span></li>
-                <li><a href="#"><i class="glyphicon glyphicon-comment"> </i>{{commentNumber}} 评论</a></li>
-                <li><a href="#"><i class="glyphicon glyphicon-share"> </i>分享</a></li>
-              </ul>
-              <share :config="config"></share>
-              <p class="wow fadeInLeft animated" data-wow-delay=".5s">{{foodDesc}}</p>
+              <!--<h4>作者的话</h4>-->
+              <br/>
+              <p class="wow fadeInLeft animated" data-wow-delay=".5s">{{foodDesc}}&nbsp;<img src="/static/images/qu4.png"/></p>
             </div>
           </div>
-          <div class="col-md-6">
+          <div class="col-md-5">
             <div class="comment">
               <div class="media wow fadeInLeft animated" data-wow-delay=".5s">
-                <div class="media-left">
+                <div style="padding-top:0; text-align:center;">
                   <a href="#">
-                    <img :src="peopleUrl" alt="">
+                    <img :src="peopleUrl" alt="" style="width:120px; height:120px;border-radius:60%;">
                   </a>
                 </div>
-                <div class="media-body" style="padding-top: 35px">
+                <div style="text-align:center;">
                   <h4>{{name}}</h4>
                   <li><i class="glyphicon glyphicon-share"> </i>关注</li>
                 </div>
@@ -84,14 +85,14 @@
           </tbody>
         </table>
         <hr>
-        <h4>{{foodTitle}} 的做法</h4>
+        <h4>{{foodTitle}}的做法</h4>
         <br>
         <table class="table wow fadeInLeft animated" data-wow-delay=".5s" style="font-size:20px;width:100%;">
           <tbody>
           <tr :key="item.id" v-for="item in steps">
             <td><h4 style="padding-top:0">{{item.id}}</h4></td>
-            <td style="width: 300px">{{item.desc}}</td>
-            <td><img class="img-responsive" :src="item.picUrl" style="width: 180px;height: 150px"></td>
+            <td style="width: 350px;">{{item.desc}}</td>
+            &nbsp;&nbsp;&nbsp;<td><img class="img-responsive" :src="item.picUrl" style="width: 180px;height: 150px"></td>
           </tr>
           </tbody>
         </table>
