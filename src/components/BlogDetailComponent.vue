@@ -13,21 +13,20 @@
     </nav>
     <div class="events-top">
       <div class="search-in animated wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="500ms">
-        <h4 class="col-md-12" style="padding-top:15px ">{{foodTitle}}</h4>
+        <h4 class="col-md-12" style="padding-top:15px">{{foodTitle}}</h4>
       </div>
       <div class="clearfix"> </div>
     </div>
     <hr>
     <div class="single">
       <div class="single-top">
-        <img class="img-responsive wow fadeInUp animated" data-wow-delay=".5s" :src="url" alt="" />
-
+        <div style="width:100%; max-height:400px; overflow: hidden">
+          <img class="img-responsive wow fadeInUp animated" data-wow-delay=".5s" :src="url" alt=""/>
+        </div>
         <div class="row">
-          <div class="col-md-1 wow fadeInLeft animated" data-wow-delay=".5s">
-            <h4 style="font-size: 30px">{{count}}</h4>
-          </div>
-          <div class="col-md-5 wow fadeInLeft animated" data-wow-delay=".5s">
-            <h5 style="padding-top: 40px;color: #97824B;font-size: 16px"> 人做过这道菜</h5>
+          <div class="col-md-5 wow fadeInLeft animated" data-wow-delay=".5s" style="padding-top:10px;">
+            <br />
+            <span><h4 style="font-size: 30px;display: inline;">{{count}}</h4>&nbsp;<h5 style="color: #97824B;font-size: 16px; display: inline;">人做过这道菜</h5></span>
           </div>
           <div class="col-md-6" id="likeCollectDiv">
               <form>
@@ -90,7 +89,7 @@
         <table class="table wow fadeInLeft animated" data-wow-delay=".5s" style="font-size:20px;width:100%;">
           <tbody>
           <tr :key="item.id" v-for="item in steps">
-            <td><h4>{{item.id}}</h4></td>
+            <td><h4 style="padding-top:0">{{item.id}}</h4></td>
             <td style="width: 300px">{{item.desc}}</td>
             <td><img class="img-responsive" :src="item.picUrl" style="width: 180px;height: 150px"></td>
           </tr>
