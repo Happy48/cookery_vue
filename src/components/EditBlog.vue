@@ -2,7 +2,7 @@
   <div class="col-md-9" style="padding-right: 50px">
     <div class="events-top">
       <div class="search-in animated wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="500ms">
-        <h4 class="col-md-12" style="padding-top:15px ">创建菜谱</h4>
+        <h4 class="col-md-12" style="padding-top:15px ">修改菜谱</h4>
       </div>
       <div class="clearfix"> </div>
     </div>
@@ -31,12 +31,12 @@
               <br>
               <table class="table wow fadeInLeft animated" data-wow-delay=".5s" style="alignment: center;font-size:17px;border: 0" id="material_table">
                 <tbody id="componentBody">
-                   <tr :key="material.id" v-for="(material,id) in materials">
-                      <!--<td>{{id+1}}</td>-->
-                      <td><input type="text" v-model="material.name" placeholder="食材：如鸡蛋" required oninvalid="setCustomValidity('请输入食材')"/></td>
-                      <td><input type="text" v-model="material.unit" placeholder="用量：如1只" required oninvalid="setCustomValidity('请输入用量')"/></td>
-                      <td style="border-top: 1px white;border-bottom: 0;border-right: 0;"><img src="/static/images/close.png" draggable="false" @click="remove(id)" style="padding-left:30px "></td>
-                    </tr>
+                <tr :key="material.id" v-for="(material,id) in materials">
+                  <!--<td>{{id+1}}</td>-->
+                  <td><input type="text" v-model="material.name" placeholder="食材：如鸡蛋" required oninvalid="setCustomValidity('请输入食材')"/></td>
+                  <td><input type="text" v-model="material.unit" placeholder="用量：如1只" required oninvalid="setCustomValidity('请输入用量')"/></td>
+                  <td style="border-top: 1px white;border-bottom: 0;border-right: 0;"><img src="/static/images/close.png" draggable="false" @click="remove(id)" style="padding-left:30px "></td>
+                </tr>
                 </tbody>
               </table>
               <div class="clearfix wow fadeInLeft animated row" data-wow-delay=".5s">
@@ -51,7 +51,7 @@
                 <tr :key="step.id" v-for="(step,id) in steps">
                   <td><h4 style="padding-top:0">{{id+1}}</h4></td>
                   <td>
-                    <textarea v-model="step.information" placeholder="添加菜谱步骤" onblur="if (this.value == '') {this.value = '';}" required oninvalid="setCustomValidity('请输入菜谱步骤')"></textarea>
+                    <textarea v-model="step.information" placeholder="添加菜谱步骤" required oninvalid="setCustomValidity('请输入菜谱步骤')"></textarea>
                   </td>
                   <td>
                     <div id="step_img_div"><ImageUpload v-bind:stepIndex="step.id" v-bind:uploadImgDes="uploadStepImg" v-on:changeUrl="getStepPicUrl" v-bind:picCurrentUrl='step.img' ></ImageUpload></div>
@@ -67,19 +67,19 @@
                 <div class="col-md-5"> <button class="addButton" style="margin-top: 5px">追加一行步骤</button></div>
               </div>
               <br>
-              <BlogTag v-on:blogTagSay="getCheckedTagNames"></BlogTag>
+              <BlogTag v-on:blogTagSay="getCheckedTagNames" :subtags="subtags"></BlogTag>
               <br>
             </div>
           </div>
           <div class="leave">
             <h4>小贴士</h4>
-              <div class="single-grid wow fadeInLeft animated" data-wow-delay=".5s">
-                <textarea required v-model="tip_area" onfocus="this.value='';" placeholder="添加小贴士" style="font-size:17px;" onblur="if (this.value == '') {this.value = '添加小贴士';}"  oninvalid="setCustomValidity('请输入菜谱小贴士')">添加小贴士</textarea>
-                <label class="hvr-rectangle-out">
-                  <input type="submit" value="上传" @click="save_new">
-                  <span class="state-info" v-if="showState">{{stateInfo}}</span>
-                </label>
-              </div>
+            <div class="single-grid wow fadeInLeft animated" data-wow-delay=".5s">
+              <textarea required v-model="tip_area" placeholder="添加小贴士" style="font-size:17px;" oninvalid="setCustomValidity('请输入菜谱小贴士')">添加小贴士</textarea>
+              <label class="hvr-rectangle-out">
+                <input type="submit" value="保存" @click="save_new">
+                <span class="state-info" v-if="showState">{{stateInfo}}</span>
+              </label>
+            </div>
           </div>
         </div>
       </div>
@@ -97,6 +97,7 @@ export default {
   stores: {
     token: 'state.token'
   },
+  props: ['noteID'],
   data () {
     return {
       noteName: '',
@@ -116,13 +117,36 @@ export default {
       practice: '',
       tip_area: '',
       subtag: '',
+      subtags: [],
       uploadStepImg: '点击上传步骤图',
       uploadCover: '点击上传菜谱封面',
       stateInfo: '',
       showState: false
     }
   },
+  created () {
+    this.getBlogDetail()
+  },
   methods: {
+    getBlogDetail: function () {
+      let information = {
+        noteID: this.noteID
+      }
+      api.getNoteUpdateInfo(information).then().catch(res => {
+        let note = res.data
+        this.noteName = note.noteName
+        this.noteCover = note.noteCover
+        this.description_area = note.description
+        let temp = note.material.replace(/'/g, '"')
+        this.materials = JSON.parse(temp)
+        this.steps = JSON.parse(note.practice)
+        this.tip_area = note.tip
+        temp = note.subTagList
+        for (let i = 0; i < note.subTagList.length; i++) {
+          this.subtags.push(temp[i])
+        }
+      })
+    },
     getCheckedTagNames: function (msg) {
       this.subtag = msg
     },
@@ -152,7 +176,7 @@ export default {
         this.$set(this.steps[i], 'id', index)
       }
       let information = {
-        token: this.token,
+        noteID: this.noteID,
         noteName: this.noteName,
         noteCover: this.noteCover,
         description: this.description_area,
@@ -161,7 +185,7 @@ export default {
         tip: this.tip_area,
         subtag: this.subtag.join(',')
       }
-      api.createNote(information).then(res => {
+      api.updateNote(information).then(res => {
       }).catch(res => {
         let data = res.data
         console.log(res.data)

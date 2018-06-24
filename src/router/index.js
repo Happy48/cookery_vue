@@ -8,6 +8,7 @@ const personalInfo = r => require.ensure([], () => r(require('@/page/PersonalInf
 const allBlog = r => require.ensure([], () => r(require('@/page/AllBlog')), 'allBlog')
 const collect = r => require.ensure([], () => r(require('@/page/Collect')), 'collect')
 const createNote = r => require.ensure([], () => r(require('@/page/CreateNote')), 'createNote')
+const editNote = r => require.ensure([], () => r(require('@/page/EditNote')), 'editNote')
 const focus = r => require.ensure([], () => r(require('@/page/Focus')), 'focus')
 const hisBlogs = r => require.ensure([], () => r(require('@/page/OtherPeopleBlog')), 'hisBlogs')
 const myBlogs = r => require.ensure([], () => r(require('@/page/MyBlogs')), 'myBlogs')
@@ -54,6 +55,11 @@ export default new Router({
       path: '/createNote',
       name: 'CreateNote',
       component: createNote
+    },
+    {
+      path: '/editNote',
+      name: 'EditNote',
+      component: editNote
     },
     {
       path: '/focus',

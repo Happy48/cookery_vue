@@ -251,5 +251,17 @@ export default {
    */
   getNoteInfo (params) {
     return axios.get('getNoteByNoteID?noteID=' + params['noteID'])
+  },
+  /**
+   * 更新笔记
+   */
+  updateNote (params) {
+    return fetch('/updateNote', params)
+  },
+  /**
+   * 获取更新笔记信息
+   */
+  getNoteUpdateInfo (params) {
+    return axios.get('getNoteUpdateInfo?noteID=' + params['noteID'])
   }
 }

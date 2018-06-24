@@ -2,7 +2,7 @@
   <div class="clearfix wow fadeInLeft animated" data-wow-delay=".5s">
     <h4>标签</h4>
     <ul class="popular">
-      <li :key="item.id" v-for="item in list">
+      <li :key="item.id" v-for="(item) in list">
         <input type="checkbox" name="标签" :value="item.name" v-model="checkTags" @change="up">&nbsp;{{item.name}}
       </li>
     </ul>
@@ -12,6 +12,7 @@
 <script>
 import api from '@/api/getData'
 export default {
+  props: ['subtags'],
   data () {
     return {
       list: [
@@ -20,7 +21,7 @@ export default {
           id: ''
         }
       ],
-      checkTags: []
+      checkTags: this.subtags
     }
   },
   created () {
@@ -35,6 +36,13 @@ export default {
     },
     up () {
       this.$emit('blogTagSay', this.checkTags)
+    },
+    isChecked (name) {
+      if (this.checkTags.indexOf(name) > 0) {
+        return true
+      } else {
+        return false
+      }
     }
   }
 }
