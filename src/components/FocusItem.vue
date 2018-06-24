@@ -3,8 +3,8 @@
     <div class="btm-right">
       <a @click="showMore">
         <img :src="url" alt="" class="img-responsive">
-        <div class="captn">
-          <h4>{{name}}</h4>
+        <div class="captn" style="bottom: -80%">
+          <h4 style="font-size: 1.4em;margin-top: 0.5em">{{name}}</h4>
           <p></p>
         </div>
       </a>
