@@ -34,12 +34,14 @@
 
         <div class="form-group form-inline">
           <label style="float: left;padding-top:25px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;生日:&nbsp;&nbsp;&nbsp;&nbsp;</label>
-          <!--<input type="date" placeholder="1980-01-01" disabled="true" id="birthday"/>-->
-          <div class="input-group date" id='data1'>
-            <input type="text" class="form-control" v-model="birthday">
-            <span class="input-group-addon">
-              <i class="glyphicon glyphicon-calendar"></i>
-            </span>
+          <!--<div class="input-group date" id='data1'>-->
+            <!--<input type="text" class="form-control" v-model="birthday">-->
+            <!--<span class="input-group-addon">-->
+              <!--<i class="glyphicon glyphicon-calendar"></i>-->
+            <!--</span>-->
+          <!--</div>-->
+          <div class="input-group date">
+            <datepicker class="form-control" v-model="birthday"></datepicker>
           </div>
         </div>
         <br />
@@ -129,6 +131,7 @@
   </div>
 </template>
 <script>
+import Datepicker from 'vuejs-datepicker';
 import api from '@/api/getData'
 import ImageUpload from '@/components/ImageUpload'
 import Title from '@/components/Title'
@@ -137,7 +140,7 @@ var title = Title
 var subTitle = SubTitle
 
 export default {
-  components: { ImageUpload, Title, SubTitle },
+  components: { ImageUpload, Title, SubTitle, Datepicker},
   stores: {
     token: 'state.token'
   },
