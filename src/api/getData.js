@@ -1,11 +1,12 @@
 import axios from 'axios'
 import qs from 'qs'
 
+let ip = '192.168.43.15'
 // axios 配置
 axios.defaults.timeout = 5000
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8'
 axios.defaults.headers.post['Accept'] = 'application/json'
-axios.defaults.baseURL = 'http://localhost:10086/api'
+axios.defaults.baseURL = 'http://' + ip + ':10086/api'
 
 // POST传参序列化
 axios.interceptors.request.use((config) => {

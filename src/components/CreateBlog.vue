@@ -7,12 +7,13 @@
       <div class="clearfix"> </div>
     </div>
     <hr />
+    <form>
     <div class="row search-in animated wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="500ms">
       <div class="col-lg-1 col-md-1"></div>
-      <div class="col-lg-8 col-md-8 animated wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="500ms">
+      <div class="col-lg-10 col-md-10 animated wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="500ms">
         <h4>菜谱名称</h4>
         <div class="single-grid wow fadeInLeft animated" data-wow-delay=".5s">
-          <input type="text" placeholder="添加菜谱名称" v-model='noteName' style="font-size:17px;" id="noteNameInput"/>
+          <input type="text" placeholder="添加菜谱名称" v-model='noteName' style="font-size:17px;" id="noteNameInput" required oninvalid="setCustomValidity('请输入菜谱名称')"/>
         </div>
         <br />
         <h4>菜谱封面</h4>
@@ -21,25 +22,26 @@
         <br />
         <div class="single-grid wow fadeInLeft animated" data-wow-delay=".5s">
           <h4>菜谱描述</h4>
-          <textarea value=" " v-model="description_area" placeholder="添加菜谱描述" style="font-size:17px;">添加菜谱描述</textarea>
+          <textarea value=" " v-model="description_area" placeholder="添加菜谱描述" style="font-size:17px;" required oninvalid="setCustomValidity('请输入菜谱描述')">添加菜谱描述</textarea>
         </div>
         <div class="single">
           <div class="single-top">
             <div class="lone-line">
               <h4>用料</h4>
               <br>
-              <table class="table wow fadeInLeft animated" data-wow-delay=".5s" style="alignment: center;font-size:17px;" id="material_table">
+              <table class="table wow fadeInLeft animated" data-wow-delay=".5s" style="alignment: center;font-size:17px;border: 0" id="material_table">
                 <tbody id="componentBody">
                    <tr :key="material.id" v-for="(material,id) in materials">
                       <!--<td>{{id+1}}</td>-->
-                      <td><input type="text" v-model="material.name" placeholder="食材：如鸡蛋"/></td>
-                      <td><input type="text" v-model="material.unit" placeholder="用量：如1只"/></td>
-                      <td><img src="/static/images/close.png" draggable="false" @click="remove(id)"></td>
+                      <td><input type="text" v-model="material.name" placeholder="食材：如鸡蛋" required oninvalid="setCustomValidity('请输入食材')"/></td>
+                      <td><input type="text" v-model="material.unit" placeholder="用量：如1只" required oninvalid="setCustomValidity('请输入用量')"/></td>
+                      <td style="border-top: 1px white;border-bottom: 0;border-right: 0;"><img src="/static/images/close.png" draggable="false" @click="remove(id)" style="padding-left:30px "></td>
                     </tr>
                 </tbody>
               </table>
-              <div class="clearfix wow fadeInLeft animated" data-wow-delay=".5s">
-                <button @click="addMaterial" class="addButton">追加一行用料</button>
+              <div class="clearfix wow fadeInLeft animated row" data-wow-delay=".5s">
+                <div class="col-md-1"><i @click="addMaterial"  class="fa fa-plus-circle" style="color:#005238;font-size: 32px;"></i></div>
+                <div class="col-md-5"> <button class="addButton" style="margin-top: 5px">追加一行用料</button></div>
               </div>
               <br>
               <h4>做法</h4>
@@ -49,7 +51,7 @@
                 <tr :key="step.id" v-for="(step,id) in steps">
                   <td><h4 style="padding-top:0">{{id+1}}</h4></td>
                   <td>
-                    <textarea v-model="step.information" placeholder="添加菜谱步骤" onblur="if (this.value == '') {this.value = '';}"></textarea>
+                    <textarea v-model="step.information" placeholder="添加菜谱步骤" onblur="if (this.value == '') {this.value = '';}" required oninvalid="setCustomValidity('请输入菜谱步骤')"></textarea>
                   </td>
                   <td>
                     <div id="step_img_div"><ImageUpload v-bind:stepIndex="step.id" v-bind:uploadImgDes="uploadStepImg" v-on:changeUrl="getStepPicUrl" v-bind:picCurrentUrl='step.img' ></ImageUpload></div>
@@ -60,8 +62,9 @@
                 </tr>
                 </tbody>
               </table>
-              <div class="clearfix wow fadeInLeft animated" data-wow-delay=".5s">
-                <button @click="addStep" class="addButton">追加一行步骤</button>
+              <div class="clearfix wow fadeInLeft animated row" data-wow-delay=".5s" style="margin-left: -8px">
+                <div class="col-md-1"><i  @click="addStep"   class="fa fa-plus-circle" style="color:#005238;font-size: 32px;"></i></div>
+                <div class="col-md-5"> <button class="addButton" style="margin-top: 5px">追加一行步骤</button></div>
               </div>
               <br>
               <BlogTag v-on:blogTagSay="getCheckedTagNames"></BlogTag>
@@ -70,20 +73,18 @@
           </div>
           <div class="leave">
             <h4>小贴士</h4>
-            <form>
               <div class="single-grid wow fadeInLeft animated" data-wow-delay=".5s">
-                <textarea value=" " v-model="tip_area" onfocus="this.value='';" placeholder="添加小贴士" style="font-size:17px;" onblur="if (this.value == '') {this.value = '添加小贴士';}">添加小贴士</textarea>
+                <textarea required v-model="tip_area" onfocus="this.value='';" placeholder="添加小贴士" style="font-size:17px;" onblur="if (this.value == '') {this.value = '添加小贴士';}"  oninvalid="setCustomValidity('请输入菜谱小贴士')">添加小贴士</textarea>
                 <label class="hvr-rectangle-out">
-                  <input type="submit" value="上传" @click="save_new">
+                  <input type="submit" value="上传" >
                 </label>
               </div>
-            </form>
           </div>
         </div>
       </div>
       <div class="col-lg-3 col-md-3"></div>
     </div>
-
+    </form>
   </div>
 </template>
 <script>
@@ -182,8 +183,8 @@ export default {
     height:300px;
   }
   #step_img_div{
-    width:150px;
-    height:120px;
+    width:200px;
+    height:150px;
     font-size:13px;
   }
   #noteNameInput:focus{
@@ -206,9 +207,13 @@ export default {
     width:100%;
   }
   #practice_table textarea{
-    width:200px;
-    height:120px;
-    outline:none;
+    width:250px;
+    height:150px;
+    padding: 10px;
+    outline: 1px solid #9d9d9d;
+  }
+  #practice_table > tbody >tr >td{
+    padding-top: 50px;
   }
   textarea:focus{
     background: #f7ecb5;

@@ -112,7 +112,8 @@ import api from '@/api/getData'
 
 export default {
   stores: {
-    token: 'state.token'
+    token: 'state.token',
+    ip: 'state.ip'
   },
   data () {
     return {
@@ -157,8 +158,8 @@ export default {
         }
       ],
       config: {
-        url: 'http://192.168.43.15:8080/#/blogDetail/' + (this.$route.params.noteID), // localhost需要改成具体ip地址才能成功分享。网址,默认使用 window.location.href
-        source: 'http://192.168.43.15:8080/', // 来源（QQ空间会用到）, 默认读取head标签：<meta name="site" content="http://overtrue" />
+        url: 'http://' + this.ip + ':8080/#/blogDetail/' + (this.$route.params.noteID), // localhost需要改成具体ip地址才能成功分享。网址,默认使用 window.location.href
+        source: 'http://' + this.ip + ':8080/', // 来源（QQ空间会用到）, 默认读取head标签：<meta name="site" content="http://overtrue" />
         title: this.$route.params.foodTitle, // 标题，默认读取 document.title 或者 <meta name="title" content="share.js" />
         description: this.$route.params.foodDesc, // 描述, 默认读取head标签：<meta name="description" content="PHP弱类型的实现原理分析" />
         image: this.$route.params.foodPic, // 图片, 默认取网页中第一个img标签
