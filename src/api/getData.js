@@ -245,5 +245,11 @@ export default {
    */
   getMyFollowListByPage (params) {
     return axios.get('myFollowListByPage?token=' + params['token'] + '&page=' + params['page'])
+  },
+  /**
+   * 根据noteID获取noteVO
+   */
+  getNoteInfo (params) {
+    return axios.get('getNoteByNoteID?noteID=' + params['noteID'])
   }
 }

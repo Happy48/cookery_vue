@@ -76,7 +76,8 @@
               <div class="single-grid wow fadeInLeft animated" data-wow-delay=".5s">
                 <textarea required v-model="tip_area" onfocus="this.value='';" placeholder="添加小贴士" style="font-size:17px;" onblur="if (this.value == '') {this.value = '添加小贴士';}"  oninvalid="setCustomValidity('请输入菜谱小贴士')">添加小贴士</textarea>
                 <label class="hvr-rectangle-out">
-                  <input type="submit" value="上传" >
+                  <input type="submit" value="上传" @click="save_new">
+                  <span class="state-info" v-if="showState">{{stateInfo}}</span>
                 </label>
               </div>
           </div>
@@ -116,7 +117,9 @@ export default {
       tip_area: '',
       subtag: '',
       uploadStepImg: '点击上传步骤图',
-      uploadCover: '点击上传菜谱封面'
+      uploadCover: '点击上传菜谱封面',
+      stateInfo: '',
+      showState: false
     }
   },
   methods: {
@@ -144,7 +147,6 @@ export default {
       this.$set(this.steps[index - 1], 'img', url)
     },
     save_new () {
-      let self = this
       for (let i in this.steps) {
         let index = parseInt(i) + 1
         this.$set(this.steps[i], 'id', index)
@@ -159,16 +161,20 @@ export default {
         tip: this.tip_area,
         subtag: this.subtag.join(',')
       }
+      console.log('info')
       api.createNote(information).then(res => {
+        console.log('res')
       }).catch(res => {
         let data = res.data
-        if (data.code === '0') {
-          alert('创建成功')
-          self.reload()
-        } else if (data.code === '1') {
-          alert('子标签不在定义范围之内')
+        console.log(res.data)
+        if (data.code === '-1') {
+          this.stateInfo = '子标签不在定义范围之内'
+          this.showState = true
         } else if (data.code === '2') {
-          alert('不存在该用户')
+          this.stateInfo = '不存在该用户'
+          this.showState = true
+        } else {
+          this.$emit('createSucc', {noteID: data.code})
         }
       })
     }
@@ -180,7 +186,7 @@ export default {
   #cover_upload_div{
     position:relative;
     width:100%;
-    height:300px;
+    height:400px;
   }
   #step_img_div{
     width:200px;
@@ -232,5 +238,13 @@ export default {
   }
   .addButton:active{
     background:#145b43;
+  }
+  .state-info{
+    margin-left: 50px;
+    padding: 10px 30px 10px 30px;
+    background-color: #5e5e5e;
+    color: #fff;
+    border-radius:20px ;
+    text-align: center;
   }
 </style>

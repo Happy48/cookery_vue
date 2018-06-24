@@ -5,7 +5,8 @@
     <div class="content">
       <div class="events">
         <LeftPart :where="where" :name="name"></LeftPart>
-        <CreateBlog></CreateBlog>
+        <CreateBlog v-if="isNotCreated" @createSucc="createSuccess"></CreateBlog>
+        <CreateSucc v-if="isCreated" :pageTitle="pageTitle" :noteID="noteID" :stateInfo="stateInfo"></CreateSucc>
         <div class="clearfix"> </div>
       </div>
     </div>
@@ -18,18 +19,24 @@ import Footer from '@/components/Footer'
 import CreateBlog from '@/components/CreateBlog'
 import api from '@/api/getData'
 import LeftPart from '@/components/LeftPart'
+import CreateSucc from '@/components/CreateSucc'
 export default {
   data () {
     return {
       where: '我',
-      name: '我'
+      name: '我',
+      createState: false,
+      pageTitle: '创建菜谱',
+      noteID: '',
+      stateInfo: '创建成功'
     }
   },
   components: {
     SubTitle,
     Footer,
     CreateBlog,
-    LeftPart
+    LeftPart,
+    CreateSucc
   },
   created () {
     this.recommend()
@@ -43,6 +50,18 @@ export default {
         let notes = res.data
         this.otherLikeData = notes
       })
+    },
+    createSuccess (params) {
+      this.noteID = params.noteID
+      this.createState = true
+    }
+  },
+  computed: {
+    isCreated: function () {
+      return this.createState
+    },
+    isNotCreated: function () {
+      return !this.createState
     }
   }
 }

@@ -23,8 +23,9 @@ new Vue({
   template: '<App/>',
   data: {
     state: {
-      // token: '8797723cc026626cb9b2a45e5d258d46'
-      token: ''
+      // token: '',
+      token: '8797723cc026626cb9b2a45e5d258d46',
+      ip: '192.168.43.15'
     }
   }
 })
