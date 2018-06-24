@@ -7,7 +7,7 @@
       <div class="clearfix"> </div>
     </div>
     <hr />
-    <form>
+    <!--<form onsubmit="false">-->
     <div class="row search-in animated wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="500ms">
       <div class="col-lg-1 col-md-1"></div>
       <div class="col-lg-10 col-md-10 animated wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="500ms">
@@ -85,7 +85,7 @@
       </div>
       <div class="col-lg-3 col-md-3"></div>
     </div>
-    </form>
+    <!--</form>-->
   </div>
 </template>
 <script>
@@ -161,9 +161,7 @@ export default {
         tip: this.tip_area,
         subtag: this.subtag.join(',')
       }
-      console.log('info')
       api.createNote(information).then(res => {
-        console.log('res')
       }).catch(res => {
         let data = res.data
         console.log(res.data)

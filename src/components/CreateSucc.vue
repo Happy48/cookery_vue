@@ -26,7 +26,7 @@ export default {
     'noteID'
   ],
   created () {
-    // window.scrollTo(0, 0)
+    window.scrollTo(0, 0)
   },
   methods: {
     turnToBlgDetail () {
