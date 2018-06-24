@@ -2,7 +2,7 @@
   <div class="grid-categories animated wow fadeInLeft" data-wow-duration="1000ms" data-wow-delay="500ms">
     <div class="col-md-2 categories-grid" ></div>
     <div class="col-md-10 categories-grid" >
-      <h2>全部分类</h2>
+      <h2 style="color: #005238">全部分类</h2>
     </div>
     <br>
     <br>
@@ -25,6 +25,7 @@
             </ul>
             <div class="clearfix"></div>
           </div>
+          <hr/>
           <div class="tagPart">
             <h4 class='subTagName'>人群</h4>
             <ul class="popular">
@@ -34,7 +35,7 @@
             </ul>
             <div class="clearfix"></div>
           </div>
-
+          <hr/>
           <div class="tagPart">
             <h4 class='subTagName'>功效</h4>
             <ul class="popular">
@@ -45,6 +46,7 @@
             </ul>
             <div class="clearfix"></div>
           </div>
+          <hr/>
           <div class="tagPart">
             <h4 class='subTagName'>特殊场合</h4>
             <ul class="popular">
@@ -62,7 +64,7 @@
         </div>
         <div class="col-md-2 categories-grid" ></div>
       </div>
-
+      <hr/>
       <div class="row tag">
         <div class="col-md-2 categories-grid" >
           <h3 class='tagName'>烘焙甜品饮料</h3>
@@ -84,6 +86,7 @@
             </ul>
             <div class="clearfix"></div>
           </div>
+          <hr/>
           <div class="tagPart">
             <h4 class='subTagName'>甜品</h4>
             <ul class="popular">
@@ -96,6 +99,7 @@
             </ul>
             <div class="clearfix"></div>
           </div>
+          <hr/>
           <div class="tagPart">
             <h4 class='subTagName'>饮料</h4>
             <ul class="popular">
@@ -111,7 +115,7 @@
         </div>
         <div class="col-md-2 categories-grid" ></div>
       </div>
-
+      <hr/>
       <div class="row tag">
         <div class="col-md-2 categories-grid" >
           <h3 class='tagName'>米面干果腌咸</h3>
@@ -129,6 +133,7 @@
             </ul>
             <div class="clearfix"></div>
           </div>
+          <hr/>
           <div class="tagPart">
             <h4 class='subTagName'>干果类</h4>
             <ul class="popular">
@@ -141,7 +146,7 @@
             </ul>
             <div class="clearfix"></div>
           </div>
-
+          <hr/>
           <div class="tagPart">
             <h4 class='subTagName'>腌咸制品</h4>
             <ul class="popular">
@@ -157,7 +162,7 @@
         </div>
         <div class="col-md-2 categories-grid" ></div>
       </div>
-
+      <hr/>
       <div class="row tag">
         <div class="col-md-2 categories-grid" >
           <h3 class='tagName'>肉类</h3>
@@ -177,6 +182,7 @@
             </ul>
             <div class="clearfix"></div>
           </div>
+          <hr/>
           <div class="tagPart">
             <h4 class='subTagName'>鸡</h4>
             <ul class="popular">
@@ -189,7 +195,7 @@
             </ul>
             <div class="clearfix"></div>
           </div>
-
+          <hr/>
           <div class="tagPart">
             <h4 class='subTagName'>牛</h4>
             <ul class="popular">
@@ -205,7 +211,7 @@
         </div>
         <div class="col-md-2 categories-grid" ></div>
       </div>
-
+      <hr/>
       <div class="row tag">
         <div class="col-md-2 categories-grid" >
           <h3 class='tagName'>蔬菜水果</h3>
@@ -225,6 +231,7 @@
             </ul>
             <div class="clearfix"></div>
           </div>
+          <hr/>
           <div class="tagPart">
             <h4 class='subTagName'>根茎蔬菜</h4>
             <ul class="popular">
@@ -239,6 +246,7 @@
             </ul>
             <div class="clearfix"></div>
           </div>
+          <hr/>
           <div class="tagPart">
             <h4 class='subTagName'>叶类蔬菜</h4>
             <ul class="popular">
@@ -248,6 +256,7 @@
             </ul>
             <div class="clearfix"></div>
           </div>
+          <hr/>
           <div class="tagPart">
             <h4 class='subTagName'>菌菇类</h4>
             <ul class="popular">
@@ -260,7 +269,7 @@
         </div>
         <div class="col-md-2 categories-grid" ></div>
       </div>
-
+      <hr/>
       <div class="row tag">
         <div class="col-md-2 categories-grid" >
           <h3 class='tagName'>汤粥主食</h3>
@@ -279,7 +288,7 @@
         </div>
         <div class="col-md-2 categories-grid" ></div>
       </div>
-
+      <hr/>
       <div class="row tag">
         <div class="col-md-2 categories-grid" >
           <h3 class='tagName'>水产</h3>
@@ -299,6 +308,7 @@
             </ul>
             <div class="clearfix"></div>
           </div>
+          <hr/>
           <div class="tagPart">
             <h4 class='subTagName'>虾</h4>
             <ul class="popular">
@@ -313,6 +323,7 @@
             </ul>
             <div class="clearfix"></div>
           </div>
+          <hr/>
           <div class="tagPart">
             <h4 class='subTagName'>贝</h4>
             <ul class="popular">
@@ -322,6 +333,7 @@
             </ul>
             <div class="clearfix"></div>
           </div>
+          <hr/>
           <div class="tagPart">
             <h4 class='subTagName'>蟹</h4>
             <ul class="popular">
@@ -335,7 +347,7 @@
         </div>
         <div class="col-md-2 categories-grid" ></div>
       </div>
-
+      <hr/>
       <div class="row tag">
         <div class="col-md-2 categories-grid" >
           <h3 class='tagName'>蛋奶豆制品</h3>
@@ -353,6 +365,7 @@
             </ul>
             <div class="clearfix"></div>
           </div>
+          <hr/>
           <div class="tagPart">
             <h4 class='subTagName'>奶制品</h4>
             <ul class="popular">
@@ -365,7 +378,7 @@
             </ul>
             <div class="clearfix"></div>
           </div>
-
+          <hr/>
           <div class="tagPart">
             <h4 class='subTagName'>豆制品</h4>
             <ul class="popular">
@@ -381,13 +394,13 @@
         </div>
         <div class="col-md-2 categories-grid" ></div>
       </div>
-
+      <hr/>
       <div class="row tag">
         <div class="col-md-2 categories-grid" >
           <h3 class='tagName'>口味</h3>
         </div>
         <div class="col-md-8 categories-grid" >
-          <div class="tagPart">
+          <div class="tagPart" style="padding-bottom: 30px">
             <h4 class='subTagName'>异国风味</h4>
             <ul class="popular">
               <li @click="jumpTag('异国风味')"><a href="#"><i class="glyphicon glyphicon-tags"> </i>日式</a></li>

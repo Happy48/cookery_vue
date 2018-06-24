@@ -1196,8 +1196,8 @@ ul.start li span{
 .captn:before {
     content: '';
     position: absolute;
-    top: -10%;
-    left: 41%;
+    top: -15%;
+    left: 35%;
     margin-left: 0;
     width: 0;
     height: 0;

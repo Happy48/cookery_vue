@@ -6,9 +6,10 @@
       <div class="events">
         <LeftPart :where="where" :name="name"></LeftPart>
         <collect-list :name="name"></collect-list>
-
+        <div class="clearfix"></div>
       </div>
     </div>
+    <Footer></Footer>
   </div>
 </template>
 <script>

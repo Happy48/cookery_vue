@@ -3,7 +3,7 @@
     <sub-title></sub-title>
     <!--content-->
     <div class="content">
-      <div class="events">
+      <div >
         <TagList></TagList>
         <div class="clearfix"> </div>
       </div>

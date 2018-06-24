@@ -8,6 +8,8 @@
         <focus-list :name="name"></focus-list>
       </div>
     </div>
+    <div class="clearfix"></div>
+    <Footer></Footer>
   </div>
 </template>
 <script>
