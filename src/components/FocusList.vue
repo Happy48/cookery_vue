@@ -14,8 +14,8 @@
     </div>
 
     <div v-if='forcusList.length===0' style="align-items: center">
-      <img src="/static/images/searchBlank.png" width="500px"/>
-      <p>高冷如你，多多关注喜欢的博主哟～</p>
+      <img src="/static/images/searchBlank.png"  width="400px" style="margin:10px 150px"/>
+      <h4 style="text-align: center">高冷如你，多多关注喜欢的博主哟～</h4>
     </div>
     <div v-if="forcusList.length!==0"  class="menu-bottom animated wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="500ms">
       <focus-item :key="subItem.icon" v-for="subItem in forcusList"  :url="subItem.icon" :name="subItem.name"></focus-item>
