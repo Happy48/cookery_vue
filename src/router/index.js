@@ -14,6 +14,7 @@ const hisBlogs = r => require.ensure([], () => r(require('@/page/OtherPeopleBlog
 const myBlogs = r => require.ensure([], () => r(require('@/page/MyBlogs')), 'myBlogs')
 const blogDetail = r => require.ensure([], () => r(require('@/page/BlogDetail')), 'blogDetail')
 const allTag = r => require.ensure([], () => r(require('@/page/AllTag')), 'allTag')
+const createWork = r => require.ensure([], () => r(require('@/page/CreateWork')), 'createWork')
 
 const test = r => require.ensure([], () => r(require('@/page/Test')), 'test')
 
@@ -95,6 +96,11 @@ export default new Router({
       path: '/blogDetail/:noteID',
       name: 'blogDetail',
       component: blogDetail
+    },
+    {
+      path: '/createWork',
+      name: 'createWork',
+      component: createWork
     }
   ]
 })

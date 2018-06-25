@@ -5,7 +5,7 @@
     <div class="content">
       <div class="events">
         <LeftPart :where="where" :name="name"></LeftPart>
-        <CreateBlog v-if="isNotCreated" @createSucc="createSuccess"></CreateBlog>
+        <workEdit v-if="isNotCreated" @createSucc="createSuccess" :noteID="this.noteID" :noteName="this.noteName"></workEdit>
         <CreateSucc v-if="isCreated" :pageTitle="pageTitle" :noteID="noteID" :stateInfo="stateInfo" :createType="createType"></CreateSucc>
         <div class="clearfix"> </div>
       </div>
@@ -16,46 +16,40 @@
 <script>
 import SubTitle from '@/components/SubTitle'
 import Footer from '@/components/Footer'
-import CreateBlog from '@/components/CreateBlog'
-import api from '@/api/getData'
 import LeftPart from '@/components/LeftPart'
+import WorkEdit from '@/components/WorkEdit'
 import CreateSucc from '@/components/CreateSucc'
 export default {
   data () {
     return {
       where: '我',
       name: '我',
-      createState: false,
-      pageTitle: '创建菜谱',
       noteID: '',
+      noteName: '',
+      createState: false,
+      pageTitle: '创建作品',
       stateInfo: '创建成功',
-      createType: '笔记'
+      createType: '作品'
+    }
+  },
+  created () {
+    this.initWork()
+  },
+  methods: {
+    initWork () {
+      this.noteID = this.$route.params.noteID
+      this.noteName = this.$route.params.noteName
+    },
+    createSuccess (params) {
+      this.createState = true
     }
   },
   components: {
     SubTitle,
     Footer,
-    CreateBlog,
     LeftPart,
+    WorkEdit,
     CreateSucc
-  },
-  created () {
-    this.recommend()
-  },
-  methods: {
-    recommend () {
-      let information = {
-        number: 3
-      }
-      api.getGuessLike(information).then().catch(res => {
-        let notes = res.data
-        this.otherLikeData = notes
-      })
-    },
-    createSuccess (params) {
-      this.noteID = params.noteID
-      this.createState = true
-    }
   },
   computed: {
     isCreated: function () {

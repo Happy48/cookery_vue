@@ -1,18 +1,18 @@
 <template>
   <div>
     <div class="col-md-3 categories-grid" v-if='isAll' style="padding-left: 50px">
-      <blog-square-label v-on:getBlogListByClass="getBlogListByClass"></blog-square-label>
+      <blog-square-label :currentLabel="currentLabel" v-on:getBlogListByClass="getBlogListByClass"></blog-square-label>
       <OtherLikeLabel v-on:recommend="recommend"  :list="otherLikeData" :title="likeLabelTitle"></OtherLikeLabel>
     </div>
     <div class="col-md-3 categories-grid" v-if="isMe" style="padding-left: 50px">
       <NoteLabel :list="noteLabelData"></NoteLabel>
       <CollectLabel :list="collectData"></CollectLabel>
-      <AttentionLabel :list="attentionData"></AttentionLabel>
+      <AttentionLabel :list="attentionData" :name="name"></AttentionLabel>
       <OtherLikeLabel v-on:recommend="recommend" :list="otherLikeData" :title="likeLabelTitle"></OtherLikeLabel>
     </div>
     <div class="col-md-3 categories-grid" v-if="isOther" style="padding-left: 50px">
       <NoteLabel :list="noteLabelData"></NoteLabel>
-      <AttentionLabel :list="attentionData"></AttentionLabel>
+      <AttentionLabel :list="attentionData" :name="name"></AttentionLabel>
     </div>
   </div>
 </template>
@@ -30,7 +30,8 @@ export default {
   },
   props: [
     'where',
-    'name'
+    'name',
+    'currentLabel'
   ],
   data () {
     return {
