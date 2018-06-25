@@ -99,7 +99,7 @@
           </tr>
           </tbody>
         </table>
-        <work-component :workList="works"></work-component>
+        <work-component :workList="works" :noteName="this.foodTitle" :noteId="this.noteId"></work-component>
       </div>
       <comment-component :commentList="comments" :noteId=this.noteId></comment-component>
     </div>
