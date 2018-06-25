@@ -263,5 +263,11 @@ export default {
    */
   getNoteUpdateInfo (params) {
     return axios.get('getNoteUpdateInfo?noteID=' + params['noteID'])
+  },
+  /**
+   * 创建笔记
+   */
+  createWork (params) {
+    return fetch('/createWork', params)
   }
 }

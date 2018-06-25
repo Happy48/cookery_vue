@@ -12,7 +12,7 @@
         <i  class="fa fa-check-circle-o" style="color:#005238;font-size: 32px;"></i>
         {{stateInfo}}
       </h3>
-      <h4  style="text-align: center;margin-top: 30px"><a  @click="turnToBlgDetail">点击此处</a>，查看刚刚{{stateInfo}}的笔记</h4>
+      <h4  style="text-align: center;margin-top: 30px"><a  @click="turnToBlgDetail">点击此处</a>，查看刚刚{{stateInfo}}的{{createType}}</h4>
     </div>
   </div>
 </template>
@@ -23,7 +23,8 @@ export default {
   props: [
     'pageTitle',
     'stateInfo',
-    'noteID'
+    'noteID',
+    'createType'
   ],
   created () {
     window.scrollTo(0, 0)

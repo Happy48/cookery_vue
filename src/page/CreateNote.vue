@@ -6,7 +6,7 @@
       <div class="events">
         <LeftPart :where="where" :name="name"></LeftPart>
         <CreateBlog v-if="isNotCreated" @createSucc="createSuccess"></CreateBlog>
-        <CreateSucc v-if="isCreated" :pageTitle="pageTitle" :noteID="noteID" :stateInfo="stateInfo"></CreateSucc>
+        <CreateSucc v-if="isCreated" :pageTitle="pageTitle" :noteID="noteID" :stateInfo="stateInfo" :createType="createType"></CreateSucc>
         <div class="clearfix"> </div>
       </div>
     </div>
@@ -28,7 +28,8 @@ export default {
       createState: false,
       pageTitle: '创建菜谱',
       noteID: '',
-      stateInfo: '创建成功'
+      stateInfo: '创建成功',
+      createType: '笔记'
     }
   },
   components: {

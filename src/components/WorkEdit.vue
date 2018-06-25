@@ -13,6 +13,7 @@
     </div>
     <div class="input-group search-in animated wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="500ms" id="uploadDiv">
       <input type="submit" @click="create" value="上传作品" id="uploadInput">
+      <span  v-if="showState" id="state_info">{{stateInfo}}</span>
     </div>
   </div>
 </template>
@@ -31,7 +32,9 @@ export default {
     return {
       uploadImg: '上传我的作品图片',
       picUrl: '',
-      content: ''
+      content: '',
+      showState: false,
+      stateInfo: ''
     }
   },
   created () {
@@ -55,17 +58,13 @@ export default {
       }).catch(res => {
         let data = res.data
         if (data.code === '0') {
-          alert('上传成功')
-          this.$router.push({
-            name: 'blogDetail',
-            params: {
-              noteID: this.noteID
-            }
-          })
+          this.$emit('createSucc', {noteID: this.noteID})
         } else if (data.code === '1') {
-          alert('上传失败')
+          this.stateInfo = '上传失败，请检查网络连接后重试'
+          this.showState = true
         } else if (data.code === '2') {
-          alert('不存在该用户')
+          this.stateInfo = '不存在该用户'
+          this.showState = true
         }
       })
     }
@@ -108,5 +107,17 @@ export default {
     font-size:17px;
     padding:10px;
     text-align:center;
+  }
+  #state_info{
+    position:absolute;
+    top:5px;
+    left:320px;
+    margin-left:20px;
+    padding: 10px 30px 10px 30px;
+    width:300px;
+    background-color: #5e5e5e;
+    color: #fff;
+    border-radius:20px;
+    text-align: center;
   }
 </style>
