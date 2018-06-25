@@ -83,9 +83,51 @@ export default {
       this.getMyAttention()
     } else if (this.where === 'All') {
       this.recommend(data)
+    }else{
+      this.getHisCollect()
+      this.getHisAttention()
     }
   },
   methods: {
+    getHisCollect () {
+      let info = {
+        username: this.name,
+      }
+      api.hisCollect(info).then().catch(res => {
+        let collectList = res.data
+        var list = []
+        if(collectList.length>3){
+          for(var i=0;i<3;i++){
+            list.push(collectList[i])
+          }
+        }else{
+          for(var i=0;i<collectList.length;i++){
+            list.push(collectList[i])
+          }
+        }
+        this.collectData = list
+      })
+    },
+    getHisAttention () {
+      let info = {
+        username: this.name,
+        name: ''
+      }
+      api.hisAttention(info).then().catch(res => {
+        let followList = res.data
+        var list = []
+        if(followList.length>3){
+          for(var i=0;i<3;i++){
+            list.push(followList[i].name)
+          }
+        }else{
+          for(var i=0;i<followList.length;i++){
+            list.push(followList[i].name)
+          }
+        }
+        this.attentionData = list
+      })
+    },
     getMyCollect () {
       let info = {
         token: this.token,

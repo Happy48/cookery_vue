@@ -269,5 +269,17 @@ export default {
    */
   createWork (params) {
     return fetch('/createWork', params)
+  },
+  /**
+   * 他的收藏
+   */
+  hisCollect (params) {
+    return axios.get('hisCollection?username=' + params['username'])
+  },
+  /**
+   * 他的关注
+   */
+  hisAttention (params) {
+    return axios.get('hisFollowList?username=' + params['username'])
   }
 }
