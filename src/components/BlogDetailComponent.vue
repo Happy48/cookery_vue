@@ -79,11 +79,11 @@
         <hr>
         <h4>用料</h4>
         <br>
-        <table class="table wow fadeInLeft animated" data-wow-delay=".5s" style="alignment: center;font-size:20px;width:70%;border-bottom: 1px gray;">
+        <table class="table wow fadeInLeft animated" data-wow-delay=".5s" style="alignment: center;font-size:20px;width:100%;border-bottom: 1px gray;">
           <tbody>
           <tr :key="item.index " v-for="item in materialList">
-            <td>{{item.name}}</td>
-            <td>{{item.quantity}}</td>
+            <td style="width:40%;">{{item.name}}</td>
+            <td style="width:60%;">{{item.quantity}}</td>
           </tr>
           </tbody>
         </table>
