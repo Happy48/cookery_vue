@@ -2,11 +2,12 @@
   <div class="grid-categories animated wow fadeInLeft" data-wow-duration="1000ms" data-wow-delay="500ms">
     <h4>{{who}}的关注</h4>
     <ul class="popular">
-      <li :key="item" v-for="item in list" @click="goToList"><a href="#"><i class="glyphicon glyphicon-user"> </i>{{item}}</a></li>
+      <li :key="item" v-for="item in list" @click="goToList(item)"><a href="#"><i class="glyphicon glyphicon-user"> </i>{{item}}</a></li>
     </ul>
   </div>
 </template>
 <script>
+import store from '@/store/todo_list.js'
 export default {
   props: [
     'list',
@@ -18,10 +19,18 @@ export default {
     }
   },
   methods: {
-    goToList () {
+    goToList (item) {
+      console.log(item)
+      store.save(item)
       this.$router.push({
-        name: 'Focus'
+        name: 'hisBlogs',
+        params: {
+          name: item
+        }
       })
+      // this.$router.push({
+      //   name: 'Focus'
+      // })
     }
   }
 }

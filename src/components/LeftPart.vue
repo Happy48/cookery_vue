@@ -79,11 +79,55 @@ export default {
     if (this.where === '我') {
       this.getMyNoteLabel()
       this.recommend(data)
+      this.getMyCollect()
+      this.getMyAttention()
     } else if (this.where === 'All') {
       this.recommend(data)
     }
   },
   methods: {
+    getMyCollect () {
+      let info = {
+        token: this.token,
+        name: ''
+      }
+      api.getUserCollection(info).then().catch(res => {
+        let collectList = res.data
+        var list = []
+        if(collectList.length>3){
+          for(var i=0;i<3;i++){
+            // list.push(collectList[i].foodTitle)
+            list.push(collectList[i])
+          }
+        }else{
+          for(var i=0;i<collectList.length;i++){
+            // list.push(collectList[i].foodTitle)
+            list.push(collectList[i])
+          }
+        }
+        this.collectData = list
+      })
+    },
+    getMyAttention () {
+      let info = {
+        token: this.token,
+        name: ''
+      }
+      api.getMyFollowList(info).then().catch(res => {
+        let followList = res.data
+        var list = []
+        if(followList.length>3){
+          for(var i=0;i<3;i++){
+            list.push(followList[i].name)
+          }
+        }else{
+          for(var i=0;i<followList.length;i++){
+            list.push(followList[i].name)
+          }
+        }
+        this.attentionData = list
+      })
+    },
     recommend (data) {
       let information = {
         number: 3
