@@ -185,7 +185,6 @@ export default {
           where: 'All'
         }
       })
-      this.$emit('getBlogListByClass', name)
     },
     initTag () {
       this.noteId = this.$route.params.noteID

@@ -4,10 +4,10 @@
     <!--content-->
     <div class="content">
       <div class="events">
-        <LeftPart :where="where" v-on:getBlogListByClass="getBlogListByClass"></LeftPart>
+        <LeftPart :where="where" :currentLabel="currentChooseLabel" v-on:getBlogListByClass="getBlogListByClass"></LeftPart>
         <div class="col-md-9" style="padding-right:50px">
           <blog-class-list v-if="list.length!==0" :name="currentChooseLabel" :list="list"></blog-class-list>
-          <div v-if="list.length===0" style="align-items: center">
+          <div v-if="list.length===0" style="text-align: center">
             <img src="/static/images/searchBlank.png" width="500px"/>
             <p>您搜索的商品不存在，请换一组关键词</p>
           </div>
@@ -49,7 +49,6 @@ export default {
     var label = this.$route.params.currentChooseLabel
     if (label === '搜索结果') {
       this.search(label)
-      console.log(this.list)
     } else if (label !== '全部菜品') {
       this.getBlogListByClass(this.$route.params.currentChooseLabel)
     }
