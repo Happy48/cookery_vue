@@ -7,7 +7,7 @@
 
       <div class="col-md-3 search" id='search' v-bind:style="{background: searchBackground, border: borderStyle}">
         <form>
-          <input type="text" placeholder="搜索笔记/食材" @keyup.enter="search" required="" >
+          <input v-model="searchText" type="text" placeholder="搜索笔记/食材" @keyup.enter="search" required="" >
           <input type="submit" @click="search" value="" >
         </form>
       </div>
@@ -46,13 +46,17 @@ export default {
   stores: {
     token: 'state.token'
   },
+  props: [
+    'from'
+  ],
   data () {
     return {
       backgroundColor: 'transparent',
       searchBackground: 'none',
       borderStyle: '0.1em white solid',
       subPicUrl: '',
-      visible: false
+      visible: false,
+      searchText: ''
     }
   },
   created () {
@@ -92,14 +96,18 @@ export default {
       }
     },
     search () {
-      console.log('search')
-      this.$router.push({
-        name: 'AllBlog',
-        params: {
-          currentChooseLabel: '搜索结果',
-          query: this.searchText
-        }
-      })
+      if (this.from === 'allblog') {
+        console.log('跳转')
+        this.$emit('search', this.searchText)
+      } else {
+        this.$router.push({
+          name: 'AllBlog',
+          params: {
+            currentChooseLabel: '搜索结果',
+            query: this.searchText
+          }
+        })
+      }
     }
   },
   computed: {

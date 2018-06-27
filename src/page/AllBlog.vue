@@ -1,6 +1,6 @@
 <template>
   <div>
-    <SubTitle></SubTitle>
+    <SubTitle :from="'allblog'" v-on:search="search"></SubTitle>
     <!--content-->
     <div class="content">
       <div class="events">
@@ -48,45 +48,19 @@ export default {
   created () {
     var label = this.$route.params.currentChooseLabel
     if (label === '搜索结果') {
-      this.search(label)
-      console.log(this.list)
+      this.search(this.$route.params.query)
     } else if (label !== '全部菜品') {
       this.getBlogListByClass(this.$route.params.currentChooseLabel)
     }
   },
   methods: {
-    reduceArray (arr, count) {
-      let len = []
-      let ar = []
-      let k = 0
-      if (arr.length % count === 0) {
-        len = parseInt(arr.length / count)
-      } else {
-        len = parseInt(arr.length / count) + 1
-      }
-      for (let i = 0; i < len; i++) {
-        if (ar[i]) {
-          ar[i] = ar[i]
-        } else {
-          ar[i] = []
-        }
-        for (let a = 0; a < count; a++) {
-          ar[i][a] = arr[k]
-          if (ar[i][a] === undefined) {
-            ar[i].length = arr.length % count
-          }
-          k++
-        }
-      }
-      return ar
-    },
-    search (label) {
-      this.currentChooseLabel = label
-      let query = this.$route.params.query
+    search (param) {
+      this.currentChooseLabel = '搜索结果'
+      console.log('搜索' + param)
+      let query = param
       api.search(query, 0).then().catch(res => {
-        this.list = this.reduceArray(res.data, 3)
+        this.list = res.data
       })
-      console.log()
     },
     getBlogListByClass (param) {
       this.tagName = param
