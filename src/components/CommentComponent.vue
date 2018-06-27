@@ -6,7 +6,7 @@
       <div :key="item.index" v-for="item in commentList" class="media wow fadeInLeft animated" data-wow-delay=".5s">
         <div class="code-in">
           <p class="smith"><a @click="userInfo(item.userName)">{{item.userName}}</a> <span>{{item.time}}</span></p>
-          <!--<p class="reply"><a href="#"><i class="glyphicon glyphicon-repeat"> </i>REPLY</a></p>-->
+          <p class="reply"><a @click="reply(item.postid)"><i class="glyphicon glyphicon-repeat"> </i>REPLY</a></p>
           <div class="clearfix"> </div>
         </div>
         <div class="media-left">
@@ -47,6 +47,23 @@ export default {
     'noteId'
   ],
   methods: {
+    reply (postid) {
+      let information = {
+        token: this.token,
+        noteId: this.noteId,
+        mainpostId: postid,
+        content: this.comment
+      }
+      api.leaveReplyToMainPost(information).then(res => {
+      }).catch(res => {
+        let data = res.data
+        if (data.code === '0') {
+          alert('留言成功'+postid)
+        } else {
+          alert('出错')
+        }
+      })
+    },
     leaveComment () {
       let information = {
         token: this.token,

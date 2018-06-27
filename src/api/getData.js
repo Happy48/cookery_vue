@@ -1,7 +1,8 @@
 import axios from 'axios'
 import qs from 'qs'
+let ip = '127.0.0.1'
 
-let ip = '192.168.43.15'
+// let ip = '192.168.43.15'
 // axios 配置
 axios.defaults.timeout = 5000
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8'
@@ -281,5 +282,11 @@ export default {
    */
   hisAttention (params) {
     return axios.get('hisFollowList?username=' + params['username'])
+  },
+  /**
+   * 留下评论
+   */
+  leaveReplyToMainPost (params) {
+    return fetch('/leaveReplyToMainPost', params)
   }
 }
