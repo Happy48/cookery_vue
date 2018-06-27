@@ -4,7 +4,7 @@
     <!--content-->
     <div class="content">
       <div class="events">
-        <LeftPart :where="where" v-on:getBlogListByClass="getBlogListByClass"></LeftPart>
+        <LeftPart :where="where" :currentLabel="currentChooseLabel" v-on:getBlogListByClass="getBlogListByClass"></LeftPart>
         <div class="col-md-9" style="padding-right:50px">
           <blog-class-list v-if="list.length!==0" :name="currentChooseLabel" :list="list"></blog-class-list>
           <div  v-if="list.length===0" style="align-items: center">
