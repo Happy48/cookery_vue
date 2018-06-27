@@ -14,6 +14,9 @@
     <div id="menu_div">
       <li><router-link to="/">首页</router-link></li>
       <li><router-link to="allBlog">笔记广场</router-link></li>
+      <li v-if="isLogin">
+        <router-link to="createNote">写笔记</router-link>
+      </li>
     </div>
 
     <div id="login_part">
@@ -33,7 +36,6 @@
       <li><router-link to="collect">我的收藏</router-link></li>
       <li><router-link to="myBlogs">我的笔记</router-link></li>
       <li><router-link to="personalInfo">我的账户</router-link></li>
-      <li><router-link to="createNote">写笔记</router-link></li>
     </div>
 
   </div>
