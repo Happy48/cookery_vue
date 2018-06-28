@@ -13,11 +13,12 @@
       <div class="clearfix"> </div>
     </div>
 
-    <div v-if='forcusList.length===0' style="align-items: center">
+    <vue-loading v-if="isLoading" type="bubbles" color="#0d6167" :size="{width: '200px', height: '200px'}"></vue-loading>
+    <div v-if='isLoading==false&&forcusList.length===0' style="align-items: center">
       <img src="/static/images/searchBlank.png"  width="400px" style="margin:10px 150px"/>
       <h4 style="text-align: center">高冷如你，多多关注喜欢的博主哟～</h4>
     </div>
-    <div v-if="forcusList.length!==0"  class="menu-bottom animated wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="500ms">
+    <div v-if="isLoading==false&&forcusList.length!==0"  class="menu-bottom animated wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="500ms">
       <focus-item :key="subItem.icon" v-for="subItem in forcusList"  :url="subItem.icon" :name="subItem.name"></focus-item>
       <div class="clearfix"> </div>
     </div>
@@ -25,7 +26,7 @@
       <!--<focus-item :key="subItem.icon" v-for="subItem in item"  :url="subItem.icon" :name="subItem.name"></focus-item>-->
       <!--<div class="clearfix"> </div>-->
     <!--</div>-->
-    <div v-if="forcusList.length!==0" style="width:75% ;margin: 0 auto">
+    <div v-if="isLoading==false&&forcusList.length!==0" style="width:75% ;margin: 0 auto">
       <PaginationFollow :total="total" :current-page='current' @pagechange="pagechange" ref="pagi"></PaginationFollow>
     </div>
   </div>
@@ -34,7 +35,7 @@
 import FocusItem from '@/components/FocusItem'
 import api from '@/api/getData'
 import PaginationFollow from '@/components/PaginationFollow'
-
+import { VueLoading } from 'vue-loading-template'
 export default {
   stores: {
     token: 'state.token'
@@ -49,7 +50,8 @@ export default {
       total: 150,
       current: 1,
       names: this.name,
-      searchText: ''
+      searchText: '',
+      isLoading: true
     }
   },
   created () {
@@ -59,7 +61,8 @@ export default {
   },
   components: {
     FocusItem,
-    PaginationFollow
+    PaginationFollow,
+    VueLoading
   },
   methods: {
     getMyFollow () {
@@ -70,8 +73,8 @@ export default {
         page: this.page
       }
       api.getMyFollowListByPage(listInfo).then(res => {}).catch(res => {
-        console.log(res.data)
         this.forcusList = res.data
+        this.isLoading = false
       })
     },
     search () {

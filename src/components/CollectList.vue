@@ -12,15 +12,16 @@
       </div>
       <div class="clearfix"> </div>
     </div>
-    <div v-if='collectList.length===0' style="align-items: center">
+    <vue-loading v-if="isLoading" type="bubbles" color="#0d6167" :size="{width: '200px', height: '200px'}"></vue-loading>
+    <div v-if='isLoading==false&&collectList.length===0' style="align-items: center">
       <img src="/static/images/searchBlank.png" width="400px" style="margin:10px 150px"/>
       <h4 style="text-align: center">收藏的作品会出现在这里哟～</h4>
     </div>
-    <div v-if="collectList.length!==0" :key="item.noteId" class="events-bottom" v-for="item in collectList">
+    <div v-if="isLoading==false&&collectList.length!==0" :key="item.noteId" class="events-bottom" v-for="item in collectList">
       <CollectItem :foodPic="item.foodPic" :foodTitle="item.foodTitle" :foodDesc="item.foodDesc" direction="left" :foodLikes="item.foodLikes" :foodCreateTime="item.foodCreateTime" :foodCollect="item.foodCollect"  :noteId="item.noteId" :name="names" :where="names"></CollectItem>
       <!--<CollectItem :url="item.foodPic" :title="item.foodTitle" :description="item.foodDesc" direction="right"></CollectItem>-->
     </div>
-    <div v-if="collectList.length!==0" style="width:75% ;margin: 0 auto">
+    <div v-if="isLoading==false&&collectList.length!==0" style="width:75% ;margin: 0 auto">
       <Pagination :total="total" :current-page='current' ref="pagi"></Pagination>
     </div>
   </div>
@@ -29,6 +30,7 @@
 import CollectItem from '@/components/CollectItem'
 import api from '@/api/getData'
 import Pagination from '@/components/Pagination'
+import { VueLoading } from 'vue-loading-template'
 
 export default {
   stores: {
@@ -39,17 +41,7 @@ export default {
   ],
   data () {
     return {
-      collectList: [
-        {
-          foodPic: '/static/images/ev.jpg',
-          foodTitle: '土司的9种经典吃法',
-          foodDesc: '土司的吃法应该可以做到365天不变样，我给恩泽同学经常做的大概就是这9种经典吃法。Yummy Yummy Yummy！',
-          foodCollect: 0,
-          foodCreateTime: '',
-          noteId: 1,
-          foodLikes: 0
-        }
-      ],
+      collectList: [],
       preSearch: '',
       page: 1,
       searchPage: 0,
@@ -57,7 +49,8 @@ export default {
       total: 1,
       current: 1,
       names: this.name,
-      searchText: ''
+      searchText: '',
+      isLoading: true
     }
   },
   created () {
@@ -67,7 +60,8 @@ export default {
   },
   components: {
     CollectItem,
-    Pagination
+    Pagination,
+    VueLoading
   },
   methods: {
     getMyNoteList () {
@@ -76,7 +70,7 @@ export default {
       }
       api.getUserCollection(listInfo).then(res => {}).catch(res => {
         this.collectList = res.data
-        // console.log(res.data)
+        this.isLoading = false
       })
     },
     search () {

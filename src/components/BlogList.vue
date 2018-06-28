@@ -12,14 +12,15 @@
       </div>
       <div class="clearfix"> </div>
     </div>
-    <div v-if='collectList.length===0' style="align-items: center">
+    <vue-loading v-if="isLoading" type="bubbles" color="#0d6167" :size="{width: '200px', height: '200px'}"></vue-loading>
+    <div v-if='isLoading==false&&collectList.length===0' style="align-items: center">
       <img src="/static/images/searchBlank.png" width="400px" style="margin:10px 150px"/>
       <h4 style="text-align: center">我的笔记会出现在这里哟～</h4>
     </div>
-    <div v-if="collectList.length!==0" :key="item.index" class="events-bottom" v-for="item in collectList">
+    <div v-if="isLoading==false&&collectList.length!==0" :key="item.index" class="events-bottom" v-for="item in collectList">
       <CollectItem :foodPic="item.foodPic" :foodTitle="item.foodTitle" :foodDesc="item.foodDesc" direction="left" :foodLikes="item.foodLikes" :foodCreateTime="item.foodCreateTime" :foodCollect="item.foodCollect"  :noteId="item.noteId" :name="names" :where="names"></CollectItem>
     </div>
-    <div v-if="collectList.length!==0" style="width:75% ;margin: 0 auto">
+    <div v-if="isLoading==false&&collectList.length!==0" style="width:75% ;margin: 0 auto">
       <Pagination :total="total" :current-page='current' @pagechange="pagechange" ref="pagi"></Pagination>
     </div>
   </div>
@@ -29,6 +30,7 @@ import CollectItem from '@/components/CollectItem'
 import api from '@/api/getData'
 import Pagination from '@/components/Pagination'
 import store from '@/store/todo_list.js'
+import { VueLoading } from 'vue-loading-template'
 
 export default {
   stores: {
@@ -47,7 +49,8 @@ export default {
       isSearched: false,
       total: 150,
       current: 1,
-      names: this.name
+      names: this.name,
+      isLoading: true
     }
   },
   created () {
@@ -62,7 +65,8 @@ export default {
   },
   components: {
     CollectItem,
-    Pagination
+    Pagination,
+    VueLoading
   },
   methods: {
     getMyNoteList () {
@@ -75,6 +79,7 @@ export default {
       api.getMyNoteList(listInfo).then(res => {}).catch(res => {
         this.collectList = res.data
         this.isSearched = false
+        this.isLoading=false
       })
     },
     getUserNoteList () {
