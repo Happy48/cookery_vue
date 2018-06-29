@@ -2084,8 +2084,13 @@ td.add-check a {
 }
 
 .indexblog-pic{
-  width: 100%;
-  height: 150px;
+  width:100%;
+  height:180px;
+  background-position: center center;
+  background-repeat: no-repeat;
+  -webkit-background-size:cover;
+  -moz-background-size:cover;
+  background-size:cover;
 }
 .indexblog-time{
   text-align: left;
@@ -2101,4 +2106,14 @@ td.add-check a {
   height:100%;
   display:block;
   padding-top: 1em;
+}
+
+.indexFocus-pic{
+  width:100%;
+  height:180px;
+  background-position: center center;
+  background-repeat: no-repeat;
+  -webkit-background-size:cover;
+  -moz-background-size:cover;
+  background-size:cover;
 }

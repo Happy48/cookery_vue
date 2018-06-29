@@ -1,6 +1,6 @@
 <template>
   <div  @click="showMore" class="food-grid animated wow fadeInUp indexblog" data-wow-duration="1000ms" data-wow-delay="500ms">
-      <img class="indexblog-pic" :src="foodPic"/>
+    <div class="indexblog-pic" :style="{backgroundImage:'url(' + foodPic + ')'}"></div>
       <h3 class="indexblog-title line-limit-length">{{foodTitle}}</h3>
       <p class="indexblog-desc line-limit-length">{{foodDesc}}</p>
   </div>

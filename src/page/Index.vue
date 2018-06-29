@@ -4,7 +4,7 @@
       <Title></Title>
       <!-- start search-->
       <div class="banner">
-        <h2 class="animated wow fadeInLeft" data-wow-duration="1000ms" data-wow-delay="500ms" style="color: white">雨后 清新 空气</h2>
+        <h2 class="animated wow fadeInLeft" data-wow-duration="1000ms" data-wow-delay="500ms" style="color: white">雨后 蝉鸣 流火</h2>
         <label></label>
         <h4 class="animated wow fadeInTop" data-wow-duration="1000ms" data-wow-delay="500ms" style="color: white;">与美食相遇在雨后炎热的{{month}}</h4>
         <div id="down" >
@@ -24,10 +24,10 @@
             <div class="col-md-4 content-left animated wow fadeInLeft" data-wow-duration="1000ms" data-wow-delay="500ms">
               <h3>{{month}}推荐</h3>
               <label><i class="glyphicon glyphicon-menu-up"></i></label>
-              <span>清补 芒种 夏至</span>
+              <span>清补 小暑 大暑</span>
             </div>
             <div class="col-md-8 content-right animated wow fadeInRight" data-wow-duration="1000ms" data-wow-delay="500ms">
-              <p>六月是夏季真正的开始，从二十四节气来说，包含有“芒种”和“夏至”两个节气。调养应以饮食清补为原则。宜食蔬菜、豆类、水果等。如菠萝、苦瓜、西瓜、荔枝、芒果、绿豆、赤豆等。忌食辛辣油腻之品。如羊肉、牛肉、猪肉、辣椒、葱、姜等 。
+              <p>七月份是夏季天气比较炎热的时候，包含有“小暑”和“大暑”两个节气。中医认为夏季也是人体阳气最旺盛的时候，所以人们在七月工作劳动之时，要注意劳逸结合。七月份的饮食应以清淡为主，蔬菜应多食绿叶菜及黄瓜、莲子、藕、豌豆等。
               </p>
             </div>
             <div class="clearfix"> </div>
@@ -49,7 +49,8 @@
             <span>火热 苦夏 开胃</span>
           </div>
           <div class="col-md-8 content-right animated wow fadeInRight" data-wow-duration="1000ms" data-wow-delay="500ms">
-            <p>闰六月正值三伏天，很多人就会受到“苦夏”的困扰，口淡乏味，食欲不振。因此，“开胃”是夏季养生的重点。对于肝火旺盛的人来说，闰六月需要多选用可以护肝养肝的食物及水果，吃草莓、喝枸杞水、喝酸奶等奶制品，是比较好的几个选择。</p>
+            <p>七月正值三伏天，很多人就会受到“苦夏”的困扰，口淡乏味，食欲不振。因此，“开胃”是夏季养生的重点。夏季要特别注意饮水量的增加，每天的饮水包括牛奶、豆浆、粥、汤在内，应在2000毫升左右，应经常少量地喝些水以维持机体的需要。
+            </p>
           </div>
           <div class="clearfix"> </div>
         </div>
@@ -60,6 +61,25 @@
     </div>
     <!--//news-->
 
+    <div class="content-top-top" style="margin-top: -80px;margin-bottom: -50px">
+      <div class="container">
+        <div class="content-top">
+          <div class="col-md-4 content-left animated wow fadeInLeft" data-wow-duration="1000ms" data-wow-delay="500ms">
+            <h3>{{month}}博主</h3>
+            <label><i class="glyphicon glyphicon-menu-up"></i></label>
+            <span>热门 博主 关注</span>
+          </div>
+          <div class="col-md-8 content-right animated wow fadeInRight" data-wow-duration="1000ms" data-wow-delay="500ms">
+            <p>夏天应尽量少吃感光蔬菜。芹菜、莴苣、油菜、菠菜、香菜、小白菜、芥菜、白萝卜等蔬菜内含有光敏性物质，吃完后立刻晒太阳，皮肤会容易出现晒斑。在炎热的夏季，适当饮用一些保健消暑饮料是必要的，但切忌过度贪凉饮冷。
+            </p>
+          </div>
+          <div class="clearfix"> </div>
+        </div>
+        <div class="news-bottom">
+          <FocusSwiper :indexFocus="indexFocus" :name="name"></FocusSwiper>
+        </div>
+      </div>
+    </div>
     <Footer></Footer>
 </div>
 </template>
@@ -68,6 +88,7 @@ import Title from '@/components/Title'
 import Footer from '@/components/Footer'
 import RecommendSwiper from '@/components/RecommendSwiper'
 import HotSwiper from '@/components/HotSwiper'
+import FocusSwiper from '@/components/FocusSwiper'
 import api from '@/api/getData'
 
 export default {
@@ -76,29 +97,10 @@ export default {
   },
   data () {
     return {
-      month: '六月',
-      indexblogData: [
-        {
-          foodPic: '/static/images/ev.jpg',
-          foodTitle: '土司的9种经典吃法',
-          foodDesc: '土司的吃法应该可以做到365天不变样，我给恩泽同学经常做的大概就是这9种经典吃法。Yummy Yummy Yummy！',
-          foodCollect: 0,
-          foodCreateTime: '',
-          noteId: 1,
-          foodLikes: 0
-        }
-      ],
-      indexHotData: [
-        {
-          foodPic: '/static/images/ev.jpg',
-          foodTitle: '土司的9种经典吃法',
-          foodDesc: '土司的吃法应该可以做到365天不变样，我给恩泽同学经常做的大概就是这9种经典吃法。Yummy Yummy Yummy！',
-          foodCollect: 0,
-          foodCreateTime: '2018-06-01',
-          noteId: 1,
-          foodLikes: 0
-        }
-      ],
+      month: '七月',
+      indexblogData: [],
+      indexHotData: [],
+      indexFocus: [],
       name: '我'
     }
   },
@@ -106,10 +108,12 @@ export default {
     Title,
     Footer,
     HotSwiper,
-    RecommendSwiper
+    RecommendSwiper,
+    FocusSwiper
   },
   created () {
     this.getIndexRecommend()
+    this.getRecommendFocus()
   },
   mounted: function () {
     this.$nextTick(function () {
@@ -120,13 +124,14 @@ export default {
     getIndexRecommend () {
       api.getIndexRecommend().then(res => {
         let data = res.data
-        this.month = data.month
+        // this.month = data.month
         this.indexblogData = data.recommend
         this.indexHotData = data.hot
       }).catch(res => {
         console.log('错误')
+        console.log(res.data)
         let data = res.data
-        this.month = data.month
+        // this.month = data.month
         this.indexblogData = data.recommend
         this.indexHotData = data.hot
       })
@@ -151,6 +156,12 @@ export default {
       cxt.lineCap = 'round'
       cxt.lineJoin = 'round'
       cxt.stroke()
+    },
+    getRecommendFocus () {
+      api.getRecommendFocus({'token': this.currentUid}).then().catch(res => {
+        console.log(res.data)
+        this.indexFocus = res.data
+      })
     }
   }
 }

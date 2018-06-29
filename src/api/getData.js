@@ -288,5 +288,17 @@ export default {
    */
   leaveReplyToMainPost (params) {
     return fetch('/leaveReplyToMainPost', params)
+  },
+  /**
+   * 按照页数获取关注列表
+   */
+  getRecommendFocus (params) {
+    return axios.get('recommendFocus?token=' + params['token'])
+  },
+  /**
+   * 判断用户是否关注某个博主
+   */
+  isFocus (params) {
+    return axios.get('isFocus?token=' + params['token'] + '&name=' + params['name'])
   }
 }

@@ -11,6 +11,7 @@
       <OtherLikeLabel v-on:recommend="recommend" :list="otherLikeData" :title="likeLabelTitle"></OtherLikeLabel>
     </div>
     <div class="col-md-3 categories-grid" v-if="isOther" style="padding-left: 50px">
+
       <NoteLabel :list="noteLabelData"></NoteLabel>
       <AttentionLabel :list="attentionData" :name="name"></AttentionLabel>
     </div>
