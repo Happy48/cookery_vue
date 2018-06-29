@@ -2,7 +2,7 @@
   <div class="food-grid animated wow fadeInUp indexblog" data-wow-duration="1000ms" data-wow-delay="500ms">
     <img class="indexblog-pic" :src="picture"/>
     <h4 class="indexblog-title line-limit-length">{{userName}}</h4>
-    <p class="indexblog-desc line-limit-length">{{desc}}</p>
+    <p class="indexblog-desc line-limit-length"> &nbsp {{desc}}</p>
   </div>
 </template>
 <script>

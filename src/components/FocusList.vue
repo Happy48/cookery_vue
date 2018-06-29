@@ -3,9 +3,9 @@
     <div class="events-top">
       <div class="search-in animated wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="500ms">
         <h4 class="col-md-8" style="padding-top:15px "> {{names}}的关注 </h4>
-        <div class="search col-md-4">
-          <form>
-            <input @keyup.enter="search" v-model="searchText" type="text" placeholder="搜索笔记/食材" required="" >
+        <div class="search col-md-4" style="margin-top: 10px">
+          <form >
+            <input @keyup.enter="search" v-model="searchText" type="text" placeholder="搜索笔记博主" required="" >
             <input @click="search" type="submit" value="" >
           </form>
         </div>

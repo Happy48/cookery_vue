@@ -1,7 +1,7 @@
 <template>
-    <div style="border-top:0.1vw solid #dddddd;">
+    <div>
       <div v-show="workList.length > 0">
-        <h4>参照这个菜谱，大家做出了{{workList.length}}个作品</h4>
+        <h4 style="margin-bottom: 20px">参照这个菜谱，大家做出了{{workList.length}}个作品</h4>
         <div>
           <swiper :options="swiperOption" ref="mySwiper">
             <!-- slides -->
@@ -9,6 +9,11 @@
               <IndexWork :userId="item.userId" :picture="item.picture" :desc="item.desc" :userName="item.userName" >
               </IndexWork>
             </swiper-slide>
+            <swiper-slide >
+              <div class="food-grid animated wow fadeInUp" style="margin: 20px" data-wow-duration="1000ms" data-wow-delay="500ms">
+                <a><i  @click="createPage(noteName,noteId)" class="fa fa-plus-circle" style="color:#005238;font-size: 80px; padding-top: 90px"></i></a>
+              </div>
+             </swiper-slide>
             <!-- Optional controls -->
             <div class="swiper-pagination"  slot="pagination"></div>
             <div class="swiper-container" slot="slidesOffsetBefore"></div>
@@ -17,7 +22,7 @@
           </swiper>
         </div>
       </div>
-      <div id="uploadWorkButton"><a @click="createPage(noteName,noteId)">上传你做的{{noteName}}</a></div>
+      <div id="uploadWorkButton" style="margin-top:20px;margin-bottom: 40px"><a @click="createPage(noteName,noteId)">上传你做的{{noteName}}</a></div>
     </div>
 </template>
 <script>

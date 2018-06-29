@@ -1,6 +1,5 @@
 <template>
   <div>
-    <hr>
     <div class="comment" v-show="commentList.length > 0">
       <h4>评论</h4>
       <div :key="item.index" v-for="item in commentList" class="media wow fadeInLeft animated" data-wow-delay=".5s">

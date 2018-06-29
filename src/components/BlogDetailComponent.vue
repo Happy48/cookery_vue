@@ -1,5 +1,5 @@
 <template>
-  <div class="col-md-8" style="padding-right: 50px">
+  <div class="col-md-9" style="padding-right: 50px;padding-left:50px">
     <nav class=" wow fadeInUp animated"  data-wow-delay=".5s" >
       <ol class="breadcrumb">
         <li class="breadcrumb-item">
@@ -27,7 +27,7 @@
     <div class="single">
       <div class="single-top">
         <div style="width:100%; max-height:450px; overflow: hidden">
-          <img class="img-responsive wow fadeInUp animated" data-wow-delay=".5s" :src="url" alt=""/>
+          <div class="img-responsive wow fadeInUp animated blog-pic" data-wow-delay=".5s" :style="{backgroundImage:'url(' + url + ')'}" alt=""></div>
         </div>
         <div class="row">
           <div class="col-md-5 wow fadeInLeft animated" data-wow-delay=".5s" style="padding-top:10px;">
@@ -67,7 +67,11 @@
                 </div>
                 <div style="text-align:center;">
                   <h4>{{name}}</h4>
-                  <li><i class="glyphicon glyphicon-share"> </i>关注</li>
+                  <div class="single-grid wow fadeInLeft animated" data-wow-delay=".5s" style="margin-top: -10px">
+                    <label class="hvr-rectangle-out">
+                      <input @click="addFocus" type="submit" v-bind:value="focusText" v-bind:style="{background: focusColor}">
+                    </label>
+                  </div>
                 </div>
               </div>
             </div>
@@ -99,8 +103,10 @@
           </tr>
           </tbody>
         </table>
+        <hr>
         <work-component :workList="works" :noteName="this.foodTitle" :noteId="this.noteId"></work-component>
       </div>
+      <hr>
       <comment-component :commentList="comments" :noteId=this.noteId></comment-component>
     </div>
   </div>
@@ -120,43 +126,24 @@ export default {
       tag: '沙拉',
       tagList: '',
       noteId: 5,
-      foodTitle: '营养齐全的【Cobb Salad】',
-      url: '/static/images/ss.jpg',
+      foodTitle: '',
+      url: '',
       count: 2373,
-      date: '08.09.2014',
+      date: '',
       commentNumber: 5,
-      foodDesc: '你知道考伯沙拉吗？满满一盘色彩缤纷的沙拉哟！看着心情就好好',
+      foodDesc: '',
       likeColor: '#08523a',
       collectColor: '#08523a',
-      likeText: '已喜欢',
-      collectText: '已收藏',
-      peopleUrl: '/static/images/si1.jpg',
-      name: 'Andy',
+      focusColor: '#08523a',
+      likeText: '',
+      collectText: '',
+      peopleUrl: '',
+      name: '',
+      focusText: '关注',
       works: [],
       comments: [],
-
-      materialList: [
-        {
-          name: '沙拉生菜',
-          quantity: '一颗'
-        },
-        {
-          name: '牛油果',
-          quantity: '半个'
-        }
-      ],
-      steps: [
-        {
-          id: 1,
-          desc: '沙拉生菜洗干净，切碎一些，放入盘底',
-          picUrl: '/static/images/bl4.jpg'
-        },
-        {
-          id: 2,
-          desc: '小番茄对半切开排入盘中，水煮蛋切开成小块，洋葱切小块，放入盘中',
-          picUrl: '/static/images/bl4.jpg'
-        }
-      ],
+      materialList: [],
+      steps: [],
       config: {
         url: 'http://' + this.ip + ':8080/#/blogDetail/' + (this.$route.params.noteID), // localhost需要改成具体ip地址才能成功分享。网址,默认使用 window.location.href
         source: 'http://' + this.ip + ':8080/', // 来源（QQ空间会用到）, 默认读取head标签：<meta name="site" content="http://overtrue" />
@@ -257,6 +244,22 @@ export default {
           alert('不存在该用户')
         }
       })
+      let info = {
+        token: this.token,
+        name: this.name
+      }
+      api.isFocus(info).then().catch(res => {
+        let isFocusCode = res.data.code
+        if (isFocusCode === '0') {
+          this.focusText = '已关注'
+          this.focusColor = 'grey'
+        } else if (isFocusCode === '1') {
+          this.focusText = '关注'
+          this.focusColor = '#08523a'
+        } else if (isFocusCode === '2') {
+          alert('不存在该用户')
+        }
+      })
     },
     addLike: function () {
       this.noteId = this.$route.params.noteID
@@ -295,6 +298,10 @@ export default {
           alert('不存在该用户')
         }
       })
+    },
+    addFocus () {
+      this.likeText = '已关注'
+      this.likeColor = 'grey'
     }
   },
   components: {

@@ -63,7 +63,7 @@
                 </tbody>
               </table>
               <div class="clearfix wow fadeInLeft animated row" data-wow-delay=".5s" style="margin-left: -8px">
-                <div class="col-md-1"><i  @click="addStep"   class="fa fa-plus-circle" style="color:#005238;font-size: 32px;"></i></div>
+                <div class="col-md-1"><i  @click="addStep"   class="fa fa-plus-circle" style="color:#005238;font-size: 128px; padding: 50px"></i></div>
                 <div class="col-md-5"> <button class="addButton" style="margin-top: 5px">追加一行步骤</button></div>
               </div>
               <br>

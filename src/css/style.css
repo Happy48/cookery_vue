@@ -1007,7 +1007,10 @@ p.reply a i{
 	font-size: 1.2em;
 }
 .search input[type="text"]::placeholder {
-  color:#fff;
+  color:rgba(255,255,255,1);
+}
+.search input[type="text"]:focus::placeholder  {
+  color:rgba(255,255,255,0.3);
 }
 .search input[type="submit"] {
 	width: 30px;
@@ -2111,6 +2114,16 @@ td.add-check a {
 .indexFocus-pic{
   width:100%;
   height:180px;
+  background-position: center center;
+  background-repeat: no-repeat;
+  -webkit-background-size:cover;
+  -moz-background-size:cover;
+  background-size:cover;
+}
+
+.blog-pic{
+  width:100%;
+  height:350px;
   background-position: center center;
   background-repeat: no-repeat;
   -webkit-background-size:cover;

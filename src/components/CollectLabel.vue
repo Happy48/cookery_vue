@@ -2,7 +2,8 @@
   <div class="grid-categories animated wow fadeInLeft" data-wow-duration="1000ms" data-wow-delay="500ms">
     <h4>我的收藏</h4>
     <ul class="popular">
-      <li :key="item.foodTitle" v-for="item in list" @click="goToList(item.noteId)"><a href="#" class="line-limit-length"><i class="glyphicon glyphicon-bookmark"> </i>{{item.foodTitle}}</a></li>
+      <li :key="item.foodTitle" v-for="item in list" @click="goToList(item.noteId)" class="line-limit-length"><a href="#" ><i class="glyphicon glyphicon-bookmark"> </i>{{item.foodTitle}}</a></li>
+      <li><a class="all-tags" style="color: #005238" > &gt;&gt; {{showmore}} &lt;&lt; </a></li>
     </ul>
   </div>
 </template>
@@ -12,6 +13,11 @@ export default {
   props: [
     'list'
   ],
+  data () {
+    return {
+      showmore: '查看更多'
+    }
+  },
   methods: {
     goToList (foodTitle) {
       let info = {
