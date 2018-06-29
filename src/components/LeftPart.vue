@@ -11,7 +11,7 @@
       <OtherLikeLabel v-on:recommend="recommend" :list="otherLikeData" :title="likeLabelTitle"></OtherLikeLabel>
     </div>
     <div class="col-md-3 categories-grid" v-if="isOther" style="padding-left: 50px">
-
+      <Otherinfo :name="name"></Otherinfo>
       <NoteLabel :list="noteLabelData"></NoteLabel>
       <AttentionLabel :list="attentionData" :name="name"></AttentionLabel>
     </div>
@@ -24,6 +24,7 @@ import CollectLabel from '@/components/CollectLabel'
 import AttentionLabel from '@/components/AttentionLabel'
 import OtherLikeLabel from '@/components/OtherLikeLabel'
 import BlogSquareLabel from '@/components/BlogSquareLabel'
+import Otherinfo from '@/components/Otherinfo'
 import api from '@/api/getData'
 export default {
   stores: {
@@ -218,7 +219,8 @@ export default {
     CollectLabel,
     OtherLikeLabel,
     AttentionLabel,
-    BlogSquareLabel
+    BlogSquareLabel,
+    Otherinfo
   }
 }
 </script>

@@ -2,7 +2,7 @@
   <div class="grid-categories animated wow fadeInLeft" data-wow-duration="1000ms" data-wow-delay="500ms">
     <h4>我的收藏</h4>
     <ul class="popular">
-      <li :key="item.foodTitle" v-for="item in list" @click="goToList(item.noteId)"><a href="#"><i class="glyphicon glyphicon-bookmark"> </i>{{item.foodTitle}}</a></li>
+      <li :key="item.foodTitle" v-for="item in list" @click="goToList(item.noteId)"><a href="#" class="line-limit-length"><i class="glyphicon glyphicon-bookmark"> </i>{{item.foodTitle}}</a></li>
     </ul>
   </div>
 </template>

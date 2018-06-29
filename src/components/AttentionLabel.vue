@@ -2,7 +2,7 @@
   <div class="grid-categories animated wow fadeInLeft" data-wow-duration="1000ms" data-wow-delay="500ms">
     <h4>{{who}}的关注</h4>
     <ul class="popular">
-      <li :key="item" v-for="item in list" @click="goToList(item)"><a href="#"><i class="glyphicon glyphicon-user"> </i>{{item}}</a></li>
+      <li :key="item" v-for="item in list" @click="goToList(item)"><a href="#" class="line-limit-length"><i class="glyphicon glyphicon-user"> </i>{{item}}</a></li>
     </ul>
   </div>
 </template>
