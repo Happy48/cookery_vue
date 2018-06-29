@@ -3,7 +3,7 @@
     <div v-if="direction==='left'" class="col-md-4 events-bottom1 animated wow fadeInRight" data-wow-duration="1000ms" data-wow-delay="500ms">
       <a @click="showMore"><img :src="foodPic" alt="" class="col_img"></a>
     </div>
-    <div class="col-md-8 events-bottom2 animated wow fadeInLeft" data-wow-duration="1000ms" data-wow-delay="500ms" style="padding-left: 50px;padding-right: 30px">
+    <div class="col-md-8 events-bottom2 animated wow fadeInLeft" data-wow-duration="1000ms" data-wow-delay="500ms" style="padding-left: 30px;padding-right: 30px">
       <h3 @click="showMore" class="line-limit-length">{{foodTitle}}</h3>
       <label><i class="glyphicon glyphicon-menu-up"></i></label>
       <div class="date">

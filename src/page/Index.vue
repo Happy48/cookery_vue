@@ -33,7 +33,8 @@
             <div class="clearfix"> </div>
           </div>
           <div class="row">
-            <RecommendSwiper :indexblogData="indexblogData" :name="name"></RecommendSwiper>
+            <vue-loading v-if="isLoading" type="bubbles" color="#0d6167" :size="{width: '200px', height: '200px'}"></vue-loading>
+            <RecommendSwiper v-if='isLoading==false' :indexblogData="indexblogData" :name="name"></RecommendSwiper>
             <div class="clearfix"></div>
           </div>
         </div>
@@ -55,7 +56,8 @@
           <div class="clearfix"> </div>
         </div>
         <div class="news-bottom">
-          <HotSwiper :indexHotData="indexHotData" :name="name"></HotSwiper>
+          <vue-loading v-if="isLoading" type="bubbles" color="#0d6167" :size="{width: '200px', height: '200px'}"></vue-loading>
+          <HotSwiper v-if='isLoading==false' :indexHotData="indexHotData" :name="name"></HotSwiper>
         </div>
       </div>
     </div>
@@ -76,7 +78,8 @@
           <div class="clearfix"> </div>
         </div>
         <div class="news-bottom">
-          <FocusSwiper :indexFocus="indexFocus" :name="name"></FocusSwiper>
+          <vue-loading v-if="isLoading" type="bubbles" color="#0d6167" :size="{width: '200px', height: '200px'}"></vue-loading>
+          <FocusSwiper v-if='isLoading==false' :indexFocus="indexFocus" :name="name"></FocusSwiper>
         </div>
       </div>
     </div>
@@ -90,6 +93,7 @@ import RecommendSwiper from '@/components/RecommendSwiper'
 import HotSwiper from '@/components/HotSwiper'
 import FocusSwiper from '@/components/FocusSwiper'
 import api from '@/api/getData'
+import { VueLoading } from 'vue-loading-template'
 
 export default {
   stores: {
@@ -101,7 +105,8 @@ export default {
       indexblogData: [],
       indexHotData: [],
       indexFocus: [],
-      name: '我'
+      name: '我',
+      isLoading: true
     }
   },
   components: {
@@ -109,7 +114,8 @@ export default {
     Footer,
     HotSwiper,
     RecommendSwiper,
-    FocusSwiper
+    FocusSwiper,
+    VueLoading
   },
   created () {
     this.getIndexRecommend()
@@ -134,6 +140,7 @@ export default {
         // this.month = data.month
         this.indexblogData = data.recommend
         this.indexHotData = data.hot
+        this.isLoading = false
       })
     },
     drawDown () {

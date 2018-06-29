@@ -1,6 +1,7 @@
 <template>
-  <div class="col-md-9" style="padding-right: 50px;padding-left:50px">
-    <nav class=" wow fadeInUp animated"  data-wow-delay=".5s" >
+  <div class="col-md-9" style="padding-right: 80px;padding-left:50px">
+    <vue-loading v-if="isLoading" type="bubbles" color="#0d6167" :size="{width: '200px', height: '200px'}"></vue-loading>
+    <nav v-if='isLoading==false' class=" wow fadeInUp animated"  data-wow-delay=".5s" >
       <ol class="breadcrumb">
         <li class="breadcrumb-item">
           <a href="index.html">首页</a>
@@ -11,20 +12,23 @@
         <li class="breadcrumb-item active">{{foodTitle}}</li>
       </ol>
     </nav>
-    <div class="events-top">
+    <div v-if='isLoading==false' class="events-top">
       <div class="search-in animated wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="500ms">
         <h4 class="col-md-12" style="padding-top:15px; margin-bottom:8px; padding-left:0;">{{foodTitle}}</h4>
         <ul class="grid-blog" style="display: inline; padding-top:15px;">
           <li><span><i class="glyphicon glyphicon-time"> </i>{{date}}</span></li>
           <li><a href="#"><i class="glyphicon glyphicon-comment"> </i>{{commentNumber}} 评论</a></li>
+          <li><a href="#"><i class="glyphicon glyphicon-star"> </i>{{likeNumber}} 喜欢</a></li>
+          <li><a href="#"><i class="glyphicon glyphicon-heart"> </i>{{collectNum}} 收藏</a></li>
+          <li v-if="isMe" @click="editBlog"><a ><i class="glyphicon glyphicon-edit"> </i>编辑</a></li>
           <li><a href="#"><i class="glyphicon glyphicon-share"> </i>分享</a></li>
           <li><share :config="config"></share></li>
         </ul>
       </div>
       <div class="clearfix"> </div>
     </div>
-    <hr>
-    <div class="single">
+    <hr v-if='isLoading==false'>
+    <div v-if='isLoading==false' class="single">
       <div class="single-top">
         <div style="width:100%; max-height:450px; overflow: hidden">
           <div class="img-responsive wow fadeInUp animated blog-pic" data-wow-delay=".5s" :style="{backgroundImage:'url(' + url + ')'}" alt=""></div>
@@ -34,7 +38,7 @@
             <br />
             <span><h4 style="font-size: 30px;display: inline;">{{count}}</h4>&nbsp;<h5 style="color: #97824B;font-size: 16px; display: inline;">人做过这道菜</h5></span>
           </div>
-          <div class="col-md-6" id="likeCollectDiv">
+          <div v-if="isOther" class="col-md-6" id="likeCollectDiv">
               <form>
                 <div class="single-grid wow fadeInLeft animated" data-wow-delay=".5s">
                   <label class="hvr-rectangle-out">
@@ -65,9 +69,9 @@
                     <img :src="peopleUrl" alt="" style="width:120px; height:120px;border-radius:60%;">
                   </a>
                 </div>
-                <div style="text-align:center;">
+                <div  style="text-align:center;">
                   <h4>{{name}}</h4>
-                  <div class="single-grid wow fadeInLeft animated" data-wow-delay=".5s" style="margin-top: -10px">
+                  <div v-if="isOther" class="single-grid wow fadeInLeft animated" data-wow-delay=".5s" style="margin-top: -10px">
                     <label class="hvr-rectangle-out">
                       <input @click="addFocus" type="submit" v-bind:value="focusText" v-bind:style="{background: focusColor}">
                     </label>
@@ -115,6 +119,7 @@
 import WorkComponent from '@/components/WorkComponent'
 import CommentComponent from '@/components/CommentComponent'
 import api from '@/api/getData'
+import { VueLoading } from 'vue-loading-template'
 
 export default {
   stores: {
@@ -131,14 +136,18 @@ export default {
       count: 2373,
       date: '',
       commentNumber: 5,
+      likeNumber: 0,
+      collectNum: 0,
       foodDesc: '',
       likeColor: '#08523a',
+      isLoading: true,
       collectColor: '#08523a',
       focusColor: '#08523a',
       likeText: '',
       collectText: '',
       peopleUrl: '',
       name: '',
+      username: '',
       focusText: '关注',
       works: [],
       comments: [],
@@ -150,7 +159,7 @@ export default {
         title: this.$route.params.foodTitle, // 标题，默认读取 document.title 或者 <meta name="title" content="share.js" />
         description: this.$route.params.foodDesc, // 描述, 默认读取head标签：<meta name="description" content="PHP弱类型的实现原理分析" />
         image: this.$route.params.foodPic, // 图片, 默认取网页中第一个img标签
-        disabled: ['google', 'facebook', 'twitter', 'linkedin', 'diandian'], // 禁用的站点
+        disabled: ['google', 'facebook', 'twitter', 'linkedin', 'diandian', 'douban', 'tencent', 'q'], // 禁用的站点
         wechatQrcodeTitle: '微信扫一扫：分享', // 微信二维码提示文字
         wechatQrcodeHelper: '<div>微信里点“发现”，扫一扫。</div>'
       }
@@ -159,7 +168,7 @@ export default {
   created () {
     this.initTag()
     this.initBlogDetail()
-    this.initialLikeAndCollect()
+    this.initUserInfo()
   },
   methods: {
     getBlogList (name) {
@@ -193,6 +202,7 @@ export default {
       let information = {
         noteId: this.noteId
       }
+      let self = this
       api.getNoteDetail(information).then().catch(res => {
         let note = res.data
         this.foodTitle = note.foodTitle
@@ -200,6 +210,8 @@ export default {
         this.count = note.workVOList.length
         this.date = note.foodCreateTime
         this.commentNumber = note.commentVOList.length
+        this.likeNumber = note.foodLikes
+        this.collectNum = note.foodCollect
         this.foodDesc = note.foodDesc
         this.peopleUrl = note.userVO.icon
         this.name = note.userVO.userName
@@ -212,6 +224,9 @@ export default {
         this.config['description'] = this.foodDesc
 
         console.log(this.config)
+        this.isLoading = false
+        self.initialLikeAndCollect()
+        self.initialFocus()
       })
     },
     initialLikeAndCollect () {
@@ -244,6 +259,14 @@ export default {
           alert('不存在该用户')
         }
       })
+    },
+    initUserInfo () {
+      api.getUserInfoByToken({token: this.token}).then().catch(res => {
+        let userinfo = res.data
+        this.username = userinfo['userName']
+      })
+    },
+    initialFocus () {
       let info = {
         token: this.token,
         name: this.name
@@ -302,11 +325,28 @@ export default {
     addFocus () {
       this.likeText = '已关注'
       this.likeColor = 'grey'
+    },
+    editBlog () {
+      this.$router.push({
+        name: 'EditNote',
+        params: {
+          noteID: this.noteId
+        }
+      })
     }
   },
   components: {
     WorkComponent,
-    CommentComponent
+    CommentComponent,
+    VueLoading
+  },
+  computed: {
+    isMe: function () {
+      return this.name === this.username
+    },
+    isOther: function () {
+      return this.name !== this.username
+    }
   }
 }
 </script>

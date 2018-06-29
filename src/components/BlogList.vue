@@ -92,6 +92,7 @@ export default {
       api.getUserNoteList(listInfo).then(res => {}).catch(res => {
         this.collectList = res.data
         this.isSearched = false
+        this.isLoading=false
       })
     },
     search () {
