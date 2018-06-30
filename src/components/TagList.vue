@@ -1,15 +1,26 @@
 <template>
   <div class="grid-categories animated wow fadeInLeft" data-wow-duration="1000ms" data-wow-delay="500ms">
     <div class="col-md-2 categories-grid" ></div>
-    <div class="col-md-10 categories-grid" >
-      <h2 style="color: #005238">全部分类</h2>
+    <div class="col-md-9 categories-grid" style="margin: 20px -15px">
+      <nav class=" wow fadeInUp animated"  data-wow-delay=".5s">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="index.html">首页</a>
+          </li>
+          <li class="breadcrumb-item">
+            <router-link to="allBlog">笔记广场</router-link>
+          </li>
+          <li class="breadcrumb-item active" >全部分类</li>
+        </ol>
+      </nav>
+      <h2 style="color: #005238;margin: 40px 0 20px 0">全部分类</h2>
     </div>
     <br>
     <br>
     <br>
 
     <div class="col-md-2 categories-grid" ></div>
-    <div class="col-md-9 categories-grid" style="border:3px solid rgb(14, 92, 67)">
+    <div class="col-md-9 categories-grid" >
       <div class="row tag">
         <div class="col-md-2 categories-grid" >
           <h3 class='tagName'>热门专题</h3>
