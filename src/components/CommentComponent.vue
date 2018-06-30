@@ -3,18 +3,21 @@
     <div class="comment" v-show="commentList.length > 0">
       <h4>评论</h4>
       <div :key="item.index" v-for="item in commentList" class="media wow fadeInLeft animated" data-wow-delay=".5s">
-        <div class="code-in">
-          <p class="smith"><a @click="userInfo(item.userName)">{{item.userName}}</a> <span>{{item.time}}</span></p>
-          <p class="reply"><a @click="reply(item.postid)"><i class="glyphicon glyphicon-repeat"> </i>REPLY</a></p>
+        <div v-if="isMe(item.userName)===true" style="padding-left: 60px" >
+          <p class="comment">
+            <a >作者回复</a><span>{{item.time}}</span>
+          </p>
           <div class="clearfix"> </div>
+          <p style="padding-top: 10px">{{item.content}}</p>
         </div>
-        <div class="media-left">
-          <a @click="userInfo(item.userName)">
-            <img :src="item.icon" alt="" style="width:80px;height:80px;border-radius:50%;">
-          </a>
-        </div>
-        <div class="media-body">
-          <p>{{item.content}}</p>
+        <div v-if="isMe(item.userName)!==true" >
+          <p class="comment">
+            <a @click="userInfo(item.userName)"><img :src="item.icon" alt="" style="width:40px;height:40px;border-radius:50%;"></a>
+            <a style="padding-left: 20px" @click="userInfo(item.userName)">{{item.userName}}</a><span>{{item.time}}</span>
+            <a @click="reply(item.postid)" style="float: right"><i class="glyphicon glyphicon-comment"> </i>回复</a>
+          </p>
+          <div class="clearfix"> </div>
+          <p style="padding-left: 60px">{{item.content}}</p>
         </div>
       </div>
     </div>
@@ -45,6 +48,9 @@ export default {
     'commentList',
     'noteId'
   ],
+  created () {
+    this.initUserInfo()
+  },
   methods: {
     reply (postid) {
       let information = {
@@ -57,7 +63,7 @@ export default {
       }).catch(res => {
         let data = res.data
         if (data.code === '0') {
-          alert('留言成功'+postid)
+          alert('留言成功' + postid)
         } else {
           alert('出错')
         }
@@ -88,31 +94,21 @@ export default {
           where: 'All'
         }
       })
+    },
+    isMe (name) {
+      return name === this.userName
+    },
+    initUserInfo () {
+      api.getUserInfoByToken({token: this.token}).then().catch(res => {
+        let userinfo = res.data
+        this.userName = userinfo['userName']
+      })
     }
   },
   data () {
     return {
-      comment: ''
-      // commentList: [
-      //   {
-      //     userName: 'Andey ',
-      //     time: '02 June 2014, 15:20',
-      //     icon: '/static/images/si2.jpg',
-      //     content: '早餐开启美好的一天'
-      //   },
-      //   {
-      //     userName: 'Rackham  ',
-      //     time: '02 June 2014, 15:20',
-      //     icon: '/static/images/si.jpg',
-      //     content: '啊啊啊～～还有这样的存在？'
-      //   },
-      //   {
-      //     userName: 'Andey ',
-      //     time: '02 June 2014, 15:20',
-      //     icon: '/static/images/si1.jpg',
-      //     content: '整个食草菜谱 我也要吃'
-      //   }
-      // ]
+      comment: '',
+      userName: ''
     }
   }
 }

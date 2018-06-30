@@ -10,7 +10,7 @@
         <div class=" blog-head">
           <div :key="subItem.index" v-for="subItem in list" class="col-md-4 blog-top" style="margin-bottom: 50px">
             <div class="blog-in">
-              <a @click="showMore(subItem.noteId, subItem.foodTitle, subItem.foodDesc,subItem.foodPic)"><img class="myimg" :src="subItem.foodPic" alt=" "></a>
+              <a @click="showMore(subItem.noteId, subItem.foodTitle, subItem.foodDesc,subItem.foodPic)"><div class="myimg" :style="{backgroundImage:'url(' + subItem.foodPic + ')'}" alt=" "></div></a>
               <div class="blog-grid">
                 <h3 class="line-limit-length"><a  @click="showMore(subItem.noteId, subItem.foodTitle, subItem.foodDesc,subItem.foodPic)">{{subItem.foodTitle}}</a></h3>
                 <div class="date">

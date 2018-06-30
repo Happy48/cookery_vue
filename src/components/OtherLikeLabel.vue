@@ -2,7 +2,7 @@
   <div class="grid-categories animated wow fadeInLeft" data-wow-duration="1000ms" data-wow-delay="500ms">
     <h4 >{{title}}</h4>
     <div :key="item.index" v-for="item in list" class="product-go">
-      <a @click="showMore(item.noteId)" class="fashion"><img class="like_img" :src="item.foodPic" alt=""></a>
+      <a @click="showMore(item.noteId)" class="fashion"><div class="like_img" :style="{backgroundImage:'url(' + item.foodPic + ')'}" alt=""></div></a>
       <div class="grid-product">
         <div class="line-limit-length"><a @click="showMore(item.noteId)" class="elit ">{{item.foodTitle}}</a></div>
         <p class="likelist-limit-length">{{item.foodDesc}}</p>

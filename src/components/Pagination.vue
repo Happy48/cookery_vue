@@ -1,13 +1,13 @@
 <template>
   <nav>
     <ul class="my_pagination">
-      <li :class="{'disabled': current == 1}"><a href="javascript:;" @click="setCurrent(current - 1)"  > « </a></li>
       <li :class="{'disabled': current == 1}"><a href="javascript:;" @click="setCurrent(1)" style="width:60px"> 首页 </a></li>
+      <li :class="{'disabled': current == 1}"><a href="javascript:;" @click="setCurrent(current - 1)"  style="width:80px"  > 上一页 </a></li>
       <li :key="p.index" v-for="p in grouplist" :class="{'active': current == p.val}">
         <a href="javascript:;" @click="setCurrent(p.val)"> {{ p.text }} </a>
       </li>
+      <li :class="{'disabled': current == page}"><a href="javascript:;" @click="setCurrent(current + 1)"  style="width:80px"> 下一页 </a></li>
       <li :class="{'disabled': current == page}"><a href="javascript:;" @click="setCurrent(page)" style="width:60px"> 尾页 </a></li>
-      <li :class="{'disabled': current == page}"><a href="javascript:;" @click="setCurrent(current + 1)"> »</a></li>
     </ul>
   </nav>
 </template>

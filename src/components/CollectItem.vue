@@ -1,7 +1,7 @@
 <template>
   <div class="events-bottom" style="box-shadow:2px 4px 10px #aaaaaa;">
     <div v-if="direction==='left'" class="col-md-4 events-bottom1 animated wow fadeInRight" data-wow-duration="1000ms" data-wow-delay="500ms">
-      <a @click="showMore"><img :src="foodPic" alt="" class="col_img"></a>
+      <a @click="showMore"><div :style="{backgroundImage:'url(' + foodPic + ')'}" alt="" class="col_img"></div></a>
     </div>
     <div class="col-md-8 events-bottom2 animated wow fadeInLeft" data-wow-duration="1000ms" data-wow-delay="500ms" style="padding-left: 30px;padding-right: 30px">
       <h3 @click="showMore" class="line-limit-length">{{foodTitle}}</h3>
@@ -13,9 +13,6 @@
         <div class="clearfix"> </div>
       </div>
       <p class="bloglist-limit-length">{{foodDesc}}</p>
-    </div>
-    <div v-if="direction==='right'" class="col-md-6 events-bottom1 animated wow fadeInRight" data-wow-duration="1000ms" data-wow-delay="500ms">
-      <a @click="showMore"><img :src="foodPic" alt="" class="img-responsive"></a>
     </div>
     <div class="clearfix"> </div>
   </div>
