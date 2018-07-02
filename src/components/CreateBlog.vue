@@ -67,7 +67,7 @@
                 <div class="col-md-5"> <button class="addButton" style="margin-top: 5px">追加一行步骤</button></div>
               </div>
               <br>
-              <BlogTag v-on:blogTagSay="getCheckedTagNames"></BlogTag>
+              <BlogTag v-on:blogTagSay="getCheckedTagNames" :subtags="subtags"></BlogTag>
               <br>
             </div>
           </div>
@@ -119,7 +119,8 @@ export default {
       uploadStepImg: '点击上传步骤图',
       uploadCover: '点击上传菜谱封面',
       stateInfo: '',
-      showState: false
+      showState: false,
+      subtags: []
     }
   },
   methods: {
